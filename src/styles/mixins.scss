@@ -1,0 +1,131 @@
+@mixin glitchCopy { 
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes glitch-anim {
+  $steps: 20;
+  @for $i from 0 through $steps {
+    #{percentage($i*(1/$steps))} {
+      clip: rect(random(100)+px, 9999px, random(100)+px, 0);
+			transform: skew((random(100) / 100) + deg);
+    }
+  }
+}
+
+// Same deal, just duplicated for ultra randomness.
+@keyframes glitch-anim2 {
+  $steps: 20;
+  @for $i from 0 through $steps {
+    #{percentage($i*(1/$steps))} {
+      clip: rect(random(100)+px, 9999px, random(100)+px, 0);
+			transform: skew((random(100) / 100) + deg);
+    }
+  }
+}
+
+// Does the same deal as before, but now only skews. Used for main text.
+@keyframes glitch-skew {
+  $steps: 10;
+  @for $i from 0 through $steps {
+    #{percentage($i*(1/$steps))} {
+      transform: skew((random(10) - 5) + deg);
+    }
+  }
+}
+
+.web-title {
+  position: relative;
+  z-index: 10;
+  a {
+    font-family: 'MFred';
+    letter-spacing: 1px;
+    font-size: 24px;
+    position: relative;
+    z-index: 10;
+    animation: glitch-skew 1s infinite linear alternate-reverse;
+    &:hover {
+      &:before, &:after {
+        display: block;
+      }
+    }
+    &:before {
+      font-family: 'MFred';
+      letter-spacing: 1px;
+      font-size: 24px;
+      text-transform: uppercase;
+      display: none;
+      @include glitchCopy;
+      z-index: 1;
+      left: 1px;
+      text-shadow: -0.25px 0 #ff00c1;
+      clip: rect(44px, 450px, 56px, 0);
+      animation: glitch-anim 5s infinite linear alternate-reverse;
+    }
+    &:after {
+      font-family: 'MFred';
+      letter-spacing: 1px;
+      font-size: 24px;
+      text-transform: uppercase;
+      display: none;
+      @include glitchCopy;
+      z-index: 1;
+      left: -1px;
+      text-shadow: -0.45px 0 #00fff9, 0.45px 0.65px #ffffff;
+      animation: glitch-anim2 1s infinite linear alternate-reverse;
+    }
+  }
+}
+
+
+/* Scroll indicator */
+
+@keyframes scroll {
+  0% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(15px);
+    -ms-transform: translateY(15px);
+    transform: translateY(15px);
+  }
+}
+
+.mouse {
+  position: fixed;
+  z-index: 10;
+  bottom: 20px;
+  left: 50%;
+  margin-left: -9px;
+  display: block;
+  width: 18px;
+  height: 28px;
+  border-radius: 11px 11px 15px 15px;
+  border: 1px solid #5a5a5a;
+
+  span.scroll {
+    display: block;
+    margin: 6px auto;
+    width: 1px;
+    height: 3px;
+    border-radius: 4px;
+    background: #5a5a5a;
+    border: 1px solid transparent;
+    -webkit-animation-duration: 2s;
+    animation-duration: 2s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-name: scroll;
+    animation-name: scroll;
+  }
+}

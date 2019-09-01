@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css?family=Questrial');
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap');
+
+@font-face {
+  font-family: 'MFred';
+  src: url('../assets/fonts/mfred/MFred.eot');
+  src: url('../assets/fonts/mfred/MFred.eot') format('embedded-opentype'),
+       url('../assets/fonts/mfred/MFred.woff2') format('woff2'),
+       url('../assets/fonts/mfred/MFred.woff') format('woff'),
+       url('../assets/fonts/mfred/MFred.ttf') format('truetype'),
+       url('../assets/fonts/mfred/MFred.svg#MFred') format('svg');
+}
+
+* {
+  font-family: 'Questrial', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'MFred', 'Oswald';
+}
+
+html, body, .main, footer, header {
+  width: 100%;
+  max-width: 100%;
+  background: #fbf9f3;
+}
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p,
+abbr, address,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+
+body {
+    line-height:1;
+
+}
+
+
+body {
+    /* --bgColor: #fbf3f2;
+    --bgColorRGB: 251,243,242;
+    --primaryColor: #032539;
+    --primaryColorRGB:3,37,57;
+    --secondaryColor: #1c768f;  
+    --secondaryColorRGB:28,118,143; 
+    --tertiaryColor: #fa991c;
+    --tertiaryColorRGB:250,153,28;
+    color: var(--primaryColor);
+    background: var(--bgColor);
+    transition: all 300ms linear; */
+}
+  
+  body.dark {
+    /* --bgColor: #032539;
+    --bgColorRGB: 3,37,57;
+    --primaryColor: #fbf3f2;
+    --primaryColorRGB:251,243,242;
+    --secondaryColor: #fa991c;
+    --secondaryColorRGB:250,153,28;
+    --tertiaryColor: #1c768f;   
+    --tertiaryColorRGB:28,118,143; */
+  }
+
+body.dark .logo img, 
+body.dark .face img, 
+body.dark .notfound img {
+    filter: invert(100%)
+}
+
+a {
+    color: var(--secondaryColor);
+    text-decoration: none;
+}
+
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section { 
+    display:block;
+}
+
+nav ul {
+    list-style:none;
+}
+
+blockquote, q {
+    quotes:none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content:'';
+    content:none;
+}
+
+a {
+    margin:0;
+    padding:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+
+/* change colours to suit your needs */
+ins {
+    background-color:#ff9;
+    color:#000;
+    text-decoration:none;
+}
+
+/* change colours to suit your needs */
+mark {
+    background-color:#ff9;
+    color:#000; 
+    font-style:italic;
+    font-weight:bold;
+}
+
+del {
+    text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+    border-bottom:1px dotted;
+    cursor:help;
+}
+
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+
+/* change border colour to suit your needs */
+hr {
+    display:block;
+    height:1px;
+    border:0;   
+    border-top:1px solid #cccccc;
+    margin:1em 0;
+    padding:0;
+}
+
+input, select {
+    vertical-align:middle;
+}
+
+.gatsby-highlight-code-line {
+    background-color: #feb;
+    display: block;
+    margin-right: -1em;
+    margin-left: -1em;
+    padding-right: 1em;
+    padding-left: 0.75em;
+    border-left: 0.25em solid #f99;
+  }
+
+  /**
+ * Add back the container background-color, border-radius, padding, margin
+ * and overflow that we removed from <pre>.
+ */
+.gatsby-highlight {
+    background-color: #e1e1e1;
+    border-radius: 0.3em;
+    margin: 0.5em 0 45px;
+    padding: 10px 5px;
+    overflow: auto;
+  }
+  
+  /**
+   * Remove the default PrismJS theme background-color, border-radius, margin,
+   * padding and overflow.
+   * 1. Make the element just wide enough to fit its content.
+   * 2. Always fill the visible space in .gatsby-highlight.
+   * 3. Adjust the position of the line numbers
+   */
+  .gatsby-highlight pre[class*="language-"] {
+    background-color: transparent;
+    margin: 0;
+    padding: 0;
+    overflow: initial;
+    float: left; /* 1 */
+    min-width: 100%; /* 2 */
+    margin-bottom: 5px !important;
+  }
+
+  ul, ol {
+    list-style: none;
+  }
+
+  @media(max-width: 1024px){
+    .works-section { padding-top: 200px }
+  }
+  @media(max-width: 480px){
+    .works-section { padding-top: 100px }
+  }
+
+ 
