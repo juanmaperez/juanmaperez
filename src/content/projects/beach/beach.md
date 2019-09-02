@@ -1,8 +1,8 @@
 ---
-path: '/projects/a-bit-of-beach'
+path: '/projects/colossus-bets'
 date: '2018-06-18T12:34:00+00:00'
-title: "A bit of beach"
-thumbnail: ./principal.jpg
+title: "Colossus Bets"
+thumbnail: ./principal.png
 type: projects
 images: [
   { title: 'Take out of here',  image: ./car.jpg },

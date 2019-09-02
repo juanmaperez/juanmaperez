@@ -1,8 +1,8 @@
 ---
-path: '/projects/glimpse-into-the-city'
+path: '/projects/australis'
 date: '2018-05-18T12:34:00+00:00'
-title: "A glimpse into the city"
-thumbnail: ./hotel.jpg
+title: "Australis"
+thumbnail: ./principal.png
 type: projects
 images: [
   { title: 'Turn to the left',  image: ./corner.jpg },

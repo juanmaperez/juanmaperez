@@ -1,8 +1,8 @@
 ---
-path: '/projects/a-day-out-of-work'
+path: '/projects/oysho'
 date: '2018-03-18T12:34:00+00:00'
-title: "A day out of work"
-thumbnail: ./dinamo.jpg
+title: "Oysho"
+thumbnail: ./principal.png
 type: projects
 images: [
   { title: 'The guardian in the rye',  image: ./sit.jpg},

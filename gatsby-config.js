@@ -1,8 +1,8 @@
 module.exports = {
-  pathPrefix: "/photographer",
+  // pathPrefix: "/photographer",
   siteMetadata: {
-    title: `Photographer`,
-    description: `Professional photographer portfolio. Let everyone know about your work `,
+    title: `Juanma Perez`,
+    description: `I'm a web developer creating blazing fast websites and apps from scratch`,
     author: `Juanma Perez`,
   },
   plugins: [

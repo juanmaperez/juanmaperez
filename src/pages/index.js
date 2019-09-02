@@ -68,11 +68,16 @@ class IndexPage extends Component{
         { workTypes && <MainBlock markAsCompleted={this.completeAnimation.bind(this)} animationCompleted={animationCompleted}/>}
         { animationCompleted && <AboutBlock /> }
         <div className="works-section">
-          { animationCompleted && Object.keys(workTypes).map((type, index) => <WorksBlock
+          { animationCompleted && Object.keys(workTypes)
+                                        .map((type, index) => { 
+                                                if (workTypes[type].works.length > 0) { 
+                                                return <WorksBlock
                                                   index={index} 
                                                   key={workTypes[type].type} 
                                                   type={workTypes[type].type} 
-                                                  works={workTypes[type].works} />)
+                                                  works={workTypes[type].works} />
+                                                }
+                                              })
           }
         </div>
         { animationCompleted && <ContactBlock /> }

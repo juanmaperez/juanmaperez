@@ -45,7 +45,7 @@ const AboutBlockView = styled.div`
       z-index: 10;
       width: 75%;
       font-size: 6vw;
-      color: #f0d0d5;
+      color: #ce6c71;
       line-height: 1.2;
       padding: 100vh 120px 50px;
       box-sizing: border-box;
@@ -183,25 +183,22 @@ class AboutBlock extends Component {
           <div className="intro-text">
             <Controller>
               <Scene classToggle={'fade-in'} triggerHook={0.80}>
-                <p>I'm <span>Lady Madrid </span>, a photographer from Seville and based in London looking for new experiences.</p>
+                <p>I'm <span>Juanma Perez</span>, a web developer from Seville and based in London.</p>
               </Scene>
             </Controller>
             <Controller>
               <Scene classToggle={'fade-in'} triggerHook={0.80}>
-                <p>I've been my whole life capturing moments into my camera, some funny, some sad and some really special.</p>
+                <p>I build blazing fast and high perfomance websites or apps based on the most modern technologies.</p>
               </Scene>
             </Controller>    
             <Controller>
               <Scene classToggle={'fade-in'} triggerHook={0.80}>
-                <p>It's this site where I chose to publicy my work with all the people who love photography as much as me.</p> 
+                <p>I love Javascript and all the frameworks related to this language like React, Angular and Vue.</p> 
               </Scene>
             </Controller>    
             <Controller>
               <Scene classToggle={'fade-in'} triggerHook={0.80}>
-                <p>Also you can find me in social media <br/>
-                <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/ladymadrid">Instagram</a>,
-                <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/ladymadrid">Behance</a> 
-                &nbsp;or <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/ladymadrid">Twitter</a>.</p>
+                <p>As a freelance I work with Companies, agencies, startups and individuals all around the world.</p>
               </Scene>
             </Controller>  
           </div> 

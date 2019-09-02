@@ -171,16 +171,19 @@ class ContactBlock extends Component {
         <div className="cover"></div>
         <div className="content">
           <div className="left">
-            <span className="month">Sept</span>
+            <span className="month">Dic</span>
             <span className="year">'19</span>
           </div>
           <div className="right">
             <div className="top">
               <p>I'm available for freelance works.</p>
-              <p>Say hello hi@ladymadrid.com</p>
+              <p>Say hello <a className="text" href="mailto:juanmaperezvar@gmail.com" target="_blank" rel="noopener norefferer">juanmaperezvar@gmail.com</a></p>
             </div>
             <div className="bottom">
-              <span>Be </span> <i>|</i> <span> Ig </span> <i>|</i> <span> Tw </span>  
+            <a className="text" href="https://www.linkedin.com/in/juanmaperezvargas/" target="_blank" rel="noopener norefferer">In </a> <i>|</i> 
+            <a className="text" href="https://www.instagram.com/encapsulated.io/" target="_blank" rel="noopener norefferer"> Ig </a> <i>|</i> 
+            <a className="text" href="https://twitter.com/juanmaperezvar" target="_blank" rel="noopener norefferer"> Tw </a> <i>|</i> 
+            <a className="text" href="https://encapsulated.io/" target="_blank" rel="noopener norefferer"> Blog </a>  
             </div>
           </div>
         </div>
