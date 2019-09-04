@@ -118,10 +118,10 @@ class MainBlock extends Component {
       <MainBlockView className="first block-home">
         <div className="main-block-cover no-visible"></div>
         <ul className="main-list">
-          <li><span>Ig: [</span> <a className="text" href="https://www.instagram.com/encapsulated.io/" target="_blank" rel="noopener norefferer">@encapsulated.io</a><span> ]</span></li>
-          <li><span>Tw: [</span> <a className="text" href="https://twitter.com/juanmaperezvar" target="_blank" rel="noopener norefferer">@juanmaperezvar</a><span> ]</span></li>
-          <li><span>In: [</span> <a className="text" href="https://www.linkedin.com/in/juanmaperezvargas/" target="_blank" rel="noopener norefferer">juanmaperezvargas</a><span> ]</span></li>
-          <li><span>Bl: [</span> <a className="text" href="https://encapsulated.io" target="_blank" rel="noopener norefferer">//encapsulated.io</a><span> ]</span></li>
+          <li><span>Ig: [</span> <a className="text" href="https://www.instagram.com/encapsulated.io/" target="_blank" rel="noopener noreferrer">@encapsulated.io</a><span> ]</span></li>
+          <li><span>Tw: [</span> <a className="text" href="https://twitter.com/juanmaperezvar" target="_blank" rel="noopener noreferrer">@juanmaperezvar</a><span> ]</span></li>
+          <li><span>In: [</span> <a className="text" href="https://www.linkedin.com/in/juanmaperezvargas/" target="_blank" rel="noopener noreferrer">juanmaperezvargas</a><span> ]</span></li>
+          <li><span>Bl: [</span> <a className="text" href="https://encapsulated.io" target="_blank" rel="noopener noreferrer">//encapsulated.io</a><span> ]</span></li>
         </ul>
       </MainBlockView>
     )
