@@ -5,7 +5,7 @@ title: "Umaicha"
 thumbnail: ./umaicha.png
 type: projects
 images: [
-  { title: 'Main Blog',  image: ./principal.png }
+  { title: 'Main Blog',  image: ./umaicha.png }
   # { title: 'Get in with me',  image: ./sign.jpg },
   # { title: 'All around',  image: ./wheel.jpg },
   # { title: 'So high',  image: ./dinamo.jpg },
