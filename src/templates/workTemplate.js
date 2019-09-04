@@ -20,14 +20,25 @@ const WorkTemplateView = styled.div`
     h1 {
       text-transform: uppercase;
       font-size: 140px;
-      margin-bottom: 30px;
+      margin-bottom: 50px;
     }
     .description {
       font-size: 18px;
       font-weight: lighter;
       line-height: 1.4;
-      margin-bottom: 60px;
+      margin-bottom: 30px;
     }
+
+    .content {
+      margin-bottom: 60px;
+      p {
+        font-size: 18px;
+        font-weight: lighter;
+        line-height: 1.4;
+        margin-bottom: 30px;
+      }
+    }
+
     .work-image {
       margin-bottom: 90px;
       .element {
@@ -75,7 +86,7 @@ const WorkTemplateView = styled.div`
 
 const WorkTemplate = ( { data, location } ) => {
   const { markdownRemark : work } = data;
-  const { frontmatter } = work;
+  const { frontmatter, html } = work;
   return (
     <Layout location={ location}>
       <WorkTemplateView>
@@ -84,9 +95,16 @@ const WorkTemplate = ( { data, location } ) => {
           <div className="description">
             <p>{ frontmatter.description }</p>
           </div>
-          { frontmatter.images.map( element => <div key={ element.title } className="work-image">
+          <div className="content" dangerouslySetInnerHTML={{ __html: html}}></div>
+          {/* <div className="work-image">
             <div className="element">
-              <Image key={ element.title } imageUrl={element.image.childImageSharp.fluid.src} title={element.title} />
+              <Image imageUrl={frontmatter.thumbnail.childImageSharp.fluid.src} title={frontmatter.title} />
+            </div>
+          </div> */}
+      
+          { frontmatter.images.length > 0 && frontmatter.images.map( element => <div key={ element.title } className="work-image">
+            <div className="element">
+              <Image imageUrl={element.image.childImageSharp.fluid.src} title={element.title} />
             </div>
             <h3 >{ element.title }</h3>
           </div>)}

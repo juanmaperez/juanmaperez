@@ -201,6 +201,8 @@ input, select {
     list-style: none;
   }
 
+  .works-section { padding-top: 200px }
+
   @media(max-width: 1024px){
     .works-section { padding-top: 200px }
   }

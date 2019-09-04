@@ -69,15 +69,14 @@ class IndexPage extends Component{
         { animationCompleted && <AboutBlock /> }
         <div className="works-section">
           { animationCompleted && Object.keys(workTypes)
-                                        .map((type, index) => { 
-                                                if (workTypes[type].works.length > 0) { 
-                                                return <WorksBlock
+                                        .map((type, index) => 
+                                                workTypes[type].works.length > 0 && <WorksBlock
                                                   index={index} 
                                                   key={workTypes[type].type} 
                                                   type={workTypes[type].type} 
                                                   works={workTypes[type].works} />
-                                                }
-                                              })
+                                                
+                                              )
           }
         </div>
         { animationCompleted && <ContactBlock /> }

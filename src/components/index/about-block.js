@@ -53,6 +53,7 @@ const AboutBlockView = styled.div`
         mix-blend-mode: difference;
         margin-bottom: 100px;
         opacity: 0;
+        font-weight:bolder;
         transition: opacity 600ms linear;
         &.fade-in {
           opacity: 1;
