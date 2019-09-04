@@ -85,6 +85,7 @@ const WorkItemView = styled.div`
         height: 475px !important;
         width: 350px !important;
         .image {
+          top: -110px;
           height: 600px;
         } 
       }
