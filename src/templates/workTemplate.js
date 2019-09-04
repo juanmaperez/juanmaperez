@@ -2,6 +2,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import Layout from './../layouts/layout'
 import styled from 'styled-components'
+import SEO from './../components/seo'
 
 import Image from './../components/image';
 import ContactBlock from './../components/index/contact-block';
@@ -89,6 +90,7 @@ const WorkTemplate = ( { data, location } ) => {
   const { frontmatter, html } = work;
   return (
     <Layout location={ location}>
+      <SEO title={frontmatter.title} description={ frontmatter.description } keywords={ `design, website, web development` } />
       <WorkTemplateView>
         <div className="work-template-container">
           <h1>{ frontmatter.title }</h1>

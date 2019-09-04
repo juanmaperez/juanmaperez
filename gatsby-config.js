@@ -4,9 +4,11 @@ module.exports = {
     title: `Juanma Perez`,
     description: `I'm a web developer creating blazing fast websites and apps from scratch`,
     author: `Juanma Perez`,
+    siteUrl: `https://juanmaperez.me`
   },
   plugins: [
     `gatsby-plugin-sass`,
+    `gatsby-plugin-sitemap`,
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-react-helmet`,
     {
@@ -40,15 +42,15 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `places`,
-        path: `${__dirname}/src/content/places`,
+        name: `design`,
+        path: `${__dirname}/src/content/design`,
       },
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `moments`,
-        path: `${__dirname}/src/content/moments`,
+        name: `ux`,
+        path: `${__dirname}/src/content/ux`,
       },
     },
     `gatsby-transformer-sharp`,
@@ -56,8 +58,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `Juanma Perez Portfolio`,
+        short_name: `juanma perez`,
         start_url: `/`,
         background_color: `#fbf9f3`,
         theme_color: `#323846`,
