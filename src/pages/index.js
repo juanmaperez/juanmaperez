@@ -64,7 +64,7 @@ class IndexPage extends Component{
 
     return (
       <Layout location={location}>
-        <SEO title="Juanma Perez" 
+        <SEO title="Home" 
             description="Personal Website by Juanma Perez, Front End developer at Colossus Bets, London" 
             keywords={[`Juanma Perez`, `javascript`, `developer`]} 
         />

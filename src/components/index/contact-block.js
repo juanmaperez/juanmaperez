@@ -177,13 +177,13 @@ class ContactBlock extends Component {
           <div className="right">
             <div className="top">
               <p>I'm available for freelance works.</p>
-              <p>Say hello <a className="text" href="mailto:juanmaperezvar@gmail.com" target="_blank" rel="noopener norefferer">juanmaperezvar@gmail.com</a></p>
+              <p>Say hello <a className="text" href="mailto:juanmaperezvar@gmail.com" target="_blank" rel="noopener noreferrer">juanmaperezvar@gmail.com</a></p>
             </div>
             <div className="bottom">
-            <a className="text" href="https://www.linkedin.com/in/juanmaperezvargas/" target="_blank" rel="noopener norefferer">In </a> <i>|</i> 
-            <a className="text" href="https://www.instagram.com/encapsulated.io/" target="_blank" rel="noopener norefferer"> Ig </a> <i>|</i> 
-            <a className="text" href="https://twitter.com/juanmaperezvar" target="_blank" rel="noopener norefferer"> Tw </a> <i>|</i> 
-            <a className="text" href="https://encapsulated.io/" target="_blank" rel="noopener norefferer"> Blog </a>  
+            <a className="text" href="https://www.linkedin.com/in/juanmaperezvargas/" target="_blank" rel="noopener noreferrer">In </a> <i>|</i> 
+            <a className="text" href="https://www.instagram.com/encapsulated.io/" target="_blank" rel="noopener noreferrer"> Ig </a> <i>|</i> 
+            <a className="text" href="https://twitter.com/juanmaperezvar" target="_blank" rel="noopener noreferrer"> Tw </a> <i>|</i> 
+            <a className="text" href="https://encapsulated.io/" target="_blank" rel="noopener noreferrer"> Blog </a>  
             </div>
           </div>
         </div>

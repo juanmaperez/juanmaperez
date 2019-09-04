@@ -90,7 +90,7 @@ const WorkTemplate = ( { data, location } ) => {
   const { frontmatter, html } = work;
   return (
     <Layout location={ location}>
-      <SEO title={frontmatter.title} description={ frontmatter.description } keywords={ `design, website, web development` } />
+      <SEO title={frontmatter.title} description={ frontmatter.description } keywords={[`web`, `javascript`, `developer`]} />
       <WorkTemplateView>
         <div className="work-template-container">
           <h1>{ frontmatter.title }</h1>
