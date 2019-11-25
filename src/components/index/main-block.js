@@ -88,10 +88,11 @@ class MainBlock extends Component {
     tl
     .fromTo('.first', 0.4,{ autoAlpha: 0 },{autoAlpha: 1 })
     .fromTo('.main-block-cover', .5, { scaleX: 0 }, { className: '-=no-visible', scaleX: 1, ease: Power1.easeIn}, '+=0.9')
-    .to('.first', 0.2,{className:"+=second"})
-    .to('.second', 0.1,{className:"+=first"})
-    .fromTo('.main-block-cover', .5, { scaleY: 1 }, { scaleY: 0, ease: Power1.easeIn})
-    .staggerFromTo('.main-list li', .6, {y: 20, autoAlpha: 0 },{y: 0, autoAlpha: 1, ease: Linear.easeNone, onComplete: this.animationIsCompleted }, 0.2)
+    .fromTo('.main-block-cover', .5, { scaleX: 0 }, { scaleX: 1, ease: Power1.easeIn})
+    .to('.first', .1,{className:"+=second"})
+    .to('.second', .1,{className:"+=first"})
+    .fromTo('.main-block-cover', .5, { scaleY: 1 }, { scaleY: 0, ease: Power1.easeIn}, '+=0.2')
+    .staggerFromTo('.main-list li', .6, {y: 20, autoAlpha: 0 },{y: 0, autoAlpha: 1, ease: Linear.easeNone, onComplete: this.animationIsCompleted })
     .delay(2)
   }
 
@@ -121,7 +122,7 @@ class MainBlock extends Component {
           <li><span>Ig: [</span> <a className="text" href="https://www.instagram.com/encapsulated.io/" target="_blank" rel="noopener noreferrer">@encapsulated.io</a><span> ]</span></li>
           <li><span>Tw: [</span> <a className="text" href="https://twitter.com/juanmaperezvar" target="_blank" rel="noopener noreferrer">@juanmaperezvar</a><span> ]</span></li>
           <li><span>In: [</span> <a className="text" href="https://www.linkedin.com/in/juanmaperezvargas/" target="_blank" rel="noopener noreferrer">juanmaperezvargas</a><span> ]</span></li>
-          <li><span>Bl: [</span> <a className="text" href="https://encapsulated.io" target="_blank" rel="noopener noreferrer">//encapsulated.io</a><span> ]</span></li>
+          <li><span>Bl: [</span> <a className="text" href="https://encapsulated.io" target="_blank" rel="noopener noreferrer">{'//encapsulated.io'}</a><span> ]</span></li>
         </ul>
       </MainBlockView>
     )
