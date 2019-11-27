@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import styled from 'styled-components'
 import { TweenMax } from 'gsap';
-
+import { Link } from 'gatsby'
 import Image from './../image'
 import girl from './../../assets/images/girl.jpg'
 
@@ -45,7 +45,7 @@ const AboutBlockView = styled.div`
       z-index: 10;
       width: 75%;
       font-size: 6vw;
-      color: #ce6c71;
+      color: #323846;
       line-height: 1.2;
       padding: 100vh 120px 50px;
       box-sizing: border-box;
@@ -60,8 +60,6 @@ const AboutBlockView = styled.div`
         }
    
         strong, a {
-          color: #f0d0d5;
-          -webkit-text-stroke: 0.0002em #f0d0d5;
           &:hover {text-decoration: underline}
         }
       }
@@ -200,6 +198,11 @@ class AboutBlock extends Component {
             <Controller>
               <Scene classToggle={'fade-in'} triggerHook={0.80}>
                 <p>As a freelance I work with Companies, agencies, startups and individuals all around the world.</p>
+              </Scene>
+            </Controller>  
+            <Controller>
+              <Scene classToggle={'fade-in'} triggerHook={0.80}>
+                <p><Link to={'/cv'}>Read more.</Link></p>
               </Scene>
             </Controller>  
           </div> 
