@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import me from './../../assets/images/juanma_perez.jpg'
+import { useSpring, animated } from 'react-spring'
 
 const PersonalWrapper = styled.div`
     display: flex;
@@ -35,9 +36,16 @@ const PersonalWrapper = styled.div`
   
 `
 
-const Personal = () => (
+const Personal = () => {
+  const props = useSpring({
+    from: { x: -300}, 
+    to: {x : 0}
+  })
+  return (
     <PersonalWrapper>
-      <div className="image" style={{background: `url(${me})`}}></div>
+      <animated.div style={props}>
+        <div className="image" style={{background: `url(${me})`}}></div>
+      </animated.div>
       <div className='data'>
         <div>
           <h4>Juanma Perez</h4>
@@ -48,6 +56,7 @@ const Personal = () => (
         <p>https://juanmaperez.me</p>
       </div>
     </PersonalWrapper>
-)
+  )
+}
 
 export default Personal

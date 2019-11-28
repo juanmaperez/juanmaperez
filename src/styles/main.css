@@ -210,4 +210,8 @@ input, select {
     .works-section { padding-top: 100px }
   }
 
- 
+  @keyframes blink { 
+    0%   { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+  }

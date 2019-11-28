@@ -1,7 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
+import {useSpring, animated} from 'react-spring'
 
 const SkillsWrapper =  styled.section`
+  transition: opacity 5s linear;
   margin: 50px 0px 0px;
   h2 {
     font-size: 44px;
@@ -22,14 +24,23 @@ const SkillsWrapper =  styled.section`
   }
 `
 
-export default () => (
-  <SkillsWrapper>
-    <h2>Skills</h2>
-    <ul>
-      <li>Animations with GreenSock, React-Spring and React-transitions</li>
-      <li>Problem Solving and bug fixing</li>
-      <li>Functional Programming</li>
-      <li>UI implementations and UX focus</li>
-    </ul>
-  </SkillsWrapper>
-)
+export default ({visible}) => {
+  const {opacity, x} = useSpring({ 
+    opacity : visible ? 1 : 0,
+    x: visible ? 0 : -100
+  })
+  
+  return (
+    <animated.div style={{ opacity, transform: x.interpolate(x => `translateX(${x}px)`)}}>
+      <SkillsWrapper>
+        <h2>Skills</h2>
+        <ul>
+          <li>Animations with GreenSock, React-Spring and React-transitions</li>
+          <li>Problem Solving and bug fixing</li>
+          <li>Functional Programming</li>
+          <li>UI implementations and UX focus</li>
+        </ul>
+      </SkillsWrapper>
+    </animated.div>
+  )
+}
