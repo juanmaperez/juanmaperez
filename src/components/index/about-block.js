@@ -192,12 +192,12 @@ class AboutBlock extends Component {
             </Controller>    
             <Controller>
               <Scene classToggle={'fade-in'} triggerHook={0.80}>
-                <p>I love Javascript and all the frameworks related to this language like React, Angular and Vue.</p> 
+                <p>I love Javascript and all the frameworks related to this language such as React, Angular or Vue.</p> 
               </Scene>
             </Controller>    
             <Controller>
               <Scene classToggle={'fade-in'} triggerHook={0.80}>
-                <p>As a freelance I work with Companies, agencies, startups and individuals all around the world.</p>
+                <p>As a freelance I work with companies, agencies, startups and individuals all around the world.</p>
               </Scene>
             </Controller>  
             <Controller>

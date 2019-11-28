@@ -1,8 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
+import {useSpring, animated} from 'react-spring'
 
 const ExperiencesWrapper =  styled.section`
   margin: 20px 0px;
+
   h2 {
     font-size: 44px;
     width: 100%;
@@ -43,59 +45,68 @@ const ExperienceItemWrapper = styled.div`
   }
 ` 
 
-export default () => (
-  <ExperiencesWrapper>
-    <h2>Work Experience</h2>
-    <ExperienceItemWrapper>
-      <div className="title-experience">
-        <p className="name"><strong>Colossus Bets</strong> | <span>Senior Front End Engineer</span></p>
-        <p className="date"><span>06/2018 | nowadays</span></p>
-      </div>
-      <div className="description-experience">
-        <ul>
-          <li>Development with Angular and React.</li>
-          <li>State management with Redux and Ngrx.</li>
-          <li>TDD with Jest and Enzyme.</li>
-          <li>Mockup API with NodeJs and Express.</li>
-          <li>Data management with RXJS.</li>
-          <li>UI implementations for improving the UX.</li>
-          <li>Static Websites with GatsbyJS.</li>
-          <li>Styling with Styled-Components and SASS.</li>
-          <li>SCRUM methodologies.</li>
-        </ul>
-      </div>
-    </ExperienceItemWrapper>
-    <ExperienceItemWrapper>
-      <div className="title-experience">
-        <p className="name"><strong>Crealogix</strong> | <span>Front End Engineer</span></p>
-        <p className="date"><span>11/2017 | 06/2018</span></p>
-      </div>
-      <div className="description-experience">
-        <ul>
-          <li>Development with Angular 5.</li>
-          <li>Custom Implementations from the Angular Router.</li>
-          <li>Develop new Modules for the main App.</li>
-          <li>Fetching Data from API through HTTP requests.</li>
-          <li>Styling with SASS.</li>
-          <li>Tasks development based on SCRUM methodologies.</li>
-        </ul>
-      </div>
-    </ExperienceItemWrapper>
-    <ExperienceItemWrapper>
-      <div className="title-experience">
-        <p className="name"><strong>InboundCycle</strong> | <span>Front End Developer</span></p>
-        <p className="date"><span>11/2015 | 10/2017</span></p>
-      </div>
-      <div className="description-experience">
-        <ul>
-          <li>Development with React.</li>
-          <li>Dashboard implementations for marketing results.</li>
-          <li>Graphics with chart.js.</li>
-          <li>Integration with different APIs like MailChimp, Hubspot, and others.</li>
-          <li>Creating different Marketing Elements like Landing pages, emails or Blogs.</li>
-          <li>Wordpress development.</li>
-        </ul>
-      </div>
-    </ExperienceItemWrapper>
-  </ExperiencesWrapper>
-)
+export default ({visible}) => {
+  const {opacity, x} = useSpring({ 
+    opacity : visible ? 1 : 0,
+    x: visible ? 0 : -100
+  })
+
+  return (
+    <animated.div style={{ opacity, transform: x.interpolate(x => `translateX(${x}px)`)}}>
+      <ExperiencesWrapper>
+        <h2>Work Experience</h2>
+        <ExperienceItemWrapper>
+          <div className="title-experience">
+            <p className="name"><strong>Colossus Bets</strong> | <span>Senior Front End Engineer</span></p>
+            <p className="date"><span>06/2018 | nowadays</span></p>
+          </div>
+          <div className="description-experience">
+            <ul>
+              <li>Development with Angular and React.</li>
+              <li>State management with Redux and Ngrx.</li>
+              <li>TDD with Jest and Enzyme.</li>
+              <li>Mocked API with NodeJs and Express.</li>
+              <li>Data management with RXJS.</li>
+              <li>UI implementations for improving the UX.</li>
+              <li>Websites with GatsbyJS, GraphQL and Apollo.</li>
+              <li>Styling with Styled-Components and SASS.</li>
+              <li>SCRUM methodologies.</li>
+            </ul>
+          </div>
+        </ExperienceItemWrapper>
+        <ExperienceItemWrapper>
+          <div className="title-experience">
+            <p className="name"><strong>Crealogix</strong> | <span>Front End Engineer</span></p>
+            <p className="date"><span>11/2017 | 06/2018</span></p>
+          </div>
+          <div className="description-experience">
+            <ul>
+              <li>Development with Angular 5.</li>
+              <li>Custom Implementations from the Angular Router.</li>
+              <li>Develop new Modules for the main App.</li>
+              <li>Fetching Data from API through HTTP requests.</li>
+              <li>Styling with SASS.</li>
+              <li>Tasks development based on SCRUM methodologies.</li>
+            </ul>
+          </div>
+        </ExperienceItemWrapper>
+        <ExperienceItemWrapper>
+          <div className="title-experience">
+            <p className="name"><strong>InboundCycle</strong> | <span>Front End Developer</span></p>
+            <p className="date"><span>11/2015 | 10/2017</span></p>
+          </div>
+          <div className="description-experience">
+            <ul>
+              <li>Development with React.</li>
+              <li>Dashboard implementations for marketing results.</li>
+              <li>Graphics with chart.js.</li>
+              <li>Integration with different APIs like MailChimp, Hubspot, and others.</li>
+              <li>Creating different Marketing Elements like Landing pages, emails or Blogs.</li>
+              <li>Wordpress development.</li>
+            </ul>
+          </div>
+        </ExperienceItemWrapper>
+      </ExperiencesWrapper> 
+    </animated.div>
+  )
+}

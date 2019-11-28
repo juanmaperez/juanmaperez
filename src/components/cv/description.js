@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 
 const DescriptionWrapper =  styled.div`
@@ -8,20 +8,47 @@ const DescriptionWrapper =  styled.div`
     line-height: 1.4;
     font-size:18px;
     letter-spacing: 1px;
+    .stick {
+  
+      -webkit-animation: blink 500ms infinite; /* Safari 4+ */
+      -moz-animation:    blink 500ms infinite; /* Fx 5+ */
+      -o-animation:      blink 500ms infinite; /* Opera 12+ */
+      animation:         blink 500ms infinite;
+    }
   }
 `
 
 
-const Description = () => (
+const Description = ({ready}) => {
+  const sentence = useRef()
+  sentence.current =`Results-oriented software engineer with 6 years experience with the most advaced technologies in development. 
+  I'm focused on improving UX and product interfaces through finding the best approach to interactions.
+  Code efficiency is a central feature of my work, as past projects have involved managing large amounts of data.`
+  const counter = useRef();
+  let interval = useRef();
+  const [quote, setQuote] = useState('')
+
+  useEffect(() => {
+    counter.current = 0;
+    interval.current = setInterval(() => {
+      if(counter.current <= sentence.current.length - 1){
+        setQuote(quote => quote + sentence.current[counter.current])
+        counter.current++
+      } else {
+        clearInterval(interval)
+        ready()
+      }
+      return () => clearInterval(interval.current)
+    }, 20 )
+  }, [])
+
+  return (
   <DescriptionWrapper>
-    <p>I have worked as a software engineer for the last 6 years, adquiring experience with every client I worked for.
-    I started as a freelance in Seville until I moved to Barcelona in 2015 to grow proffesionally 
-    and get experience with the most advanced technologies in development.</p>
-    <p>During this years, I have been improving the user experience for different products through the interfaces and the 
-    best approaches on interactions.
-    Also I have managed huge amounts of data, and the efficiency became one of the most important things on the decission process and roadmap
-    to follow for keeping the best performance in Apps.</p>
-  </DescriptionWrapper>
-)
+      <p>
+        <span>{ quote }</span><span className="stick">|</span>
+      </p>
+    </DescriptionWrapper> 
+  )
+}
 
 export default Description

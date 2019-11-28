@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import Layout from "./../layouts/layout"
 import SEO from "./../components/seo"
 import styled from 'styled-components'
@@ -22,22 +22,28 @@ const CvPageWrapper = styled.div`
 `
 
 
-const CvPage = ({ location }) => (
-  <Layout location={location}>
-   <SEO title="CV" 
-        description="Personal Website by Juanma Perez, Front End developer at Colossus Bets, London" 
-        keywords={[`Juanma Perez`, `javascript`, `developer`]} 
-    />
-    <CvPageWrapper>
-      <div className='cv-container'>
-        <Personal />
-        <Description />
-        <Experiences />
-        <Education />
-        <Skills />
-      </div>
-    </CvPageWrapper> 
-  </Layout>
-)
+const CvPage = ({ location }) => {
+  const [visible, setVisible] = useState(false) 
+
+  const ready = () => setVisible(true)
+
+  return (
+    <Layout location={location}>
+    <SEO title="CV" 
+          description="Personal Website by Juanma Perez, Front End developer at Colossus Bets, London" 
+          keywords={[`Juanma Perez`, `javascript`, `developer`]} 
+      />
+      <CvPageWrapper>
+        <div className='cv-container'>
+          <Personal />
+          <Description ready={ready} />
+          <Experiences visible={visible} />
+          <Education visible={visible} />
+          <Skills visible={visible} />
+        </div>
+      </CvPageWrapper> 
+    </Layout>
+  )
+}
 
 export default CvPage;
