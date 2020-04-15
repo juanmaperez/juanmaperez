@@ -21,7 +21,7 @@ const DescriptionWrapper =  styled.div`
 
 const Description = ({ready}) => {
   const sentence = useRef()
-  sentence.current =`Results-oriented software engineer with 6 years experience with the most advaced technologies in development. 
+  sentence.current =`Results-oriented software engineer with 6 years experience with the most advanced technologies in development. 
   I'm focused on improving UX and product interfaces through finding the best approach to interactions.
   Code efficiency is a central feature of my work, as past projects have involved managing large amounts of data.`
   const counter = useRef();
