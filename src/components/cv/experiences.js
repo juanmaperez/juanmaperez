@@ -25,7 +25,7 @@ const ExperienceItemWrapper = styled.div`
         color: #000;
       }
       span {
-        color #B7C8Cb;
+        color: #B7C8Cb;
       }
     }
     .date {
@@ -57,8 +57,27 @@ export default ({visible}) => {
         <h2>Work Experience</h2>
         <ExperienceItemWrapper>
           <div className="title-experience">
+            <p className="name"><strong>Sainsbury's Tech</strong> | <span>Software Engineer</span></p>
+            <p className="date"><span>01/2020 | nowadays</span></p>
+          </div>
+          <div className="description-experience">
+            <ul>
+              <li>Components and Modules development using React.</li>
+              <li>Update codebase transform functional components using React Hooks.</li>
+              <li>Data typing using Typescript.</li>
+              <li>TDD with Jest and Enzyme.</li>
+              <li>State Management using Redux.</li>
+              <li>Continuous deployments improving the UI.</li>
+              <li>Reusable and isolated components using Storybook.</li>
+              <li>Styling with Styled-Components.</li>
+              <li>Development with new technologies such as GraphQL, Apollo, GatsbyJS y Prisma.</li>
+            </ul>
+          </div>
+        </ExperienceItemWrapper>
+        <ExperienceItemWrapper>
+          <div className="title-experience">
             <p className="name"><strong>Colossus Bets</strong> | <span>Senior Front End Engineer</span></p>
-            <p className="date"><span>06/2018 | nowadays</span></p>
+            <p className="date"><span>06/2018 | 01/2020</span></p>
           </div>
           <div className="description-experience">
             <ul>
@@ -90,7 +109,7 @@ export default ({visible}) => {
             </ul>
           </div>
         </ExperienceItemWrapper>
-        <ExperienceItemWrapper>
+        {/* <ExperienceItemWrapper>
           <div className="title-experience">
             <p className="name"><strong>InboundCycle</strong> | <span>Front End Developer</span></p>
             <p className="date"><span>11/2015 | 10/2017</span></p>
@@ -105,7 +124,7 @@ export default ({visible}) => {
               <li>Wordpress development.</li>
             </ul>
           </div>
-        </ExperienceItemWrapper>
+        </ExperienceItemWrapper> */}
       </ExperiencesWrapper> 
     </animated.div>
   )
