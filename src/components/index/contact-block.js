@@ -71,7 +71,7 @@ const ContactBlockView = styled.div`
         padding: 20px 0px;
         span { padding: 0px 10px;}
         i {
-          opacity: :.7; 
+          opacity: .7; 
           font-style: normal;
         }
       }
@@ -171,8 +171,8 @@ class ContactBlock extends Component {
         <div className="cover"></div>
         <div className="content">
           <div className="left">
-            <span className="month">Dic</span>
-            <span className="year">'19</span>
+            <span className="month">Sep</span>
+            <span className="year">'20</span>
           </div>
           <div className="right">
             <div className="top">
