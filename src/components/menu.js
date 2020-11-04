@@ -22,6 +22,8 @@ const MenuView = styled.div`
   }
   
   #nav-icon {
+    background: none;
+    border: 0;
     margin: 5px;
     width: 35px;
     height: 20px;
@@ -108,12 +110,12 @@ class Menu extends Component {
     const { open } = this.state;
     return (
       <MenuView >
-        <div className={ open ? 'open': ''} id="nav-icon" onClick={ this.toggleMenu }>
+        <button className={ open ? 'open': ''} id="nav-icon" onClick={ this.toggleMenu } onKeyDown={ this.toggleMenu }>
           <span className="bar"></span>
           <span className="bar"></span>
           <span className="bar"></span>
           <span className="bar"></span>
-        </div>
+        </button>
         <div className={ open ? 'open menu-list': 'menu-list'}>
           <ul>
             <MenuLink name="home" to={'/'} location={this.props.location } closeMenu={this.toggleMenu.bind(this)} />

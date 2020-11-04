@@ -40,7 +40,7 @@ const Description = ({ready}) => {
       }
       return () => clearInterval(interval.current)
     }, 20 )
-  }, [])
+  }, [ready])
 
   return (
   <DescriptionWrapper>

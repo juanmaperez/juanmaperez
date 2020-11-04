@@ -62,15 +62,14 @@ export default ({visible}) => {
           </div>
           <div className="description-experience">
             <ul>
-              <li>Components and Modules development using React.</li>
-              <li>Update codebase transform functional components using React Hooks.</li>
-              <li>Data typing using Typescript.</li>
-              <li>TDD with Jest and Enzyme.</li>
-              <li>State Management using Redux.</li>
-              <li>Continuous deployments improving the UI.</li>
-              <li>Reusable and isolated components using Storybook.</li>
-              <li>Styling with Styled-Components.</li>
+              <li>Components and view development using React, Redux, and Typescript.</li>
+              <li>Update codebase to functional components using React Hooks.</li>
+              <li>TDD with Jest and Enzyme. Creating reusable and isolated components using Storybook.</li>
+              <li>Migrating the React project into NextJS to take advantage of SSR.</li>
+              <li>Creation and improvement of our services in GO.</li>
+              <li>Responsible of pairing sessions and onboarding of new colleagues.</li>
               <li>Development with new technologies such as GraphQL, Apollo, GatsbyJS y Prisma.</li>
+              <li>CI/CD with SCRUM methodologies.</li>
             </ul>
           </div>
         </ExperienceItemWrapper>
@@ -87,7 +86,7 @@ export default ({visible}) => {
               <li>Mocked API with NodeJs and Express.</li>
               <li>Data management with RXJS.</li>
               <li>UI implementations for improving the UX.</li>
-              <li>Websites with GatsbyJS, GraphQL and Apollo.</li>
+              <li>Microsites created with GatsbyJS, GraphQL and Apollo.</li>
               <li>Styling with Styled-Components and SASS.</li>
               <li>SCRUM methodologies.</li>
             </ul>
