@@ -66,7 +66,7 @@ export default ({visible}) => {
               <li>Update codebase to functional components using React Hooks.</li>
               <li>TDD with Jest and Enzyme. Creating reusable and isolated components using Storybook.</li>
               <li>Migrating the React project into NextJS to take advantage of SSR.</li>
-              <li>Creation and improvement of our services in GO.</li>
+              <li>Creation and improvement of our services in Go.</li>
               <li>Responsible of pairing sessions and onboarding of new colleagues.</li>
               <li>Development with new technologies such as GraphQL, Apollo, GatsbyJS y Prisma.</li>
               <li>CI/CD with SCRUM methodologies.</li>
