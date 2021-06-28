@@ -15,13 +15,12 @@ const BlogView = styled.div`
 	padding: 100px 0 80px;
   min-height: 10px;
   @media(max-width: 768px){
-    margin: 0px auto 80px;
+    margin: 0px auto 0px;
 		padding: 50px 0 80px;
   }
   @media(max-width: 510px){
-    margin: 0px auto 80px;
+    margin: 0px auto 0px;
 		padding: 100px 0 80px;
-
   }
   .list-header {
     margin: 100px auto 0px;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { Link } from 'gatsby'
 
 import { TweenMax, Power1 } from 'gsap';
 
@@ -172,7 +173,7 @@ class ContactBlock extends Component {
         <div className="content">
           <div className="left">
             <span className="month">Sep</span>
-            <span className="year">'20</span>
+            <span className="year">'21</span>
           </div>
           <div className="right">
             <div className="top">
@@ -180,10 +181,10 @@ class ContactBlock extends Component {
               <p>Say hello <a className="text" href="mailto:juanmaperezvar@gmail.com" target="_blank" rel="noopener noreferrer">juanmaperezvar@gmail.com</a></p>
             </div>
             <div className="bottom">
-            <a className="text" href="https://www.linkedin.com/in/juanmaperezvargas/" target="_blank" rel="noopener noreferrer">In </a> <i>|</i> 
-            <a className="text" href="https://www.instagram.com/encapsulated.io/" target="_blank" rel="noopener noreferrer"> Ig </a> <i>|</i> 
-            <a className="text" href="https://twitter.com/juanmaperezvar" target="_blank" rel="noopener noreferrer"> Tw </a> <i>|</i> 
-            <a className="text" href="https://encapsulated.io/" target="_blank" rel="noopener noreferrer"> Blog </a>  
+              <a className="text" href="https://www.linkedin.com/in/juanmaperezvargas/" target="_blank" rel="noopener noreferrer">In </a> <i>|</i> 
+              <a className="text" href="https://www.instagram.com/encapsulated.io/" target="_blank" rel="noopener noreferrer"> Ig </a> <i>|</i> 
+              <a className="text" href="https://twitter.com/juanmaperezvar" target="_blank" rel="noopener noreferrer"> Tw </a> <i>|</i> 
+              <Link className="text" to="/blog"> Blog </Link>  
             </div>
           </div>
         </div>

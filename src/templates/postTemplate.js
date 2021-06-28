@@ -21,7 +21,10 @@ const BlogPostView = styled.div`
     padding: 100px 0 40px;
     @media(max-width:1590px){ width: 50% }
     @media(max-width:1100px){ width:55% }
-    @media(max-width:878px){ width:75% }
+    @media(max-width:878px){     
+			padding: 50px 0 40px;
+			width:75% 
+		}
     @media(max-width:510px){
       width:95%;
       padding: 100px 10px 40px;
@@ -61,7 +64,7 @@ const BlogPostView = styled.div`
         top: -3px;
         margin-right: 10px;
         display: inline-block;
-        width: 8px;
+        width: 10px;
         height: 17px;
         background: url(${props=> props.icon});
         border-radius: 50%/25%;
@@ -178,21 +181,24 @@ function PostTemplate (props) {
 	const { markdownRemark: post } = props.data;
 	const { frontmatter, html } = post;
 	const { next, prev } = props.pageContext;
-	const backPath = props.location.state ? props.location.state.prevPath || '/' : '/';
+	// const backPath = location.state ? location.state.prevPath || '/blog' : '/blog';
 
 	return(
 	<Layout location={location}>
 		<SEO title={frontmatter.title} description={ frontmatter.excerpt } keywords={ frontmatter.tags } />
 			<BlogPostView height={height} icon={ frontmatter.icon.childImageSharp.fluid.src }>       
 				<div className="post-container">
-					<Link className="back" to={ backPath }>
+					{/* <Link className="back" to={ backPath }>
 							Back to the list
-					</Link>
+					</Link> */}
 					<h2 className="post-title">
 						{frontmatter.title}
 					</h2>
 					<div className="post-date">
-						<span className="post-icon"></span>{frontmatter.date}
+						<Link className="post-icon" to={`/blog/category/${frontmatter.category}`}>
+							<img width="10" src={frontmatter.icon.childImageSharp.fluid.src} alt={frontmatter.category}/>
+						</Link>
+						<span>{frontmatter.date}</span>
 					</div>
 
 					<div className="post-content" dangerouslySetInnerHTML={{__html: html}} />

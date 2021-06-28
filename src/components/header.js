@@ -74,7 +74,10 @@ class Header extends Component {
   }
   
   render() {
+
     const { siteTitle, location } = this.props; 
+    const backPath = location.state ? location.state.prevPath || '/blog' : '/blog';
+
     return (
       <HeaderView>
         <h1 className="web-title" data-text={siteTitle} style={{ margin: 0 }}>
@@ -82,7 +85,8 @@ class Header extends Component {
         </h1>
         <nav>
           { location.pathname === '/' && <Menu location={location}/>}
-          { location.pathname !== '/' && <Link className="back" to="/"> Back </Link>}
+          { location.pathname !== '/' && !location.pathname.includes('/blog/') && <Link className="back" to="/"> Back to home</Link>}
+          { location.pathname.includes('/blog/') && <Link className="back" to={backPath}> Back to posts</Link>}
         </nav>
       </HeaderView>
     )

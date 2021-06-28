@@ -87,7 +87,7 @@ const PostItem = (props) => {
               <Link to={frontmatter.path} state={{prevPath: listPath }}> {frontmatter.title} </Link>
             </h2>
             <div className="post-date">
-              <Link to={`/category/${frontmatter.category}`}><img width="10" src={frontmatter.icon.childImageSharp.fluid.src} alt={frontmatter.category}/></Link>
+              <Link to={`/blog/category/${frontmatter.category}`}><img width="10" src={frontmatter.icon.childImageSharp.fluid.src} alt={frontmatter.category}/></Link>
               &nbsp;<span>{frontmatter.date}</span>
             </div>
             <div className="post-excerpt">

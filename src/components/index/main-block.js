@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-
+import { Link } from 'gatsby'
 import { Power1, TimelineMax, TweenMax, Linear } from 'gsap'
 
 import backgroundSecond from './../../assets/images/first.jpg'
@@ -122,7 +122,7 @@ class MainBlock extends Component {
           <li><span>Ig: [</span> <a className="text" href="https://www.instagram.com/finejavascript/" target="_blank" rel="noopener noreferrer">@encapsulated.io</a><span> ]</span></li>
           <li><span>Tw: [</span> <a className="text" href="https://twitter.com/juanmaperezvar" target="_blank" rel="noopener noreferrer">@juanmaperezvar</a><span> ]</span></li>
           <li><span>In: [</span> <a className="text" href="https://www.linkedin.com/in/juanmaperezvargas/" target="_blank" rel="noopener noreferrer">juanmaperezvargas</a><span> ]</span></li>
-          <li><span>Bl: [</span> <a className="text" href="https://finejavascript.com" target="_blank" rel="noopener noreferrer">{'//finejavascript'}</a><span> ]</span></li>
+          <li><span>Bl: [</span> <Link className="text" to={'/blog'}>{'//blog'}<span> ]</span></Link></li>
         </ul>
       </MainBlockView>
     )

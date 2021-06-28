@@ -1,3 +1,4 @@
+import { Link } from 'gatsby';
 import React, { Component } from 'react';
 import styled from 'styled-components'
 import MenuLink from'./menuLink'
@@ -18,6 +19,20 @@ const MenuView = styled.div`
     }
     ul {
       list-style: none;
+      li {
+        cursor: pointer;
+        text-align: right;
+        button {
+          font-size: 18px; 
+          color: #323846;
+          background:none;
+          border: 0px;
+          &:hover {
+            text-decoration: line-through;
+          }
+        }
+      }
+    
     }
   }
   
@@ -121,7 +136,15 @@ class Menu extends Component {
             <MenuLink name="home" to={'/'} location={this.props.location } closeMenu={this.toggleMenu.bind(this)} />
             <MenuLink name="about" to={'/about'} location={this.props.location } closeMenu={this.toggleMenu.bind(this)} />
             <MenuLink name="works" to={'/works'} location={this.props.location } closeMenu={this.toggleMenu.bind(this)} />
-            <MenuLink name="contact" to={'/contact'} location={this.props.location } closeMenu={this.toggleMenu.bind(this)} />  
+            <MenuLink name="contact" to={'/contact'} location={this.props.location } closeMenu={this.toggleMenu.bind(this)} /> 
+            <li>
+              <Link to={'/blog'}>
+                <button className="unstyled" role="link">
+                  <span>[ </span>Blog 
+                  <span> ]</span>
+                </button>
+              </Link>
+            </li>
           </ul>
         </div>
       </MenuView>

@@ -6,9 +6,18 @@ import SEO from "../components/seo"
 import PostItem from './../components/post-item'
 
 const CategoryView = styled.div`
-  margin: 150px auto 80px;
+  margin: 0px auto 0px;
+  padding: 120px 0 80px;
   width: 100%;
   min-height: 10px;
+  @media(max-width: 768px){
+    margin: 0px auto 0px;
+		padding: 50px 0 80px;
+  }
+  @media(max-width: 510px){
+    margin: 0px auto 0px;
+		padding: 100px 0 80px;
+  }
   .category-header {
     margin: 100px auto;
     box-sizing: border-box;
@@ -23,6 +32,7 @@ const CategoryView = styled.div`
       margin-top: -10px;
       font-size: 24px;
       color: var(--tertiaryColor);
+      text-transform: uppercase;
     }
     @media(max-width:1590px){ width: 40% }
     @media(max-width:1100px){ width:55% }
