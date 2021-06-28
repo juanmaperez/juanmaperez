@@ -138,13 +138,13 @@ class WorkItem extends Component {
     const { work, top } = this.props;
     return(
       <WorkItemView top={top}>
-          <div className={`work-container work-${work.type}-${top}`}>
-            <Link to={`${work.path}`} className={`image-wrapper wrapper-${work.type}-${top}`}>
-              <div className={`image image-${work.type}-${top}`} style={{'background': `url(${work.thumbnail.childImageSharp.fluid.src})`}}>
-              </div>
-              <span to={`${work.path}`} className="title">{ work.title }</span>
-            </Link>
-          </div>
+        <div className={`work-container work-${work.type}-${top}`}>
+          <Link to={`${work.path}`} className={`image-wrapper wrapper-${work.type}-${top}`}>
+            <div className={`image image-${work.type}-${top}`} style={{'background': `url(${work.thumbnail.childImageSharp.fluid.src})`}}>
+            </div>
+            <span to={`${work.path}`} className="title">{ work.title }</span>
+          </Link>
+        </div>
       </WorkItemView>
     )
   }

@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 
 
 const Image = ({title, imageUrl}) => (
-    <img alt={ title } src={ imageUrl } />
+  <img alt={ title } src={ imageUrl } />
 )
 
 Image.propTypes = {

@@ -8,7 +8,6 @@ import Image from './../components/image'
 import juanma from './../assets/images/juanma_perez.jpg'
 
 
-
 const BlogView = styled.div`
   margin: 0px auto 0px;
   width: 100%;
@@ -165,8 +164,8 @@ class BlogPage extends Component {
     const { currentPage, numPages } = this.props.pageContext 
     const isFirst = currentPage === 1;
     const isLast = currentPage ===  numPages;
-    const prevPage = currentPage -1 === 1 ? '/' : `/page/${(currentPage - 1 ).toString()}`
-    const nextPage = `/page/${(currentPage  + 1).toString()}`
+    const prevPage = currentPage -1 === 1 ? '/blog' : `/blog/page/${(currentPage - 1 ).toString()}`
+    const nextPage = `/blog/page/${(currentPage  + 1).toString()}`
     return (
       <Layout location={location}>
         <SEO 
@@ -188,7 +187,7 @@ class BlogPage extends Component {
             {posts.map(({node: post})=>{
               const { frontmatter } = post;
               return (
-                <PostItem listPath={this.props.location.pathname} key={frontmatter.path} frontmatter={frontmatter} />
+                <PostItem listPath={location.pathname} key={frontmatter.path} frontmatter={frontmatter} />
               )
             })}
           </div>
@@ -216,7 +215,7 @@ class BlogPage extends Component {
 }
 
 export const query = graphql`
-  query BlogQuery ($skip: Int!, $limit: Int!) {
+  query ($skip: Int!, $limit: Int!) {
     allMarkdownRemark (
       limit: $limit
       skip: $skip
