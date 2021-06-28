@@ -90,10 +90,11 @@ class IndexPage extends Component{
 }
 
 export const query = graphql`
-  query BlogQuery {
+  query WorksQuery {
     allMarkdownRemark (
       limit: 2000
       sort: { fields: [frontmatter___date], order: DESC }
+      filter: {frontmatter: {type: {eq: "projects"}}}
     ) {
       totalCount
       edges {

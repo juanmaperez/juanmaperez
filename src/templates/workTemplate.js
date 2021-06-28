@@ -90,12 +90,12 @@ const WorkTemplate = ( { data, location } ) => {
   const { frontmatter, html } = work;
   return (
     <Layout location={ location}>
-      <SEO title={frontmatter.title} description={ frontmatter.description } keywords={[`web`, `javascript`, `developer`]} />
+      <SEO title={frontmatter.title} description={ frontmatter.excerpt } keywords={[`web`, `javascript`, `developer`]} />
       <WorkTemplateView>
         <div className="work-template-container">
           <h1>{ frontmatter.title }</h1>
           <div className="description">
-            <p>{ frontmatter.description }</p>
+            <p>{ frontmatter.excerpt }</p>
           </div>
           <div className="content" dangerouslySetInnerHTML={{ __html: html}}></div>
           {/* <div className="work-image">
@@ -125,7 +125,7 @@ export const WorkQuery = graphql`
       frontmatter {
         path
         title
-        description
+        excerpt
         thumbnail {
           childImageSharp {
               fluid(maxWidth: 2500) {

@@ -4,6 +4,7 @@ date: '2018-03-18T12:34:00+00:00'
 title: "Umaicha"
 thumbnail: ./umaicha.png
 type: projects
+category: projects
 images: [
   { title: 'Main Blog',  image: ./umaicha.png }
   # { title: 'Get in with me',  image: ./sign.jpg },
@@ -11,7 +12,7 @@ images: [
   # { title: 'So high',  image: ./dinamo.jpg },
   # { title: 'Playing all day',  image: ./games.jpg }
 ]
-description: "UmaiCha is a company from catalonia specialized in tea production. Their principal strategy is to sell tea drinks without sugar and made with japanese technics and raw material from this country."
+excerpt: "UmaiCha is a company from catalonia specialized in tea production. Their principal strategy is to sell tea drinks without sugar and made with japanese technics and raw material from this country."
 ---
 
 Umaicha’s work has been based on authenticity and tradition and the result of their effort is a natural product from green tea leaves from the Kagoshima region on the island of Kyushu in southern Japan.

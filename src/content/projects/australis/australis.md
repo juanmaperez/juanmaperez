@@ -4,6 +4,7 @@ date: '2018-05-18T12:34:00+00:00'
 title: "Australis"
 thumbnail: ./principal.png
 type: projects
+category: projects
 images: [
   { title: 'Blog site',  image: ./principal.png } 
   # { title: 'Lovely dinner',  image: ./restaurant.jpg },
@@ -11,7 +12,7 @@ images: [
   # { title: 'Under the city',  image: ./tube.jpg },
   # { title: 'Gin & tonic, please',  image: ./bar.jpg }
 ]
-description: "Australis is a company specialized in navigation through the southern channels of Chilean-Argentine Patagonia. Their luxury cruises offer an interesting experience visiting unique places as the Strait of Magellan or The Beagle Channel during 3, 4 or 7 nights."
+excerpt: "Australis is a company specialized in navigation through the southern channels of Chilean-Argentine Patagonia. Their luxury cruises offer an interesting experience visiting unique places as the Strait of Magellan or The Beagle Channel during 3, 4 or 7 nights."
 ---
 
 This project was implemented to attract people interested in this kind of destination less usual and away from the big cities. For this reason, we created blogpatagonia.australis.com a meeting point for this tourist with a wild lifestyle and completely full of adventures.

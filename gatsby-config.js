@@ -16,6 +16,12 @@ module.exports = {
       options: {
         plugins: [
           {
+            resolve: `gatsby-remark-prismjs`,
+            options: {
+              inlineCodeMarker: '÷'
+            }
+          },
+          {
             resolve: `gatsby-remark-images`,
             options: {
                 maxWidth: 1300,
@@ -30,6 +36,13 @@ module.exports = {
       options: {
         name: `images`,
         path: `${__dirname}/src/assets/images`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `icons`,
+        path: `${__dirname}/src/assets/icons`,
       },
     },
     {
@@ -51,6 +64,13 @@ module.exports = {
       options: {
         name: `ux`,
         path: `${__dirname}/src/content/ux`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `posts`,
+        path: `${__dirname}/src/content/posts`,
       },
     },
     `gatsby-transformer-sharp`,

@@ -4,6 +4,7 @@ date: '2018-06-18T12:34:00+00:00'
 title: "Colossus Bets"
 thumbnail: ./principal.png
 type: projects
+category: projects
 images: [
   { title: 'Main App',  image: ./principal.png }
   # { title: 'Lets get that place',  image: ./pier.jpg },
@@ -11,7 +12,7 @@ images: [
   # { title: 'Nobody at home',  image: ./surfing.jpg },
   # { title: 'So nice',  image: ./skate.jpg }
 ]
-description: "Colossus Bets is a betting company based on UK. Here is where I work nowadays implementing new features for the main app and improving the UX for the existing ones."
+excerpt: "Colossus Bets is a betting company based on UK. Here is where I work nowadays implementing new features for the main app and improving the UX for the existing ones."
 ---
 
 I have been working in different areas in the project but also focused on improvements related to how the users can set information about their profiles, stadistics, results, or bet deposits through a profile view with new features and easier to follow.
