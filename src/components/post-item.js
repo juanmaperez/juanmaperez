@@ -17,11 +17,6 @@ const PostItemView = styled.div`
   }
   .post-wrapper {
     height: 100%;
-    opacity: 0;
-    transition: opacity 600ms linear;
-    &.fade-in {
-      opacity: 1;
-    }
     .post-icon {
       margin-right: 5px;
       width: 8px;
