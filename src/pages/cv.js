@@ -29,8 +29,8 @@ const CvPage = ({ location }) => {
 
   return (
     <Layout location={location}>
-    <SEO title="CV" 
-          description="Personal Website by Juanma Perez, Front End developer at Colossus Bets, London" 
+    <SEO title="Juanma Perez | CV" 
+          description="Personal Website by Juanma Perez. I'm Juanma Perez and here you can find my update resume." 
           keywords={[`Juanma Perez`, `javascript`, `developer`]} 
       />
       <CvPageWrapper>

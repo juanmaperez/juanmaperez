@@ -64,8 +64,8 @@ class IndexPage extends Component{
 
     return (
       <Layout location={location}>
-        <SEO title="Home" 
-            description="Personal Website by Juanma Perez, Front End developer at Colossus Bets, London" 
+        <SEO title="Juanma Perez | Home" 
+            description="Personal website by Juanma Perez, I'm Juanma Perez, a software engineer from Seville working at Cazoo." 
             keywords={[`Juanma Perez`, `javascript`, `developer`]} 
         />
         { workTypes && <MainBlock markAsCompleted={this.completeAnimation.bind(this)} animationCompleted={animationCompleted}/>}

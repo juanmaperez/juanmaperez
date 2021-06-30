@@ -35,7 +35,7 @@ const NotFoundView = styled.div`
 
 const NotFoundPage = ({location}) => (
   <Layout location={location}>
-    <SEO title="404: Not found" />
+    <SEO title="Juanma Perez | 404" />
     <NotFoundView>
       <h1>404</h1>
       <p>Be focused or <Link to={'/'}>go Home</Link></p>

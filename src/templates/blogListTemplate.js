@@ -169,8 +169,8 @@ class BlogPage extends Component {
     return (
       <Layout location={location}>
         <SEO 
-          title="Blog" 
-          description={'Juanma Perez personal blog about javascript and other technologies related to front end development'} 
+          title="Juanma Perez | Blog" 
+          description={'Juanma Perez personal blog about javascript and other technologies. Sometimes I also write about bread or recipes'} 
           keywords={['javascript', 'development', 'front end', 'react', 'angular', 'gatsbyjs']} 
         />
         <BlogView>
@@ -180,7 +180,7 @@ class BlogPage extends Component {
             </div>
             <div className="info">
               <p className="title">Personal blog by <a href="https://twitter.com/juanmaperezvar" target="blank">Juanma Perez</a></p>
-              <p>What I learned about javascript</p>
+              <p>What I learned about javascript and bread</p>
             </div>
           </div>
           <div className={`post-list list`}>

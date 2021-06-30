@@ -182,7 +182,7 @@ class AboutBlock extends Component {
           <div className="intro-text">
             <Controller>
               <Scene classToggle={'fade-in'} triggerHook={0.80}>
-                <p>I'm <span>Juanma Perez</span>, a web developer from Seville and based in London.</p>
+                <p>I'm <strong>Juanma Perez</strong>, a web developer from Seville and based in London.</p>
               </Scene>
             </Controller>
             <Controller>

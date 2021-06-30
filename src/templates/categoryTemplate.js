@@ -101,7 +101,7 @@ class CategoryTemplate extends Component {
 
     return (
       <Layout location={location}>
-        <SEO title={`${ category } pills`} description={`Little of knowledge about ${category}`} keywords={[ category, 'javascript', 'code' ]}/>
+        <SEO title={`Juanma Perez | ${ category }`} description={`Little of knowledge about ${category}`} keywords={[ category, 'javascript', 'code' ]}/>
         <CategoryView>
           <div className="category-header">
             <h2 className="category-title">All about {category}</h2>
