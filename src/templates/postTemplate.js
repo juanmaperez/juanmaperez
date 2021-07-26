@@ -143,9 +143,24 @@ const BlogPostView = styled.div`
         color: var(--tertiaryColor);
         text-decoration: none;
       }
-      ul {
-        margin:30px 0px 30px;
+      ol {
+        margin:20px 0px 20px;
         padding-left: 0px;
+        counter-reset: my-counter;
+        list-style: none;
+
+        li {
+          counter-increment: my-counter;
+        }
+        li::before {
+          content: counter(my-counter) ".  ";
+          font-family: "MFred";
+          font-size: 24px;
+          padding-right: 5px;;
+        }
+      }
+      ul {
+        margin:20px 0px 20px;
         list-style: circle !important;
         padding-left: 20px;
 
