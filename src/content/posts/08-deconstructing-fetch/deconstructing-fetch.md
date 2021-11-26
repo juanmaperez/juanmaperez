@@ -9,13 +9,13 @@ tags: ["javascript", "fetch API", "fetch", "typescript", "fetch browser API"]
 excerpt: "Fetch is one of the most used APIs in our projects but not everyone knows about all the features available."
 ---
 
-Fetch is one of the most used API from your browser. We take advantage of this API to perform http requests such as POST, GET, PUT, PATCH or DELETE but not everyone knows all the features that it offers.
+Fetch is one of the most used API from your browser. We take advantage of this API to perform http requests such as `POST`, `GET`, `PUT`, `PATCH` or `DELETE` but not everyone knows all the features that it offers.
 
 So basically, the Fetch API provides an easy and logical way to retrieve resources asynchronously across the network.
 
 ## Fetch method and Response object.
 
-The Fetch API provides a global `fetch()` method, which is a better alternative than the old `XMLHttpRequest` and `jQuery.ajax()`, with significant differences:
+The Fetch API provides a global <a href="https://developer.mozilla.org/en-US/docs/Web/API/fetch" target="_blank">fetch() method</a>, which is a better alternative than the old `XMLHttpRequest` and `jQuery.ajax()`, with significant differences:
 
 - `fetch()` won't reject on HTTP error status even if the response is an 404 or 500, instead will resolve with the `ok` property set to false
 
@@ -27,7 +27,7 @@ The simplest use of fetch takes one argument, the path to the resource you want 
 const res = await fetch("http://example.com/movies")
 ```
 
-If you are wondering what type of object is returning the fetch method, it's just a promise that resolves in a [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) to our request, and this is the way that you'll more likely find this type of object.
+If you are wondering what type of object is returning the fetch method, it's just a promise that resolves in a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Response" target="_blank">Response</a> to our request, and this is the way that you'll most likely find this type of object.
 
 ## Request
 
@@ -42,7 +42,7 @@ const res = await fetch("http://example.com/movies", {
 We basically pass to the `fetch()` method all the arguments that we need for our request but, did you know that there is actually a Request constructor?
 
 ```js
-let req = new Request("http://example.com/movies", {
+const req = new Request("http://example.com/movies", {
   headers: { accept: "application/json" },
 })
 ```
@@ -50,7 +50,7 @@ let req = new Request("http://example.com/movies", {
 You can use both together, the Request constructor is kinda like a way to describe a request, and the fetch is kinda like telling the JavaScript environment to actually execute the described request.
 
 ```js
-let req = new Request("http://example.com/movies", {
+const req = new Request("http://example.com/movies", {
   headers: { accept: "application/json" },
 })
 
@@ -59,13 +59,13 @@ const res = await fetch(req)
 
 ## Headers
 
-Another API that you might not be familiar with is the [Headers API](https://developer.mozilla.org/en-US/docs/Web/API/Headers), which has associated a list of headers, but also methods to perform actions such as retrieving, setting or removing headers from the list.
+Another API that you might not be familiar with is the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Headers" target="_blank">Headers API</a>, which has associated a list of headers, but also methods to perform actions such as retrieving, setting or removing headers from the list.
 
 ```js
-let headers = new Headers({ accept: "application/json" })
+const headers = new Headers({ accept: "application/json" })
 headers.append("Set-Cookie", "some_cookie=cookie-value")
 
-let req = new Request("http://example.com/movies", {
+const req = new Request("http://example.com/movies", {
   headers,
 })
 
@@ -96,16 +96,17 @@ The URL interface can receive the whole url as a string or two arguments where t
 ```js
 const url = new URL("../movies", "http://example.com")
 
-console.log(url.hostname) // "www.example.com"
+console.log(url.hostname) // "http://example.com"
 console.log(url.pathname) // "/movies"
 ```
 
 Besides, It's also common that some resources accept parameters such as page, limit or filters that can be sent with the URL.
 
-The [URLSearchParams](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams) interface defines utility methods to work with the query string of a URL, and it's also present in the URL interface under the property searchParams.
+The <a href="https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams" target="_blank">URLSearchParams</a> interface defines utility methods to work with the query string of a URL, and it's also present in the URL interface under the property searchParams.
 
 ```js
-let url = new URL("http://example.com/movies")
+const url = new URL("http://example.com/movies")
+
 url.searchParams.set("page", 1)
 url.searchParams.set("limit", 10)
 ```
@@ -115,6 +116,7 @@ This API expects an object of key and value properties and it returns URLSearchP
 ```js
 const page = "2"
 const limit = "10"
+
 const searchParams = new URLSearchParams({ page, limit })
 
 const url = new URL(`http://example.com/movies?${searchParams.toString()}`)
@@ -126,14 +128,13 @@ The Fetch Api is a more complex API than just a global method `fetch()`, even wh
 
 ```js
 // Params
-const page = "music"
-const limit = "3"
-const searchParams = new URLSearchParams({ term, limit })
+const page = "1"
+const limit = "30"
+
+const searchParams = new URLSearchParams({ page, limit })
 
 // URL
-const url = new URL(
-  `https://icanhazdadjoke.com/search?${searchParams.toString()}`
-)
+const url = new URL(`http://example.com/movies?${searchParams.toString()}`)
 
 // Headers
 const headers = new Headers({ accept: "application/json" })
