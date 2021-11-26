@@ -1,7 +1,7 @@
 ---
 path: "/blog/deconstructing-fetch-browser-api"
 date: "2021-11-25T19:00:00+00:00"
-title: "Deconstructing the fetch browser API"
+title: "Deconstructing the Fetch API"
 type: post
 icon: ./../../../assets/icons/javascript.png
 category: "javascript"
