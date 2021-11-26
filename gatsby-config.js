@@ -4,7 +4,7 @@ module.exports = {
     title: `Juanma Perez`,
     description: `I'm a web developer creating blazing fast websites and apps from scratch`,
     author: `Juanma Perez`,
-    siteUrl: `https://juanmaperez.me`
+    siteUrl: `https://juanmaperez.me`,
   },
   plugins: [
     `gatsby-plugin-sass`,
@@ -12,24 +12,24 @@ module.exports = {
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-react-helmet`,
     {
-      resolve: 'gatsby-transformer-remark',
+      resolve: "gatsby-transformer-remark",
       options: {
         plugins: [
           {
             resolve: `gatsby-remark-prismjs`,
             options: {
-              inlineCodeMarker: '÷'
-            }
+              inlineCodeMarker: "÷",
+            },
           },
           {
             resolve: `gatsby-remark-images`,
             options: {
-                maxWidth: 1300,
-                linkImagesToOriginal: false
-            }
-          }
-        ]
-      }
+              maxWidth: 1300,
+              linkImagesToOriginal: false,
+            },
+          },
+        ],
+      },
     },
     {
       resolve: `gatsby-source-filesystem`,
@@ -55,20 +55,6 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `design`,
-        path: `${__dirname}/src/content/design`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `ux`,
-        path: `${__dirname}/src/content/ux`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
         name: `posts`,
         path: `${__dirname}/src/content/posts`,
       },
@@ -84,7 +70,7 @@ module.exports = {
         background_color: `#fbf9f3`,
         theme_color: `#323846`,
         display: `minimal-ui`,
-        icon: `src/assets/images/icon.png` // This path is relative to the root of the site.
+        icon: `src/assets/images/icon.png`, // This path is relative to the root of the site.
       },
     },
     {
