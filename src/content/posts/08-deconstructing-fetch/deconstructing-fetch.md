@@ -9,9 +9,9 @@ tags: ["javascript", "fetch API", "fetch", "typescript", "fetch browser API"]
 excerpt: "Fetch is one of the most used APIs in our projects but not everyone knows about all the features available."
 ---
 
-Fetch is one of the most used API from your browser. We take advantage of this API to perform http requests such as `POST`, `GET`, `PUT`, `PATCH` or `DELETE` but not everyone knows all the features that it offers.
+Fetch is one of the most used API from the browser. We take advantage of this API to perform http requests such as `POST`, `GET`, `PUT`, `PATCH` or `DELETE`, but not everyone knows all the features that it offers.
 
-So basically, the Fetch API provides an easy and logical way to retrieve resources asynchronously across the network.
+Basically, the Fetch API provides an easy and logical way to retrieve resources asynchronously across the network.
 
 ## Fetch method and Response object.
 
