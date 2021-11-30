@@ -205,6 +205,7 @@ function PostTemplate(props) {
   const { location } = props
   const { markdownRemark: post } = props.data
   const { frontmatter, html } = post
+  console.log(frontmatter)
   const { next, prev } = props.pageContext
   // const backPath = location.state ? location.state.prevPath || '/blog' : '/blog';
 
@@ -281,6 +282,7 @@ export const PostQuery = graphql`
         date(formatString: "MMMM, DD, YYYY")
         path
         excerpt
+        category
         thumbnail {
           childImageSharp {
             fluid(maxWidth: 2000) {
