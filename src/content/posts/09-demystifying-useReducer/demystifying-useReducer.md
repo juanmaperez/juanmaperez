@@ -21,17 +21,17 @@ The useState can get you a really long way with React state management but you m
 
 As we said, useReducer accepts 2 parameters:
 
-1. Reducer: a function that receives 2 parameters:
+1. **Reducer**: a function that receives 2 parameters:
 
-   - first argument called _state_ is the current state
-   - second argument called _action_ is whatever is passed to update the state
+first argument called **state** is the current state
+second argument called **action** is whatever is passed to update the state
 
-2. initialState: initial value for our state
+2. **initialState**: initial value for our state
 
 Also it's gonna return 2 values:
 
-1. current state
-2. Dispatch function: used to update the state.
+1. **current state**
+2. **Dispatch function**: used to update the state.
 
 ### Replicating useState
 
@@ -57,7 +57,7 @@ This implementations is too simple and basically we are passing into the dispatc
 
 ### Update the state base on the action(step).
 
-Now let's change our useReducer in a way that our action is actually determining the state of the useReducer is gonna change, and we can achieve that passing the step that we want to increment our previous state, and we can change the name from the dispatch function from setCount to updateCount.
+Now let's change our useReducer in a way that our action is actually determining the state of the useReducer is gonna change, and we can achieve that passing the step that we want to increment our previous state, and we can change the name from the dispatch function from `setCount` to `updateCount`.
 
 ```js
 const step = 2
