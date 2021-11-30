@@ -23,8 +23,8 @@ As we said, useReducer accepts 2 parameters:
 
 1. Reducer: a function that receives 2 parameters:
 
-- first argument called _state_ is the current state
-- second argument called _action_ is whatever is passed to update the state
+   - first argument called _state_ is the current state
+   - second argument called _action_ is whatever is passed to update the state
 
 2. initialState: initial value for our state
 
