@@ -21,7 +21,7 @@ The useState can get you a really long way with React state management but you m
 
 As we said, useReducer accepts 2 parameters:
 
-1. **Reducer**: a function that receives 2 parameters: **state** (is the current state) and **action** (whatever is passed to update the state)
+1. **Reducer**: a function that receives 2 parameters: `state` (is the current state) and `action` (whatever is passed to update the state)
 
 2. **initialState**: initial value for our state
 
