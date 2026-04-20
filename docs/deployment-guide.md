@@ -44,8 +44,26 @@ The migration target uses **Astro** with output in **`site/dist/`** (not Gatsby 
 
 Official reference: [Deploy your Astro Site to GitHub Pages](https://docs.astro.build/en/guides/deploy/github/).
 
-CI deploy for Astro is tracked separately (Epic 1 — GitHub Actions); legacy Gatsby may still use `npm run deploy` until cutover.
+## Astro CI GitHub Actions
 
-## CI/CD
+**Workflow:** [`.github/workflows/deploy-astro-pages.yml`](../.github/workflows/deploy-astro-pages.yml)
 
-No `.github/workflows/` in repository from quick scan — deploy is **manual** from a developer machine unless CI is added later.
+| Behavior | Detail |
+|----------|--------|
+| **Trigger** | Push to **`main`** or **`master`**, plus **`workflow_dispatch`** (manual run from the Actions tab). |
+| **Build** | `actions/setup-node` reads **`site/.nvmrc`**; **`npm ci`** and **`npm run build`** run in **`site/`**; artifact uploaded from **`site/dist/`**. |
+| **Deploy** | **`actions/deploy-pages`** with environment **`github-pages`** (OIDC; no deploy tokens in the repo — **NFR-S1**). |
+| **Concurrency** | Group **`pages`** with **`cancel-in-progress: true`** to avoid overlapping deployments. |
+
+### One-time GitHub repository settings
+
+1. **Settings → Pages → Build and deployment**  
+   - **Source:** **GitHub Actions** (not “Deploy from a branch” / `gh-pages` unless you intentionally keep legacy Gatsby on branch deploy).  
+2. First workflow run may prompt you to **approve** the **`github-pages`** environment (organization/repo policy).  
+3. **Custom domain** (`https://juanmaperez.dev`): continue to use DNS + Pages custom domain settings as today; Astro `site` in `site/astro.config.mjs` must stay aligned with that hostname.
+
+Legacy **Gatsby** deploy (`npm run deploy` → **`gh-pages`** branch) remains available until cutover; it does not use this workflow.
+
+## CI/CD (legacy Gatsby)
+
+Deploy is still **manual** from a developer machine via **`npm run deploy`** unless you remove it. The **Astro** pipeline above is separate.

@@ -8,7 +8,7 @@
 # STATUS DEFINITIONS: see bmad-sprint-planning skill workflow.md
 
 generated: "2026-04-20T12:00:00Z"
-last_updated: "2026-04-20T18:05:00Z"
+last_updated: "2026-04-20T18:25:00Z"
 project: juanmaperez
 project_key: juanmaperez
 tracking_system: file-system
@@ -18,7 +18,7 @@ development_status:
   epic-1: in-progress
   1-1-initialize-astro-static-project: done
   1-2-configure-site-url-and-base-for-github-pages: done
-  1-3-github-action-build-and-deploy-to-pages: backlog
+  1-3-github-action-build-and-deploy-to-pages: done
   1-4-developer-documentation-and-node-pinning: backlog
   1-5-capture-legacy-performance-baselines: backlog
   epic-1-retrospective: optional

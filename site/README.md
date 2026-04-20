@@ -1,6 +1,6 @@
 # Astro site (migration target)
 
-This directory is the **Gatsby → Astro** rebuild (**Epic 1** — Stories **1.1** scaffold, **1.2** `site`/`base`). The legacy Gatsby app remains at the repository root; work here until cutover.
+This directory is the **Gatsby → Astro** rebuild (**Epic 1** — Stories **1.1** scaffold, **1.2** `site`/`base`, **1.3** GitHub Actions → Pages). The legacy Gatsby app remains at the repository root; work here until cutover.
 
 ## Requirements
 
@@ -27,3 +27,7 @@ npm run preview  # serve dist/ locally
 - **`base`:** `'/'` — site is served at the **domain root** (custom domain on GitHub Pages), not from `https://<user>.github.io/<repo>/`.
 
 If you ever publish only to **`https://<user>.github.io/<repository>/`** without a custom domain, set `base: '/<repository>/'` (leading and trailing slash) and set `site` to `https://<user>.github.io` per [Astro GitHub Pages](https://docs.astro.build/en/guides/deploy/github/).
+
+### CI deploy
+
+Push to **`main`** or **`master`** runs [`.github/workflows/deploy-astro-pages.yml`](../.github/workflows/deploy-astro-pages.yml) (`npm ci` + `npm run build` in this folder). Configure **Settings → Pages → Build and deployment → GitHub Actions** once. Details: [deployment-guide.md](../docs/deployment-guide.md#astro-ci-github-actions).

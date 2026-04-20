@@ -44,7 +44,7 @@ Gatsby exposes **GraphiQL** in development (see starter README) for experimentin
 
 ## Astro migration (`site/`)
 
-The **Astro 6** static app lives under **`site/`** (separate `package.json` from Gatsby). It requires **Node ≥ 22.12** (`site/.nvmrc`). See [site/README.md](../site/README.md) for install and `dev` / `build` / `preview`. Production **`site`** / **`base`** for GitHub Pages are documented there and in [deployment-guide.md](./deployment-guide.md#astro-site-site--url-and-base).
+The **Astro 6** static app lives under **`site/`** (separate `package.json` from Gatsby). It requires **Node ≥ 22.12** (`site/.nvmrc`). See [site/README.md](../site/README.md) for install and `dev` / `build` / `preview`. **URLs and hosting** are in [deployment-guide.md](./deployment-guide.md) (Astro `site` / `base`, then **Astro CI GitHub Actions**). **CI:** push to `main` or `master` runs [`.github/workflows/deploy-astro-pages.yml`](../.github/workflows/deploy-astro-pages.yml).
 
 ## Testing
 
