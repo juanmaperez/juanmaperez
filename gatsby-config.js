@@ -4,7 +4,7 @@ module.exports = {
     title: `Juanma Perez`,
     description: `I'm a web developer creating blazing fast websites and apps from scratch`,
     author: `Juanma Perez`,
-    siteUrl: `https://juanmaperez.me`,
+    siteUrl: `https://juanmaperez.dev`,
   },
   plugins: [
     `gatsby-plugin-sass`,

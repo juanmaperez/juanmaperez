@@ -42,6 +42,10 @@ Gatsby exposes **GraphiQL** in development (see starter README) for experimentin
 - **Prettier:** `.prettierrc`  
 - No ESLint config in tree from quick scan  
 
+## Astro migration (`site/`)
+
+The **Astro 6** static app lives under **`site/`** (separate `package.json` from Gatsby). It requires **Node ≥ 22.12** (`site/.nvmrc`). See [site/README.md](../site/README.md) for install and `dev` / `build` / `preview`. Production **`site`** / **`base`** for GitHub Pages are documented there and in [deployment-guide.md](./deployment-guide.md#astro-site-site--url-and-base).
+
 ## Testing
 
 No unit or E2E tests configured; `npm test` is a stub.

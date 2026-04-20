@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Personal **portfolio and blog** for Juanma Perez: landing experience, **CV** page, **case-study style project pages**, and **technical blog posts**. Marketing copy describes fast websites and apps; live site metadata targets `https://juanmaperez.me` (`gatsby-config.js`).
+Personal **portfolio and blog** for Juanma Perez: landing experience, **CV** page, **case-study style project pages**, and **technical blog posts**. Marketing copy describes fast websites and apps; live site metadata targets `https://juanmaperez.dev` (`gatsby-config.js`).
 
 ## Repository type
 

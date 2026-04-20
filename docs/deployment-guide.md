@@ -16,7 +16,7 @@
 
 ## Site URL configuration
 
-- `gatsby-config.js` → `siteMetadata.siteUrl`: `https://juanmaperez.me`  
+- `gatsby-config.js` → `siteMetadata.siteUrl`: `https://juanmaperez.dev`  
 - **Sitemap** plugin uses site URL for absolute links.  
 - If the site is served from a **path prefix**, uncomment/configure `pathPrefix` in `gatsby-config.js` (currently commented example `/photographer`).
 
@@ -27,6 +27,24 @@
 ## Analytics
 
 `gatsby-plugin-google-analytics` with tracking ID in config — ensure compliance with your privacy policy; plan **GA4** or removal if UA is deprecated.
+
+## Astro site (`site/`) — URL and `base`
+
+The migration target uses **Astro** with output in **`site/dist/`** (not Gatsby `public/`).
+
+| Setting | Value | Why |
+|---------|--------|-----|
+| **`site`** (`site/astro.config.mjs`) | `https://juanmaperez.dev` | Same canonical origin as legacy `gatsby-config.js` → `siteMetadata.siteUrl`; required for `import.meta.env.SITE`, sitemap, OG. |
+| **`base`** | `'/'` | Production is treated as **custom domain at site root** (not `github.io/<repo>/`). |
+
+**User site vs project site (GitHub Pages):**
+
+- **Custom domain / apex (this repo’s assumption):** `site` = your HTTPS origin, `base` = `'/'`.
+- **Project site** at `https://<user>.github.io/<repo>/`: set `site` to `https://<user>.github.io` and `base` to `'/repo/'` so assets and routes resolve.
+
+Official reference: [Deploy your Astro Site to GitHub Pages](https://docs.astro.build/en/guides/deploy/github/).
+
+CI deploy for Astro is tracked separately (Epic 1 — GitHub Actions); legacy Gatsby may still use `npm run deploy` until cutover.
 
 ## CI/CD
 

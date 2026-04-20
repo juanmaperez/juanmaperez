@@ -53,7 +53,7 @@ const Personal = () => {
         </div>
         <p>juanmaperezvar@gmail.com</p>
         <p>07447 881 161</p>
-        <p>https://juanmaperez.me</p>
+        <p>https://juanmaperez.dev</p>
       </div>
     </PersonalWrapper>
   )
