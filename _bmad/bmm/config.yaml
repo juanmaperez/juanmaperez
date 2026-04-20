@@ -1,0 +1,7 @@
+# BMad BMM paths (minimal) — enables sprint-status / sprint-planning skills
+project_name: juanmaperez
+user_name: Juanma
+communication_language: english
+document_output_language: english
+planning_artifacts: _bmad-output/planning-artifacts
+implementation_artifacts: _bmad-output/implementation-artifacts
