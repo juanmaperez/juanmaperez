@@ -6,13 +6,14 @@ Personal **portfolio and blog** for Juanma Perez: landing experience, **CV** pag
 
 ## Repository type
 
-**Monolith** — single Gatsby application at repository root.
+**Monolith — dual static generators (transition):** legacy **Gatsby 2** at the repository root and the **Astro 6** migration target under **`site/`**, until cutover replaces Gatsby for production.
 
 ## Technology summary
 
 | Layer | Technology | Notes |
 |--------|------------|--------|
-| Framework | Gatsby 2.x | Build-time GraphQL, static generation |
+| Framework (legacy) | Gatsby 2.x | Build-time GraphQL, static generation; root `package.json` |
+| Framework (migration) | Astro 6.x | Static output, `site/package.json`; Node **≥ 22.12** (`site/.nvmrc`) |
 | UI | React 16.8 | Class / function components, hooks where used |
 | Styling | styled-components, SCSS | Global `main.css`, mixins |
 | Content | Markdown + remark | Posts under `src/content/posts/`, projects under `src/content/projects/` |
@@ -22,7 +23,7 @@ Personal **portfolio and blog** for Juanma Perez: landing experience, **CV** pag
 
 ## Architecture classification
 
-**Static site generator (SSG)** with **client-side enhancements** (animations: GSAP, ScrollMagic; webpack null-loader for SSR of ScrollMagic).
+**Static site generator (SSG)** with **client-side enhancements** on the Gatsby site (animations: GSAP, ScrollMagic; webpack null-loader for SSR of ScrollMagic). The **`site/`** Astro app is static-first with optional islands later (see planning architecture).
 
 ## Documentation map
 
@@ -33,7 +34,7 @@ Personal **portfolio and blog** for Juanma Perez: landing experience, **CV** pag
 | [source-tree-analysis.md](./source-tree-analysis.md) | Directory purposes |
 | [component-inventory.md](./component-inventory.md) | React components |
 | [development-guide.md](./development-guide.md) | Local dev and scripts |
-| [deployment-guide.md](./deployment-guide.md) | GitHub Pages via gh-pages |
+| [deployment-guide.md](./deployment-guide.md) | Gatsby `gh-pages` + Astro GitHub Actions |
 | [api-contracts.md](./api-contracts.md) | Build-time GraphQL usage (no REST API) |
 | [data-models.md](./data-models.md) | Markdown frontmatter schemas |
 

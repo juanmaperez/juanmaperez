@@ -1,3 +1,5 @@
+> **This repository:** legacy **Gatsby** site at the **root** (below) and **Astro 6** under **`site/`**. Maintainer setup (two Node versions, commands, deploy): **[docs/index.md](docs/index.md)** — read that first. The remainder is the upstream **Gatsby default starter** readme.
+
 <!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
 <p align="center">
   <a href="https://www.gatsbyjs.org">

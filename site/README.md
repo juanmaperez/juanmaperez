@@ -1,6 +1,6 @@
 # Astro site (migration target)
 
-This directory is the **Gatsby → Astro** rebuild (**Epic 1** — Stories **1.1** scaffold, **1.2** `site`/`base`, **1.3** GitHub Actions → Pages). The legacy Gatsby app remains at the repository root; work here until cutover.
+This directory is the **Gatsby → Astro** rebuild (**Epic 1** — Stories **1.1**–**1.3** plus **1.4** Node/docs alignment). The legacy Gatsby app remains at the repository root; work here until cutover.
 
 ## Requirements
 
@@ -11,10 +11,12 @@ This directory is the **Gatsby → Astro** rebuild (**Epic 1** — Stories **1.1
 ```bash
 cd site
 npm install
-npm run dev      # local dev server
+npm run dev      # local dev server (Vite; edits under site/src/ reload without restart — FR16)
 npm run build    # static output → dist/
 npm run preview  # serve dist/ locally
 ```
+
+**Node:** `engines` in `package.json` and **`.nvmrc`** must stay in sync with [CI](../.github/workflows/deploy-astro-pages.yml) (`node-version-file: site/.nvmrc`).
 
 ## Configuration
 
