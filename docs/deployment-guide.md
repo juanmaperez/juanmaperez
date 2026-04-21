@@ -60,9 +60,13 @@ Official reference: [Deploy your Astro Site to GitHub Pages](https://docs.astro.
 1. **Settings → Pages → Build and deployment**  
    - **Source:** **GitHub Actions** (not “Deploy from a branch” / `gh-pages` unless you intentionally keep legacy Gatsby on branch deploy).  
 2. First workflow run may prompt you to **approve** the **`github-pages`** environment (organization/repo policy).  
-3. **Custom domain** (`https://juanmaperez.dev`): continue to use DNS + Pages custom domain settings as today; Astro `site` in `site/astro.config.mjs` must stay aligned with that hostname.
+3. **Custom domain:** when you attach a hostname in GitHub Pages + DNS, keep Astro `site` in `site/astro.config.mjs` aligned with that hostname (today’s config may still point at a former domain — update when the new site is live).
 
 Legacy **Gatsby** deploy (`npm run deploy` → **`gh-pages`** branch) remains available until cutover; it does not use this workflow.
+
+## Performance baselines (Lighthouse)
+
+**Legacy production baselines** (against the old live site) are **out of scope** — the previous host is offline. **NFR-P1 / NFR-P2** will be satisfied by capturing baselines from the **new** production URL when it exists; procedure and JSON field reference: [**`_baseline/README.md`**](../_baseline/README.md). Optional scripted run (requires explicit `BASELINE_*` URLs): [`scripts/capture-legacy-baselines.sh`](../scripts/capture-legacy-baselines.sh).
 
 ## CI/CD (legacy Gatsby)
 

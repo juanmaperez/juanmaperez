@@ -12,6 +12,7 @@
 - **Gatsby entry points:** `gatsby-config.js`, `gatsby-node.js`, `src/pages/`  
 - **Gatsby content:** `src/content/posts/` (9 posts), `src/content/projects/` (5 projects)  
 - **Deploy:** Gatsby: `public/` → `gh-pages` branch. Astro: `site/dist/` → [GitHub Actions → Pages](./deployment-guide.md#astro-ci-github-actions).  
+- **Perf baselines (NFR-P1/P2):** legacy host offline — first baseline at **new** production URL; see [`_baseline/README.md`](../_baseline/README.md).  
 
 ## Generated documentation
 
