@@ -1,0 +1,95 @@
+---
+// site/src/components/home/HomeContact.astro
+---
+<section class="home-contact" aria-labelledby="home-contact-heading">
+	<h2 id="home-contact-heading" class="visually-hidden">Contact</h2>
+	<div class="home-contact__content">
+		<div class="home-contact__date" aria-hidden="true">
+			<span class="home-contact__month">Sep</span>
+			<span class="home-contact__year">'21</span>
+		</div>
+		<div class="home-contact__copy">
+			<div class="home-contact__top">
+				<p>I'm available for freelance works.</p>
+				<p>
+					Say hello
+					<a
+						href="mailto:juanmaperezvar@gmail.com"
+						target="_blank"
+						rel="noopener noreferrer"
+					>juanmaperezvar@gmail.com</a>
+				</p>
+			</div>
+			<div class="home-contact__bottom">
+				<a href="https://www.linkedin.com/in/juanmaperezvargas/" target="_blank" rel="noopener noreferrer">In</a>
+				<span aria-hidden="true"> | </span>
+				<a href="https://www.instagram.com/encapsulated.io/" target="_blank" rel="noopener noreferrer">Ig</a>
+				<span aria-hidden="true"> | </span>
+				<a href="https://twitter.com/juanmaperezvar" target="_blank" rel="noopener noreferrer">Tw</a>
+				<span aria-hidden="true"> | </span>
+				<a href="/blog">Blog</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.home-contact {
+		background: #b7c8cb;
+		max-width: 100%;
+		box-sizing: border-box;
+		padding: 2rem 1rem;
+		overflow: hidden;
+		color: #fff;
+	}
+	.home-contact__content {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1.5rem;
+		align-items: center;
+		max-width: 100%;
+		box-sizing: border-box;
+	}
+	.home-contact__date {
+		flex: 0 1 auto;
+		line-height: 0.85;
+		font-size: clamp(3rem, 20vw, 8rem);
+		text-transform: uppercase;
+	}
+	.home-contact__month,
+	.home-contact__year {
+		display: block;
+	}
+	.home-contact__copy {
+		flex: 1 1 16rem;
+		min-width: 0;
+		font-size: clamp(1rem, 3vw, 2rem);
+		line-height: 1.4;
+	}
+	.home-contact__top {
+		padding-bottom: 1rem;
+		border-bottom: 3px solid #fff;
+		margin-bottom: 1rem;
+	}
+	.home-contact__top p {
+		margin: 0 0 0.5rem;
+	}
+	.home-contact__bottom a {
+		color: inherit;
+	}
+	.home-contact a:focus-visible {
+		outline: 2px solid currentColor;
+		outline-offset: 2px;
+	}
+	.visually-hidden {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+</style>

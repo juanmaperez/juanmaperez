@@ -1,0 +1,96 @@
+---
+// site/src/components/home/HomeWorks.astro
+import { getCollection } from 'astro:content';
+
+const thumbModules = import.meta.glob<{ default: { src: string } }>(
+	'../../content/projects/**/*.{png,jpg}',
+	{ eager: true },
+);
+
+function resolveThumb(projectId: string, thumbnail: string): string | undefined {
+	const needle = thumbnail.replace('./', '');
+	const folder = projectId.split('/')[0];
+	const key = Object.keys(thumbModules).find(
+		(k) => k.includes(`/${folder}/`) && k.endsWith(`/${needle}`),
+	);
+	return key ? thumbModules[key].default.src : undefined;
+}
+
+const projects = (await getCollection('projects')).sort(
+	(a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+<section class="home-works" aria-labelledby="home-works-heading">
+	<h2 id="home-works-heading" class="home-works__title">projects</h2>
+	<ul class="home-works__list">
+		{projects.map((project) => {
+			const thumbSrc = resolveThumb(project.id, project.data.thumbnail);
+			return (
+				<li class="home-works__item">
+					<a class="home-works__link" href={project.data.path}>
+						{thumbSrc ? (
+							<img
+								src={thumbSrc}
+								alt={project.data.title}
+								width="400"
+								height="300"
+								loading="lazy"
+							/>
+						) : null}
+						<span class="home-works__name">{project.data.title}</span>
+					</a>
+				</li>
+			);
+		})}
+	</ul>
+</section>
+
+<style>
+	.home-works {
+		background: #fbf9f3;
+		max-width: 100%;
+		box-sizing: border-box;
+		padding: 2rem 1rem;
+		overflow: hidden;
+	}
+	.home-works__title {
+		margin: 0 0 1.5rem;
+		font-size: clamp(2rem, 12vw, 6rem);
+		text-transform: uppercase;
+		color: #b7c8cb;
+		line-height: 1;
+	}
+	.home-works__list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr));
+		gap: 1.5rem;
+		max-width: 100%;
+		box-sizing: border-box;
+	}
+	.home-works__item {
+		min-width: 0;
+	}
+	.home-works__link {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		color: #323846;
+		text-decoration: none;
+		max-width: 100%;
+	}
+	.home-works__link img {
+		display: block;
+		max-width: 100%;
+		height: auto;
+	}
+	.home-works__name {
+		font-weight: 700;
+	}
+	.home-works__link:focus-visible {
+		outline: 2px solid currentColor;
+		outline-offset: 2px;
+	}
+</style>

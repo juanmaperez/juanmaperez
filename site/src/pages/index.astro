@@ -1,7 +1,17 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import HomeHero from '../components/home/HomeHero.astro';
+import HomeAbout from '../components/home/HomeAbout.astro';
+import HomeWorks from '../components/home/HomeWorks.astro';
+import HomeContact from '../components/home/HomeContact.astro';
 ---
-<BaseLayout>
+<BaseLayout
+	title="Juanma Perez | Home"
+	description="Personal website by Juanma Perez, I'm Juanma Perez, a software engineer from Seville working at Cazoo."
+>
 	<h1>Juanma Perez</h1>
-	<p>Site under migration. Content lands progressively in Epics 3–7.</p>
+	<HomeHero />
+	<HomeAbout />
+	<HomeWorks />
+	<HomeContact />
 </BaseLayout>

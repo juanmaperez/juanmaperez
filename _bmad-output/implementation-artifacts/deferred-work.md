@@ -45,6 +45,12 @@ Items deferred from code reviews and stories (not blocking current slice).
 - **`_schema-test/` accidental commit** — if `posts/_schema-test/` or `projects/_schema-test/` is committed, CI `npm run check` fails on invalid fixture. Add `**/_schema-test/` to `.gitignore` in a follow-up hardening pass.
 - **Dev note PR overstatement** — story Dev Notes §Edge cases claimed build job runs on PRs; workflow has no `pull_request` trigger until decision on Review Finding #1 is resolved.
 
+## Deferred from: code review of 3-3-home-page-content-and-layout-parity (2026-05-21)
+
+- **`/blog`, `/cv`, project detail routes 404 during Epic 3** — intentional; URLs wired correctly for FR21 at release (Stories 4.1, 3.4, 5.1).
+- **`second.jpg` unused in hero** — copied per AC4 task; MVP uses `first.jpg` only; optional dual-background later.
+- **Large project thumbnails via `import.meta.glob`** — same ~13 MB bundle concern as Story 2.3; Epic 5 `<Image>` pipeline.
+
 ## Deferred from: code review of 3-2-global-header-and-navigation (2026-05-21)
 
 - **`/blog` nav href 404s until Story 4.1** — intentional during Epic 3; story §Edge cases and link inventory document the call. FR21 applies at release, not mid-migration.

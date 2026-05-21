@@ -1,0 +1,93 @@
+---
+// site/src/components/home/HomeHero.astro
+---
+<section class="home-hero" aria-labelledby="home-hero-heading">
+	<h2 id="home-hero-heading" class="visually-hidden">Hero</h2>
+	<ul class="home-hero__links">
+		<li>
+			<span>Ig: [</span>
+			<a
+				class="home-hero__link"
+				href="https://www.instagram.com/finejavascript/"
+				target="_blank"
+				rel="noopener noreferrer"
+			>@encapsulated.io</a>
+			<span> ]</span>
+		</li>
+		<li>
+			<span>Tw: [</span>
+			<a
+				class="home-hero__link"
+				href="https://twitter.com/juanmaperezvar"
+				target="_blank"
+				rel="noopener noreferrer"
+			>@juanmaperezvar</a>
+			<span> ]</span>
+		</li>
+		<li>
+			<span>In: [</span>
+			<a
+				class="home-hero__link"
+				href="https://www.linkedin.com/in/juanmaperezvargas/"
+				target="_blank"
+				rel="noopener noreferrer"
+			>juanmaperezvargas</a>
+			<span> ]</span>
+		</li>
+		<li>
+			<span>Bl: [</span>
+			<a class="home-hero__link home-hero__link--blog" href="/blog">//blog</a>
+			<span> ]</span>
+		</li>
+	</ul>
+</section>
+
+<style>
+	.home-hero {
+		position: relative;
+		min-height: 50vh;
+		max-width: 100%;
+		box-sizing: border-box;
+		background-color: #fbf9f3;
+		background-image: url('/images/home/first.jpg');
+		background-size: cover;
+		background-position: center center;
+		overflow: hidden;
+	}
+	.home-hero__links {
+		list-style: none;
+		margin: 0;
+		padding: 1rem;
+		position: absolute;
+		right: 1rem;
+		bottom: 1rem;
+		max-width: calc(100% - 2rem);
+		box-sizing: border-box;
+		text-align: right;
+	}
+	.home-hero__links li {
+		margin-bottom: 0.25rem;
+		font-size: 1.125rem;
+	}
+	.home-hero__link {
+		color: inherit;
+	}
+	.home-hero__link--blog {
+		font-weight: 600;
+	}
+	.home-hero a:focus-visible {
+		outline: 2px solid currentColor;
+		outline-offset: 2px;
+	}
+	.visually-hidden {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+</style>

@@ -1,0 +1,72 @@
+---
+// site/src/components/home/HomeAbout.astro
+---
+<section class="home-about" aria-labelledby="home-about-heading">
+	<h2 id="home-about-heading" class="visually-hidden">About</h2>
+	<div class="home-about__inner">
+		<div class="home-about__text">
+			<p>I'm <strong>Juanma Perez</strong>, a web developer from Seville and based in London.</p>
+			<p>I build blazing fast and high perfomance websites or apps based on the most modern technologies.</p>
+			<p>I love Javascript and all the frameworks related to this language such as React, Angular or Vue.</p>
+			<p>As a freelance I work with companies, agencies, startups and individuals all around the world.</p>
+			<p><a class="home-about__read-more" href="/cv">Read more.</a></p>
+		</div>
+		<figure class="home-about__figure">
+			<img src="/images/home/girl.jpg" alt="lady madrid" width="640" height="960" loading="lazy" />
+		</figure>
+	</div>
+</section>
+
+<style>
+	.home-about {
+		background: #fbf9f3;
+		max-width: 100%;
+		box-sizing: border-box;
+		padding: 2rem 1rem;
+		overflow: hidden;
+	}
+	.home-about__inner {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1.5rem;
+		align-items: flex-start;
+		max-width: 100%;
+		box-sizing: border-box;
+	}
+	.home-about__text {
+		flex: 1 1 16rem;
+		min-width: 0;
+		font-size: clamp(1.125rem, 4vw, 2.5rem);
+		line-height: 1.2;
+		color: #323846;
+	}
+	.home-about__text p {
+		margin: 0 0 1.5rem;
+	}
+	.home-about__figure {
+		flex: 0 1 20rem;
+		margin: 0;
+		min-width: 0;
+		max-width: 100%;
+	}
+	.home-about__figure img {
+		display: block;
+		max-width: 100%;
+		height: auto;
+	}
+	.home-about a:focus-visible {
+		outline: 2px solid currentColor;
+		outline-offset: 2px;
+	}
+	.visually-hidden {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+</style>
