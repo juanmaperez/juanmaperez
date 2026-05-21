@@ -9,9 +9,15 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "check": "astro check",
+    "test:schema": "node scripts/verify-content-schema.mjs",
     "astro": "astro"
   },
   "dependencies": {
     "astro": "^6.1.8"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "typescript": "^5.9.3"
   }
 }

@@ -14,7 +14,15 @@ npm install
 npm run dev      # local dev server (Vite; edits under site/src/ reload without restart — FR16)
 npm run build    # static output → dist/
 npm run preview  # serve dist/ locally
+npm run check    # TypeScript + content collection schema validation (FR17)
+npm run test:schema  # proves invalid frontmatter fails check (Story 2.1)
 ```
+
+## Content collections (Story 2.1)
+
+- **Config:** `src/content.config.ts` — `posts` and `projects` with Zod schemas (see [docs/data-models.md](../docs/data-models.md)).
+- **Paths:** `src/content/posts/**`, `src/content/projects/**` (empty until Stories 2.2 / 2.3).
+- **Schema gate:** `npm run check` validates frontmatter; `npm run test:schema` copies a bad fixture, expects `astro check` to fail, then cleans up.
 
 **Node:** `engines` in `package.json` and **`.nvmrc`** must stay in sync with [CI](../.github/workflows/deploy-astro-pages.yml) (`node-version-file: site/.nvmrc`).
 

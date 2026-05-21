@@ -40,4 +40,6 @@ Markdown body becomes `html` in GraphQL for full-article rendering in templates.
 
 ## Validation
 
-No JSON Schema in repo; **conventions are implicit**. A migration should define an explicit schema (e.g. Astro content collection `zod` schema) matching these fields.
+**Legacy (Gatsby):** conventions are implicit — no JSON Schema in repo.
+
+**Astro (`site/`):** explicit Zod schemas in [`site/src/content.config.ts`](../site/src/content.config.ts) for `posts` and `projects` collections (Story 2.1, ADR-003). Invalid frontmatter fails `cd site && npm run check` / `npm run build`. Field tables above remain the source of truth for migration (Stories 2.2–2.3).
