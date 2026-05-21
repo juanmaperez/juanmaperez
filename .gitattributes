@@ -1,0 +1,6 @@
+# Treat design / vector source files as binary so git does not attempt
+# line-ending normalization or text diffs (would corrupt PostScript streams).
+*.ai binary
+*.psd binary
+*.sketch binary
+*.fig binary
