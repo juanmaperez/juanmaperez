@@ -36,3 +36,11 @@ Items deferred from code reviews and stories (not blocking current slice).
 - **Migrated thumbnails are ~13.7 MB total** (`australis`: 4.17 MB, `oysho`: 4.69 MB, `umaicha`: 4.16 MB, `colossus`: 3.59 MB, `sainsburys`: 1.13 MB). No bundle-size guard. Add a baseline assertion during **Epic 5** when `<Image>` optimization lands, or earlier in **Story 2.4** if a generic CI size budget makes sense.
 - **`verify-content-schema.mjs` not idempotent** — if the test process is killed between `mkdirSync` and the `finally` `rmSync`, the invalid fixture lingers under `site/src/content/posts/_schema-test/` (or `projects/_schema-test/`) and the next `npm run check` fails on real content. Add a pre-clean `rmSync(testDir, { recursive: true, force: true })` before `mkdirSync` in **Story 2.4** (CI gate hardening).
 - **Glob loader doesn't exclude `_schema-test/`** — if a stranded fixture survives a killed test run, Astro's glob loader picks it up as a real entry. Add `ignore: ['**/_schema-test/**']` to both collection loader configs in `site/src/content.config.ts` during **Story 2.4**.
+
+## Deferred from: code review of 2-4-ci-gate-schema-validation-on-every-build (2026-05-21)
+
+- **AC3 branch protection** — mark the `build` job / workflow as a **required status check** on `main` in GitHub Settings → Branches. Code cannot enforce this; story already flagged maintainer follow-up #3.
+- **AC2 GitHub Actions log proof** — optional throwaway branch with broken frontmatter to capture a readable Zod/`astro check` error in the Actions log (story §Testing recipe). Local `npm run test:schema` is the proxy used today.
+- **Push and observe real CI run** — link a green Actions run showing `Schema validation (FR17)` step after merge (maintainer follow-up #1 from dev-story).
+- **`_schema-test/` accidental commit** — if `posts/_schema-test/` or `projects/_schema-test/` is committed, CI `npm run check` fails on invalid fixture. Add `**/_schema-test/` to `.gitignore` in a follow-up hardening pass.
+- **Dev note PR overstatement** — story Dev Notes §Edge cases claimed build job runs on PRs; workflow has no `pull_request` trigger until decision on Review Finding #1 is resolved.

@@ -50,8 +50,8 @@ Official reference: [Deploy your Astro Site to GitHub Pages](https://docs.astro.
 
 | Behavior | Detail |
 |----------|--------|
-| **Trigger** | Push to **`main`** or **`master`**, plus **`workflow_dispatch`** (manual run from the Actions tab). |
-| **Build** | `actions/setup-node` reads **`site/.nvmrc`**; **`npm ci`** and **`npm run build`** run in **`site/`**; artifact uploaded from **`site/dist/`**. |
+| **Trigger** | Push or pull request targeting **`main`** or **`master`**, plus **`workflow_dispatch`** (manual run from the Actions tab). |
+| **Build** | `actions/setup-node` reads **`site/.nvmrc`**; **`npm ci`**, **`npm run check`** (FR17 schema gate), and **`npm run build`** run in **`site/`**; artifact uploaded from **`site/dist/`**. Deploy runs only on **push** or **workflow_dispatch**, not on PRs. |
 | **Deploy** | **`actions/deploy-pages`** with environment **`github-pages`** (OIDC; no deploy tokens in the repo — **NFR-S1**). |
 | **Concurrency** | Group **`pages`** with **`cancel-in-progress: true`** to avoid overlapping deployments. |
 

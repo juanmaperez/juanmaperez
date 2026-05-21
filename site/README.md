@@ -40,4 +40,8 @@ If you ever publish only to **`https://<user>.github.io/<repository>/`** without
 
 ### CI deploy
 
-Push to **`main`** or **`master`** runs [`.github/workflows/deploy-astro-pages.yml`](../.github/workflows/deploy-astro-pages.yml) (`npm ci` + `npm run build` in this folder). Configure **Settings → Pages → Build and deployment → GitHub Actions** once. Details: [deployment-guide.md](../docs/deployment-guide.md#astro-ci-github-actions).
+Push or pull request targeting **`main`** or **`master`** runs [`.github/workflows/deploy-astro-pages.yml`](../.github/workflows/deploy-astro-pages.yml) (`npm ci` → `npm run check` → `npm run build` in this folder; deploy only on push). Configure **Settings → Pages → Build and deployment → GitHub Actions** once. Details: [deployment-guide.md](../docs/deployment-guide.md#astro-ci-github-actions).
+
+### CI schema validation gate (FR17, Story 2.4)
+
+CI runs `npm run check` (Astro + Zod content schema validation) **before** `npm run build`. Any post or project with invalid frontmatter fails the workflow at this step and blocks deploy. The local equivalent is `cd site && npm run check`.
