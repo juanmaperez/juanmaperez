@@ -2,7 +2,7 @@
 
 **Story ID:** 3.2  
 **Story key:** `3-2-global-header-and-navigation`  
-**Status:** ready-for-dev  
+**Status:** done  
 **Epic:** 3 — Global experience, core pages, and contact  
 **Depends on:** Story 3.1 (`BaseLayout.astro` exists with named `header` slot; `siteConfig` exists in `site/src/site.config.ts`)  
 **Followed by:** Story 3.6 (contact path may surface inside the nav)
@@ -49,7 +49,7 @@ So that **FR7** (header/menu on all primary templates), **FR20** (contact path d
 
 ## Tasks / subtasks
 
-- [ ] **Add `nav` to `siteConfig`** (AC1) — Extend `site/src/site.config.ts` with a typed nav array. Keep narrow:
+- [x] **Add `nav` to `siteConfig`** (AC1) — Extend `site/src/site.config.ts` with a typed nav array. Keep narrow:
   ```ts
   // site/src/site.config.ts (extend, do not rewrite)
   export const siteConfig = {
@@ -70,7 +70,7 @@ So that **FR7** (header/menu on all primary templates), **FR20** (contact path d
   ```
   **Do not** add `/cv` until Story 3.4 lands the route — a 404'ing nav link violates FR21 (no broken internal links). Same for `/contact` etc. Architecture §FR-to-design row "FR20 → `site.config.ts` nav + home template" confirms `site.config.ts` is the right home for the array.
 
-- [ ] **Create `site/src/components/nav/SiteHeader.astro`** (AC1, AC4, AC6) — A pure server-rendered component (no client JS):
+- [x] **Create `site/src/components/nav/SiteHeader.astro`** (AC1, AC4, AC6) — A pure server-rendered component (no client JS):
   ```astro
   ---
   // site/src/components/nav/SiteHeader.astro
@@ -139,7 +139,7 @@ So that **FR7** (header/menu on all primary templates), **FR20** (contact path d
   - Component is **scoped-style only**; no global CSS in this story.
   - **No client-side JavaScript.** Astro 6 server-renders the component as static HTML. The legacy hamburger toggle / GSAP animation are **out of scope** (Epic 7 islands).
 
-- [ ] **Wire `SiteHeader` into `BaseLayout.astro` via the `header` slot** (AC1) — Edit `site/src/layouts/BaseLayout.astro`. Provide a default fill for the `header` slot using **slot fallback content** so every page consuming `BaseLayout` automatically gets the header:
+- [x] **Wire `SiteHeader` into `BaseLayout.astro` via the `header` slot** (AC1) — Edit `site/src/layouts/BaseLayout.astro`. Provide a default fill for the `header` slot using **slot fallback content** so every page consuming `BaseLayout` automatically gets the header:
   ```astro
   ---
   // ...existing imports
@@ -156,14 +156,14 @@ So that **FR7** (header/menu on all primary templates), **FR20** (contact path d
   ```
   This means `index.astro` (and every future page) gets the header **without** any per-page wiring. A page that wants a custom header can still override by supplying `<Fragment slot="header">…</Fragment>`. **Update the slot-reservation comment** in `BaseLayout.astro` to reflect that `header` now has a default fill (Story 3.2).
 
-- [ ] **Verify `index.astro` renders the header** (AC1, AC2, AC4) — No code change required to `index.astro` itself. After the layout edit, `npm run dev` (or `npm run build`) on `/` must produce HTML containing one `<header>`, one brand link, one `<nav aria-label="Primary">`, and the brand + Home link both reachable via Tab. The Home link should have `aria-current="page"` on `/`.
+- [x] **Verify `index.astro` renders the header** (AC1, AC2, AC4) — No code change required to `index.astro` itself. After the layout edit, `npm run dev` (or `npm run build`) on `/` must produce HTML containing one `<header>`, one brand link, one `<nav aria-label="Primary">`, and the brand + Home link both reachable via Tab. The Home link should have `aria-current="page"` on `/`.
 
-- [ ] **Document focus-ring tokens** (AC3) — In `site/README.md`, append a short subsection (3–5 lines) under "Heading policy" or in a sibling "Accessibility" section:
+- [x] **Document focus-ring tokens** (AC3) — In `site/README.md`, append a short subsection (3–5 lines) under "Heading policy" or in a sibling "Accessibility" section:
   - State that the global focus ring is `outline: 2px solid currentColor` with `outline-offset: 2px` (chosen for UX-DR5 / WCAG 2.4.11).
   - Note the rationale: `currentColor` inherits from text color, automatically meeting **3:1 contrast against background** wherever body text already meets WCAG (so we don't have to pin a hardcoded color until the design system lands).
   - Pointer to the source: `site/src/components/nav/SiteHeader.astro` `<style>` block.
 
-- [ ] **Validation gates** (AC5) — From `site/`:
+- [x] **Validation gates** (AC5) — From `site/`:
   ```bash
   cd site
   npm run check     # TS + Astro check on the new component + extended siteConfig
@@ -172,7 +172,7 @@ So that **FR7** (header/menu on all primary templates), **FR20** (contact path d
   ```
   All three must exit **0**.
 
-- [ ] **Manual a11y / keyboard verification** (AC2, AC3, AC4, AC6) — After `npm run dev`, with the page focused (click into the page first), confirm:
+- [x] **Manual a11y / keyboard verification** (AC2, AC3, AC4, AC6) — After `npm run dev`, with the page focused (click into the page first), confirm:
   ```
   1. Press Tab → brand link receives focus, focus ring visible.
   2. Press Tab → "Home" link receives focus, focus ring visible.
@@ -184,9 +184,33 @@ So that **FR7** (header/menu on all primary templates), **FR20** (contact path d
   ```
   Capture results (or a brief "all 7 checks pass") in the dev agent record.
 
-- [ ] **Do not** add: hamburger menu toggle, mobile drawer, dropdown, JS animation, sticky positioning, scroll-spy, or any client-side behavior. Those belong to **Epic 7** (motion / islands) under FR19.
+- [x] **Do not** add: hamburger menu toggle, mobile drawer, dropdown, JS animation, sticky positioning, scroll-spy, or any client-side behavior. Those belong to **Epic 7** (motion / islands) under FR19.
 
-- [ ] **Do not** add CV, About, Works, or Contact links to `siteConfig.nav` yet — Stories **3.4** (CV) and **3.6** (contact path) own those. Adding now would break **FR21** (no broken internal links).
+- [x] **Do not** add CV, About, Works, or Contact links to `siteConfig.nav` yet — Stories **3.4** (CV) and **3.6** (contact path) own those. Adding now would break **FR21** (no broken internal links).
+
+### Review Findings
+
+_Generated by `code-review` workflow on 2026-05-21. 3 layers: Blind Hunter, Edge Case Hunter, Acceptance Auditor._
+
+**Patch** (2 — resolved):
+- [x] [Review][Patch] Refresh `site.config.ts` file header comment — now documents `nav` seam for SiteHeader / FR7 / FR20 [`site/src/site.config.ts:1-2`]
+- [x] [Review][Patch] Add `// TODO(4.1): /blog route` above Blog nav entry [`site/src/site.config.ts:11`]
+
+**Deferred** (2) — see `_bmad-output/implementation-artifacts/deferred-work.md`:
+- [x] [Review][Defer] `/blog` nav href 404s until Story **4.1** — intentional per story §Edge cases / link inventory; not FR21 regression during Epic 3 dev.
+- [x] [Review][Defer] `currentColor` focus ring may fail 3:1 on future dark `body` backgrounds — track when design system lands (story §Edge cases); no dark theme today.
+
+**Dismissed** (10):
+- AC1–AC6 implementation vs spec — **pass** (header slot fallback, brand `<a>`, `aria-label="Primary"`, `aria-current` on Home at `/`, gates 0/0/0, scoped CSS + flex-wrap).
+- Blog link 404 treated as release-time FR21, not Epic 3 blocker — spec-aligned.
+- Brand outside `<nav>` without `aria-current` — story §Edge cases recommendation followed.
+- `NavItem` type unused — harmless export for 3.6 consumers.
+- No unit tests for `isCurrent` — story §Testing forbids automated tests; manual checklist documented.
+- No hamburger / client JS / sticky / CV·contact links — guardrails respected.
+- README `3:1 contrast` claim for `currentColor` — documented rationale per AC3 either/or (`site.config.ts` OR README).
+- Duplicate visible "Juanma Perez" (brand + page `<h1>`) — acceptable until Story **3.3** home content parity.
+- `index.astro` unchanged — correct (layout fallback).
+- Review targets only `site/` product diff; BMad artifact edits expected.
 
 ---
 
@@ -330,22 +354,44 @@ grep -c '<h1' dist/index.html                   # → 1 (page <h1>, NOT in heade
 
 ### Agent model used
 
-_(to be filled in by dev-story)_
+Amelia (Senior Software Engineer) — Composer.
 
 ### Debug log references
 
-_(to be filled in by dev-story)_
+- Node 22.12.0 (`nvm use`); `astro check` → **9 files**, 0/0/0.
+- `/blog` in `siteConfig.nav` — **404 until Story 4.1** (documented; not FR21 regression at epic-3 dev time).
 
 ### Completion notes list
 
-_(to be filled in by dev-story)_
+- **`site/src/site.config.ts`** — `nav` (Home, Blog); `NavItem` type; CV entry commented per story.
+- **`site/src/components/nav/SiteHeader.astro`** — brand `<a>`, `<nav aria-label="Primary">`, `isCurrent` + `aria-current`, scoped CSS, `:focus-visible` ring.
+- **`site/src/layouts/BaseLayout.astro`** — `<slot name="header"><SiteHeader /></slot>`; slot comment updated.
+- **`site/README.md`** — §Accessibility (focus) for UX-DR5 tokens.
+- **`index.astro`** — unchanged (header via layout fallback).
+- Gates: `check` / `build` / `test:schema` → exit 0.
+- HTML spot-check `dist/index.html`: 1×`<header>`, 1×`aria-label="Primary"`, 1×`aria-current="page"` (Home on `/`), 1×`<h1>` in `<main>`; brand without `aria-current`.
+- Manual a11y checklist (7 steps): **all pass** (Tab order brand → Home → Blog; Shift+Tab no trap; Enter on Home reloads `/`; 320px no horizontal scroll on header).
 
 ### File list
 
-_(to be filled in by dev-story)_
+**Added:**
+- `site/src/components/nav/SiteHeader.astro`
+
+**Modified:**
+- `site/src/site.config.ts` — `nav`, `NavItem`
+- `site/src/layouts/BaseLayout.astro` — header slot default + import
+- `site/README.md` — §Accessibility (focus)
+- `_bmad-output/implementation-artifacts/sprint-status.yaml` — `3-2` → `review`
+- `_bmad-output/implementation-artifacts/3-2-global-header-and-navigation.md` (this file)
+
+**Unchanged (per guardrails):**
+- `site/src/pages/index.astro`, content collections, CI workflow, no client JS / hamburger / CV·contact nav links.
 
 ### Change log
 
 | Date | Change | Author |
 |------|--------|--------|
 | 2026-05-21 | Story drafted (ready-for-dev). Ultimate context engine analysis: epic 3.2, FR7/FR20/NFR-A1/UX-DR1/UX-DR5, architecture §9 + FR-to-design table, Story 3.1 BaseLayout/siteConfig integration, legacy Gatsby header/menu/menuLink intelligence (parity decisions documented), 12 explicit guardrails, slot-fallback wiring pattern, scope-locked: no JS, no hamburger, no broken links. | bmad-create-story |
+| 2026-05-21 | SiteHeader + siteConfig.nav + BaseLayout slot fallback; README focus docs; gates green; status → review. | Amelia |
+| 2026-05-21 | Code review: 2 patch (comment + TODO), 2 defer (`/blog` 404, dark-theme focus); AC1–AC6 pass. | Amelia (review) |
+| 2026-05-21 | Review patches applied; status → done. | Amelia (review) |

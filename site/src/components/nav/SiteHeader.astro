@@ -1,0 +1,59 @@
+---
+// site/src/components/nav/SiteHeader.astro
+import { siteConfig } from '../../site.config';
+
+const currentPath = Astro.url.pathname;
+const isCurrent = (href: string): boolean => {
+	if (href === '/') return currentPath === '/';
+	return currentPath === href || currentPath.startsWith(href + '/');
+};
+---
+<header class="site-header">
+	<a class="site-header__brand" href="/">{siteConfig.title}</a>
+	<nav aria-label="Primary">
+		<ul class="site-header__nav-list">
+			{siteConfig.nav.map((item) => (
+				<li>
+					<a
+						href={item.href}
+						aria-current={isCurrent(item.href) ? 'page' : undefined}
+					>
+						{item.label}
+					</a>
+				</li>
+			))}
+		</ul>
+	</nav>
+</header>
+
+<style>
+	.site-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		padding: 1rem;
+		max-width: 100%;
+		box-sizing: border-box;
+	}
+	.site-header__brand {
+		font-weight: 700;
+		text-decoration: none;
+	}
+	.site-header__nav-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		gap: 1rem;
+		flex-wrap: wrap;
+	}
+	.site-header__nav-list a[aria-current='page'] {
+		text-decoration: underline;
+	}
+	/* Focus visibility — UX-DR5 / WCAG 2.4.11. */
+	.site-header a:focus-visible {
+		outline: 2px solid currentColor;
+		outline-offset: 2px;
+	}
+</style>

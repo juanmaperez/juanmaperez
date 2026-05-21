@@ -44,3 +44,8 @@ Items deferred from code reviews and stories (not blocking current slice).
 - **Push and observe real CI run** — link a green Actions run showing `Schema validation (FR17)` step after merge (maintainer follow-up #1 from dev-story).
 - **`_schema-test/` accidental commit** — if `posts/_schema-test/` or `projects/_schema-test/` is committed, CI `npm run check` fails on invalid fixture. Add `**/_schema-test/` to `.gitignore` in a follow-up hardening pass.
 - **Dev note PR overstatement** — story Dev Notes §Edge cases claimed build job runs on PRs; workflow has no `pull_request` trigger until decision on Review Finding #1 is resolved.
+
+## Deferred from: code review of 3-2-global-header-and-navigation (2026-05-21)
+
+- **`/blog` nav href 404s until Story 4.1** — intentional during Epic 3; story §Edge cases and link inventory document the call. FR21 applies at release, not mid-migration.
+- **`currentColor` focus ring on dark backgrounds** — `SiteHeader.astro` `:focus-visible` uses `currentColor`; safe with default light page today. Revisit when a design system or dark theme lands (story §Edge cases).

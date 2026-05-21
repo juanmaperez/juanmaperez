@@ -2,10 +2,11 @@
 // site/src/layouts/BaseLayout.astro
 // Slots:
 //   - head:   reserved (Story 6.1 — per-page SEO/OG tags)
-//   - header: reserved (Story 3.2 — global header + nav)
+//   - header: default fill SiteHeader (Story 3.2); pages may override via slot="header"
 //   - default (in <main>): page content (this story onwards)
 //   - footer: reserved (Story 3.6 — primary contact path) — may also surface site-wide links
 import { siteConfig } from '../site.config';
+import SiteHeader from '../components/nav/SiteHeader.astro';
 
 interface Props {
 	title?: string;
@@ -29,7 +30,7 @@ const resolvedDescription = description ?? siteConfig.description;
 		<slot name="head" />
 	</head>
 	<body>
-		<slot name="header" />
+		<slot name="header"><SiteHeader /></slot>
 		<main>
 			<slot />
 		</main>

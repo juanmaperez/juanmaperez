@@ -49,3 +49,7 @@ CI runs `npm run check` (Astro + Zod content schema validation) **before** `npm 
 ## Heading policy
 
 Each page contributes exactly one `<h1>`. The `<h1>` is owned by the page (or a route-family layout), never by `BaseLayout`. `BaseLayout` emits no headings — it is only the document shell (`src/layouts/BaseLayout.astro`). Later headings on a page follow content order without skipping levels (UX-DR2 / accessibility). Site-wide title and description defaults live in `src/site.config.ts`; pages may pass optional `title` and `description` props to `BaseLayout` (defaults apply when omitted).
+
+## Accessibility (focus)
+
+Global header links use `outline: 2px solid currentColor` with `outline-offset: 2px` on `:focus-visible` (UX-DR5 / WCAG 2.4.11). `currentColor` inherits from text color so the ring meets **3:1 contrast** wherever body text already does — no hardcoded token until a design system lands. Source: `src/components/nav/SiteHeader.astro` scoped styles.
