@@ -1,0 +1,38 @@
+---
+// site/src/layouts/BaseLayout.astro
+// Slots:
+//   - head:   reserved (Story 6.1 — per-page SEO/OG tags)
+//   - header: reserved (Story 3.2 — global header + nav)
+//   - default (in <main>): page content (this story onwards)
+//   - footer: reserved (Story 3.6 — primary contact path) — may also surface site-wide links
+import { siteConfig } from '../site.config';
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const { title, description } = Astro.props;
+const resolvedTitle = title ?? siteConfig.title;
+const resolvedDescription = description ?? siteConfig.description;
+---
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{resolvedTitle}</title>
+		<meta name="description" content={resolvedDescription} />
+		<slot name="head" />
+	</head>
+	<body>
+		<slot name="header" />
+		<main>
+			<slot />
+		</main>
+		<slot name="footer" />
+	</body>
+</html>
