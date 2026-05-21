@@ -29,6 +29,10 @@ const projects = defineCollection({
 		path: z.string().regex(/^\//),
 		title: z.string().min(1),
 		date: z.coerce.date(),
+		// NOTE: 'projects' is intentionally plural here (matches the collection name)
+		// and is asymmetric with the posts schema's `type: z.literal('post')` (singular).
+		// All 5 legacy projects use `type: projects`; do NOT "normalize" to singular
+		// without also rewriting every project's frontmatter.
 		type: z.literal('projects'),
 		category: z.string().min(1),
 		thumbnail: z.string().min(1),

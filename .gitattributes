@@ -4,3 +4,12 @@
 *.psd binary
 *.sketch binary
 *.fig binary
+
+# Raster / vector image formats — git auto-detects most, but pinning prevents
+# accidental text-diff or CRLF normalization regressions across editors.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary

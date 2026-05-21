@@ -2,7 +2,7 @@
 
 **Story ID:** 2.3  
 **Story key:** `2-3-migrate-project-case-study-markdown`  
-**Status:** ready-for-dev  
+**Status:** done  
 **Epic:** 2 — Validated content collections for posts and projects  
 **Depends on:** Story 2.1 (`projects` schema in `site/src/content.config.ts`), Story 2.2 (mirrors the proven copy-and-validate pattern)
 
@@ -42,13 +42,13 @@ So that **FR9** is satisfied, **FR17** schema validation passes on real project 
 
 ## Tasks / subtasks
 
-- [ ] **Copy project folders** (AC1) — Mirror legacy structure into Astro tree. For each of the 5 folders under `src/content/projects/<slug>/`, copy the folder and its single `.md` file plus the co-located thumbnail image (`principal.png` for australis/colossus/oysho/sainsburys; `umaicha.png` for umaicha) to `site/src/content/projects/<slug>/`. Preserve the **slug folder name** and the **inner `.md` filename** (e.g. `australis/australis.md`). Do **not** flatten or rename.
+- [x] **Copy project folders** (AC1) — Mirror legacy structure into Astro tree. For each of the 5 folders under `src/content/projects/<slug>/`, copy the folder and its single `.md` file plus the co-located thumbnail image (`principal.png` for australis/colossus/oysho/sainsburys; `umaicha.png` for umaicha) to `site/src/content/projects/<slug>/`. Preserve the **slug folder name** and the **inner `.md` filename** (e.g. `australis/australis.md`). Do **not** flatten or rename.
 
-- [ ] **Do not copy commented-out images** (AC1, AC5) — Each legacy file has one real image entry plus 4 YAML-commented placeholder entries (`# { title: ..., image: ... }`). Leave the comments alone — they're already YAML-inert and the parsed `images` array contains only the uncommented entry. Do **not** uncomment, delete, or "tidy" them; minimize diff churn (per Story 2.2 precedent).
+- [x] **Do not copy commented-out images** (AC1, AC5) — Each legacy file has one real image entry plus 4 YAML-commented placeholder entries (`# { title: ..., image: ... }`). Leave the comments alone — they're already YAML-inert and the parsed `images` array contains only the uncommented entry. Do **not** uncomment, delete, or "tidy" them; minimize diff churn (per Story 2.2 precedent).
 
-- [ ] **Verify thumbnail relative paths still work** (AC1, AC5) — From a migrated project at `site/src/content/projects/<slug>/<slug>.md`, the `thumbnail: ./principal.png` (or `./umaicha.png`) resolves to a sibling file in the same folder. Confirm the thumbnail file exists alongside each migrated `.md`. **Do not change** the `thumbnail` string — schema accepts any non-empty string; Epic 5 owns `<Image>` wiring.
+- [x] **Verify thumbnail relative paths still work** (AC1, AC5) — From a migrated project at `site/src/content/projects/<slug>/<slug>.md`, the `thumbnail: ./principal.png` (or `./umaicha.png`) resolves to a sibling file in the same folder. Confirm the thumbnail file exists alongside each migrated `.md`. **Do not change** the `thumbnail` string — schema accepts any non-empty string; Epic 5 owns `<Image>` wiring.
 
-- [ ] **Frontmatter normalization** (AC1) — Verify (do **not** restructure) that each migrated project's frontmatter parses cleanly under the schema in `site/src/content.config.ts`:
+- [x] **Frontmatter normalization** (AC1) — Verify (do **not** restructure) that each migrated project's frontmatter parses cleanly under the schema in `site/src/content.config.ts`:
   - `path`: string starting with `/` (all 5 conform — `/projects/australis`, `/projects/colossus-bets`, `/projects/oysho`, `/projects/sainsburys`, `/projects/umaicha`).
   - `title`: non-empty string. **`Sainsbury's`** has an apostrophe inside double quotes — this is valid YAML; **keep it as-is**.
   - `date`: ISO datetime (legacy uses `2018-05-18T12:34:00+00:00`-style strings; `z.coerce.date()` accepts).
@@ -59,7 +59,7 @@ So that **FR9** is satisfied, **FR17** schema validation passes on real project 
   - `images`: array of `{ title, image }` (all 5 have one parsed entry; commented entries are ignored).
   - Quote style (`'...'` vs `"..."`) is **irrelevant** to YAML — do not churn diffs normalizing it.
 
-- [ ] **Run validation locally** (AC1, AC2, AC4) — Execute in order:
+- [x] **Run validation locally** (AC1, AC2, AC4) — Execute in order:
   ```bash
   cd site
   npm run check        # AC1 — schema + TS pass on all 5 projects
@@ -68,13 +68,34 @@ So that **FR9** is satisfied, **FR17** schema validation passes on real project 
   ```
   All three must exit **0**.
 
-- [ ] **Remove `.gitkeep`** (housekeeping) — After at least one project folder lands under `site/src/content/projects/`, delete `site/src/content/projects/.gitkeep` (no longer needed). This mirrors the 2.2 cleanup of the posts `.gitkeep`.
+- [x] **Remove `.gitkeep`** (housekeeping) — After at least one project folder lands under `site/src/content/projects/`, delete `site/src/content/projects/.gitkeep` (no longer needed). This mirrors the 2.2 cleanup of the posts `.gitkeep`.
 
-- [ ] **Do not delete legacy `src/content/projects/`** — Legacy Gatsby tree stays at repo root until cutover (Epic 7). Story 2.3 is **copy**, not **move**.
+- [x] **Do not delete legacy `src/content/projects/`** — Legacy Gatsby tree stays at repo root until cutover (Epic 7). Story 2.3 is **copy**, not **move**.
 
-- [ ] **Documentation delta** (minimal) — Append a short "Projects migrated (Story 2.3)" note to `docs/data-models.md` Validation section, pointing to `site/src/content/projects/` as the live location post-migration. Keep it to 1–2 lines; do not duplicate field tables. Mirror the 2.2 doc-delta pattern.
+- [x] **Documentation delta** (minimal) — Append a short "Projects migrated (Story 2.3)" note to `docs/data-models.md` Validation section, pointing to `site/src/content/projects/` as the live location post-migration. Keep it to 1–2 lines; do not duplicate field tables. Mirror the 2.2 doc-delta pattern.
 
----
+### Review Findings
+
+_Generated by `code-review` workflow on 2026-05-21. 3 layers: Blind Hunter, Edge Case Hunter, Acceptance Auditor._
+
+**Decision needed:** 0.
+
+**Patch** (3 — all resolved):
+- [x] [Review][Patch] Untrack review-diff artifact `_bmad-output/tmp/story-2-3-review.diff` (recurrence from Story 2.2) — deleted; added `_bmad-output/tmp/` rule to root `.gitignore` so it won't recur on the next review.
+- [x] [Review][Patch] Document the deliberate plural in `type: z.literal('projects')` — added a 1-line comment in `site/src/content.config.ts` explaining why the literal is plural (distinct from `posts'` singular `'post'`) so a future schema-cleanup pass doesn't silently break all 5 projects.
+- [x] [Review][Patch] Extend `.gitattributes` belt-and-suspenders binary list — added `*.png`, `*.jpg`, `*.jpeg`, `*.gif`, `*.webp`, `*.ico` so future image migrations can't be text-tracked by accident (same hygiene class as Story 2.2's `icons.ai` fix).
+
+**Deferred** (8) — see `_bmad-output/implementation-artifacts/deferred-work.md`:
+- [x] [Review][Defer] No consumer of `projects` collection — schema is the only gate; Epic 5 owns project routes (duplicate of 2.2 finding).
+- [x] [Review][Defer] Cross-collection `path` uniqueness not enforced — posts and projects could collide; Story 2.4 (CI gate hardening).
+- [x] [Review][Defer] `thumbnail` is bare string, not `image()` ref — Epic 5 image-pipeline wiring.
+- [x] [Review][Defer] `images[].image` same bare-string issue — Epic 5.
+- [x] [Review][Defer] Commented `images` placeholders reference non-existent files (`./pier.jpg` etc.) — Guardrail §6 keeps them inert; revisit during Epic 5 if uncommenting.
+- [x] [Review][Defer] Migrated thumbnails are 13–17 MB total, no bundle-size baseline — Epic 5 image-pipeline scope needs a size guard.
+- [x] [Review][Defer] `verify-content-schema.mjs` not idempotent — Story 2.4 (CI gate hardening) should add pre-clean of `_schema-test/`.
+- [x] [Review][Defer] Glob loader doesn't exclude `_schema-test/` — stranded fixture would be picked up; Story 2.4 should add `ignore: ['**/_schema-test/**']`.
+
+**Dismissed** (14) — false positives (e.g. "`images` arrays malformed YAML" — verified all 5 parse cleanly as single-entry `[{title, image}]`), process artifacts (status flip, narrative gates), and items explicitly out of scope per Guardrails (quote-style normalization, trailing newlines, doc-delta verbosity).
 
 ## Path inventory (verify all 5 unique after migration)
 
@@ -234,22 +255,57 @@ ls site/src/content/projects/umaicha/umaicha.png >/dev/null && echo "umaicha ok"
 
 ### Agent model used
 
-_(to be filled in by dev-story)_
+Amelia (Senior Software Engineer) — Claude Opus 4.7.
 
 ### Debug log references
 
-_(to be filled in by dev-story)_
+- Clean run, no surprises. Validation trio executed under Node 22.12.0 (via `nvm use` against `site/.nvmrc`).
+- `[glob-loader] No files found matching "**/*.{md,mdx}" in directory "src/content/projects"` warning **disappeared** once the 5 projects landed, matching the prediction in Dev Notes §Story 2.1/2.2 intelligence.
+- No frontmatter edits required — all 5 legacy projects validate against the frozen `projects` Zod schema as-is (including `Sainsbury's` apostrophe inside `"..."`, plural `type: projects`, mixed quote styles, and the YAML-commented `images` placeholder entries).
 
 ### Completion notes list
 
-_(to be filled in by dev-story)_
+- Pure copy: 5 project folders + co-located thumbnail PNGs → `site/src/content/projects/<slug>/`. Legacy `src/content/projects/` untouched (per Guardrails §4).
+- Zero frontmatter edits — schema acceptance confirmed on first run via `astro check`.
+- YAML-commented `images` placeholder entries left untouched (per Guardrails §6); parsed `images` array contains exactly the single uncommented entry per project, satisfying the `{title, image}` shape (AC5 ✅).
+- Removed `site/src/content/projects/.gitkeep`; the `posts/` tree from Story 2.2 was not touched (per Guardrails §9).
+- Acceptance gates (from `site/`, Node 22.12.0):
+  - `npm run check` → **0 errors, 0 warnings, 0 hints** across 6 Astro files (AC1 ✅)
+  - `npm run build` → static build, 1 page, completed in ~1.27s (AC2 ✅)
+  - `npm run test:schema` → invalid `posts` AND `projects` fixtures still rejected (AC4 ✅)
+- Spot checks: 5 folders, 5 unique `/projects/...` paths (including intentional `colossus → /projects/colossus-bets` asymmetry), all 5 thumbnails co-located, `.gitkeep` gone (AC3 ✅).
+- Documentation: 1-line "Projects migrated (Story 2.3)" note appended to `docs/data-models.md` §Validation, mirroring 2.2's pattern.
 
 ### File list
 
-_(to be filled in by dev-story)_
+**Added** (copied from legacy):
+- `site/src/content/projects/australis/australis.md`
+- `site/src/content/projects/australis/principal.png`
+- `site/src/content/projects/colossus/colossus.md`
+- `site/src/content/projects/colossus/principal.png`
+- `site/src/content/projects/oysho/oysho.md`
+- `site/src/content/projects/oysho/principal.png`
+- `site/src/content/projects/sainsburys/sainsburys.md`
+- `site/src/content/projects/sainsburys/principal.png`
+- `site/src/content/projects/umaicha/umaicha.md`
+- `site/src/content/projects/umaicha/umaicha.png`
+
+**Modified:**
+- `docs/data-models.md` — added 1-line "Projects migrated (Story 2.3)" note in §Validation.
+- `_bmad-output/implementation-artifacts/sprint-status.yaml` — status transitions `ready-for-dev` → `in-progress` → `review` → `done`; `last_updated` bumped.
+- `site/src/content.config.ts` — added 4-line code comment above `type: z.literal('projects')` documenting the deliberate plural (review-patch).
+- `.gitignore` (root) — added `_bmad-output/tmp/` rule so review-diff scratch artifacts stop recurring across reviews (review-patch).
+- `.gitattributes` (root) — extended binary list with raster image formats (`*.png`, `*.jpg`, `*.jpeg`, `*.gif`, `*.webp`, `*.ico`) as belt-and-suspenders hygiene (review-patch).
+
+**Deleted:**
+- `site/src/content/projects/.gitkeep` (placeholder consumed by real content).
+
+**Unchanged (per guardrails):**
+- Schema shape itself (`site/src/content.config.ts` Zod object body), `site/src/content/posts/**` (owned by Story 2.2), all legacy `src/content/projects/**`.
 
 ### Change log
 
 | Date | Change | Author |
 |------|--------|--------|
 | 2026-05-21 | Story drafted (ready-for-dev). Ultimate context engine analysis: epic 2.3, architecture §6.2, schema in `content.config.ts`, 2.1/2.2 intelligence integrated, all 5 legacy project frontmatter inspected, image strategy deferred to Epic 5. | bmad-create-story |
+| 2026-05-21 | Migrated 5 legacy project case studies + co-located thumbnails into `site/src/content/projects/`; validation gates (`check`, `build`, `test:schema`) pass on first run with zero frontmatter edits. | Amelia |

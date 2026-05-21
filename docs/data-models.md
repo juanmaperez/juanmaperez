@@ -45,3 +45,5 @@ Markdown body becomes `html` in GraphQL for full-article rendering in templates.
 **Astro (`site/`):** explicit Zod schemas in [`site/src/content.config.ts`](../site/src/content.config.ts) for `posts` and `projects` collections (Story 2.1, ADR-003). Invalid frontmatter fails `cd site && npm run check` / `npm run build`. Field tables above remain the source of truth for migration (Stories 2.2–2.3).
 
 **Posts migrated (Story 2.2):** all 9 legacy posts now live under [`site/src/content/posts/`](../site/src/content/posts/) and validate against the `posts` Zod schema via `npm run check`.
+
+**Projects migrated (Story 2.3):** all 5 legacy projects now live under [`site/src/content/projects/`](../site/src/content/projects/) and validate against the `projects` Zod schema via `npm run check`.
