@@ -19,7 +19,7 @@
 |------------------|-------------|------------------------------------------------------|---------------------------------|------------------------|----------|-------|
 | Home | `/` | removed | N | | | Story 3.3: static hero/about/works/contact; GSAP + ScrollMagic + cookie gate removed |
 | CV | `/cv/` | removed | N | | | Story 3.4: static sections; react-spring + typewriter removed |
-| Not found | `/404/` or host 404 | n/a | N | | | Match host behavior for GitHub Pages |
+| Not found | `/404/` or host 404 | n/a | N | | | Story 3.5: static `404.html`; blog recovery link added per epics (legacy home-only) |
 
 ---
 

@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Juanma Perez | 404">
+	<section class="not-found" aria-labelledby="not-found-heading">
+		<h1 id="not-found-heading">404</h1>
+		<p class="not-found__message">
+			Be focused or <a href="/">go Home</a> or <a href="/blog">browse the blog</a>.
+		</p>
+	</section>
+</BaseLayout>
+
+<style>
+	.not-found {
+		min-height: calc(100vh - 4rem);
+		max-width: 100%;
+		box-sizing: border-box;
+		overflow-x: hidden;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		padding: 1rem;
+		background: url('/images/404.jpg') center / cover no-repeat;
+		color: #fff;
+		text-align: center;
+	}
+	.not-found h1 {
+		font-size: clamp(4rem, 25vw, 18.75rem);
+		line-height: 1;
+		text-transform: uppercase;
+		margin: 0 0 1rem;
+		text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+	}
+	.not-found__message {
+		font-size: clamp(1.125rem, 4vw, 2.25rem);
+		text-transform: uppercase;
+		letter-spacing: 0.14em;
+		margin: 0;
+		text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+	}
+	.not-found a {
+		color: inherit;
+		text-decoration: underline;
+	}
+	.not-found a:focus-visible {
+		outline: 2px solid currentColor;
+		outline-offset: 2px;
+	}
+</style>
