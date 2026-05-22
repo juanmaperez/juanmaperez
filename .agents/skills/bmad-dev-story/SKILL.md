@@ -411,9 +411,11 @@ Activation is complete. Begin the workflow below.
       - Code quality checks pass (linting, static analysis if configured)
       - File List includes every new/modified/deleted file (relative paths)
       - Dev Agent Record contains implementation notes
+      - Dev Agent Record → Agent model used follows {workflow.persistent_facts} (Amelia + model when session used bmad-agent-dev; never bare "Composer (dev-story)" after Amelia DS)
       - Change Log includes summary of changes
       - Only permitted story sections were modified
     </action>
+    <action>Set Dev Agent Record → Agent model used before marking review (required field, not optional)</action>
 
     <!-- Mark story ready for review - sprint status conditional -->
     <check if="{sprint_status} file exists AND {{current_sprint_status}} != 'no-sprint-tracking'">

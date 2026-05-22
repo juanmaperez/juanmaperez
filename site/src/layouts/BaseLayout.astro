@@ -1,22 +1,30 @@
 ---
 // site/src/layouts/BaseLayout.astro
 // Slots:
-//   - head:   reserved (Story 6.1 — per-page SEO/OG tags)
+//   - head:   optional extra tags after PageHead (Story 6.1)
 //   - header: default fill SiteHeader (Story 3.2); pages may override via slot="header"
-//   - default (in <main>): page content (this story onwards)
+//   - default (in <main>): page content
 //   - footer: default fill SiteFooter (Story 3.6); pages may override via slot="footer"
 import { siteConfig } from '../site.config';
 import SiteHeader from '../components/nav/SiteHeader.astro';
 import SiteFooter from '../components/nav/SiteFooter.astro';
+import PageHead from '../components/seo/PageHead.astro';
+import { formatPageTitle, truncateDescription } from '../utils/seo';
 
 interface Props {
 	title?: string;
 	description?: string;
+	canonicalPath?: string;
+	ogType?: 'website' | 'article';
+	noindex?: boolean;
 }
 
-const { title, description } = Astro.props;
-const resolvedTitle = title ?? siteConfig.title;
-const resolvedDescription = description ?? siteConfig.description;
+const { title, description, canonicalPath, ogType, noindex } = Astro.props;
+const resolvedTitle = formatPageTitle(title ?? siteConfig.title);
+const resolvedDescription = truncateDescription(
+	description ?? siteConfig.description,
+);
+const resolvedCanonicalPath = canonicalPath ?? Astro.url.pathname;
 ---
 <!doctype html>
 <html lang="en">
@@ -28,6 +36,13 @@ const resolvedDescription = description ?? siteConfig.description;
 		<meta name="generator" content={Astro.generator} />
 		<title>{resolvedTitle}</title>
 		<meta name="description" content={resolvedDescription} />
+		<PageHead
+			title={resolvedTitle}
+			description={resolvedDescription}
+			canonicalPath={resolvedCanonicalPath}
+			ogType={ogType}
+			noindex={noindex}
+		/>
 		<slot name="head" />
 	</head>
 	<body>

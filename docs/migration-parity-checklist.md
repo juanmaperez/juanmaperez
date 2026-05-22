@@ -11,6 +11,10 @@
 
 **References:** `_bmad-output/planning-artifacts/architecture.md` §12–13, `_bmad-output/planning-artifacts/prd.md` (FR19, NFR-P1–P2).
 
+**SEO (FR10):** Story **6.1** — per-page `<title>`, meta description, canonical, Open Graph, and Twitter tags via `site/src/components/seo/PageHead.astro`; content titles use legacy Helmet `titleTemplate` parity (`{page} | Juanma Perez`).
+
+**SEO (FR11):** Story **6.2** — `@astrojs/sitemap` emits `sitemap-index.xml` on build; `site/src/pages/robots.txt.ts` points crawlers at the sitemap (legacy `gatsby-plugin-sitemap` parity). `/404` excluded from sitemap via integration `filter`.
+
 ---
 
 ## Core templates

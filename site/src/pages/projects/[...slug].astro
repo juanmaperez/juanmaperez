@@ -20,7 +20,11 @@ interface Props {
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 ---
-<ProjectLayout title={entry.data.title} description={entry.data.excerpt}>
+<ProjectLayout
+	title={entry.data.title}
+	description={entry.data.excerpt}
+	canonicalPath={entry.data.path}
+>
 	<article class="project-detail">
 		<div class="project-detail__container">
 			<h1>{entry.data.title}</h1>
