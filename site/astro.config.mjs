@@ -8,4 +8,11 @@ export default defineConfig({
 	site: 'https://juanmaperez.dev',
 	base: '/',
 	output: 'static',
+	markdown: {
+		syntaxHighlight: 'shiki',
+		shikiConfig: {
+			theme: 'github-light',
+			wrap: true,
+		},
+	},
 });

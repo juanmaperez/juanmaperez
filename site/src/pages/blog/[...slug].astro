@@ -121,20 +121,19 @@ const formattedDate = entry.data.date.toLocaleDateString('en-GB', {
 		padding-left: 1rem;
 		border-left: 3px solid #b7c8cb;
 	}
-	.blog-post__content :global(pre) {
+	.blog-post__content :global(pre.astro-code) {
 		overflow-x: auto;
 		max-width: 100%;
 		padding: 1rem;
-		background: #f5f3ee;
 		font-size: 0.9rem;
 		line-height: 1.45;
 	}
-	.blog-post__content :global(code) {
+	.blog-post__content :global(:not(pre) > code) {
 		font-family: ui-monospace, monospace;
 		font-size: 0.9em;
-	}
-	.blog-post__content :global(pre code) {
-		font-size: inherit;
+		background: #f0ede6;
+		padding: 0.1em 0.35em;
+		border-radius: 3px;
 	}
 	.blog-post__content :global(img) {
 		max-width: 100%;

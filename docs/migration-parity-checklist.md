@@ -60,6 +60,8 @@ Distinct categories from current content: `javascript`, `react`, `recipes`.
 | Post | `/blog/deconstructing-fetch-browser-api` | removed | N | | | Story 4.3: static detail; prev/next per legacy DESC index |
 | Post | `/blog/demystifying-useReducer-hook` | removed | N | | | Story 4.3: static detail; prev/next per legacy DESC index |
 
+**Code highlighting (FR14):** Story **4.5** — fenced blocks use **Shiki** (`github-light` in `astro.config.mjs`), not legacy `gatsby-remark-prismjs`. Functional parity; not pixel-perfect Prism theme match. Posts **07** (recipes) have no fences.
+
 ---
 
 ## Projects — case studies (`path` from frontmatter)
