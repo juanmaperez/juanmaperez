@@ -52,6 +52,19 @@ CI runs `npm run check` (Astro + Zod content schema validation) **before** `npm 
 
 After `npm run build`, CI runs `npm run test:links`, which crawls `dist/**/*.html` for broken root-relative `href`/`src` targets. Run locally: `cd site && npm run build && npm run test:links`.
 
+### Analytics (GA4, Story 6.5)
+
+Optional GA4 via `PUBLIC_GA_MEASUREMENT_ID` (public `G-…` ID — not a secret API key). Copy `.env.example` to `.env` and set the ID for local builds with analytics, or leave unset for zero third-party scripts.
+
+```bash
+cd site
+cp .env.example .env   # then set PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX npm run build
+grep gtag dist/index.html   # should match when ID is set
+```
+
+Production: add repository variable **`PUBLIC_GA_MEASUREMENT_ID`** in GitHub (Settings → Secrets and variables → Actions → Variables). CI passes the variable to the build step in [`.github/workflows/deploy-astro-pages.yml`](../.github/workflows/deploy-astro-pages.yml). Legacy Universal Analytics `UA-98892695-1` is not used — create a GA4 property and use its measurement ID.
+
 ## Heading policy
 
 Each page contributes exactly one `<h1>`. The `<h1>` is owned by the page (or a route-family layout), never by `BaseLayout`. `BaseLayout` emits no headings — it is only the document shell (`src/layouts/BaseLayout.astro`). Later headings on a page follow content order without skipping levels (UX-DR2 / accessibility). Site-wide title and description defaults live in `src/site.config.ts`; pages may pass optional `title` and `description` props to `BaseLayout` (defaults apply when omitted).

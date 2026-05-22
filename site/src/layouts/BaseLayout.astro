@@ -1,7 +1,7 @@
 ---
 // site/src/layouts/BaseLayout.astro
 // Slots:
-//   - head:   optional extra tags after PageHead (Story 6.1)
+//   - head:   optional extra tags after PageHead + Analytics (Stories 6.1, 6.5)
 //   - header: default fill SiteHeader (Story 3.2); pages may override via slot="header"
 //   - default (in <main>): page content
 //   - footer: default fill SiteFooter (Story 3.6); pages may override via slot="footer"
@@ -9,6 +9,7 @@ import { siteConfig } from '../site.config';
 import SiteHeader from '../components/nav/SiteHeader.astro';
 import SiteFooter from '../components/nav/SiteFooter.astro';
 import PageHead from '../components/seo/PageHead.astro';
+import Analytics from '../components/analytics/Analytics.astro';
 import { formatPageTitle, truncateDescription } from '../utils/seo';
 
 interface Props {
@@ -43,6 +44,7 @@ const resolvedCanonicalPath = canonicalPath ?? Astro.url.pathname;
 			ogType={ogType}
 			noindex={noindex}
 		/>
+		<Analytics />
 		<slot name="head" />
 	</head>
 	<body>

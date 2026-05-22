@@ -19,6 +19,8 @@
 
 **Integrity (FR21):** Story **6.4** — `npm run test:links` after build crawls `site/dist/` for broken internal links; CI gate in `.github/workflows/deploy-astro-pages.yml`.
 
+**Analytics (NFR-S1/S2):** Story **6.5** — GA4 gtag via `site/src/components/analytics/Analytics.astro` in `BaseLayout` when `PUBLIC_GA_MEASUREMENT_ID` is set at build time. Legacy Universal Analytics `UA-98892695-1` (`gatsby-plugin-google-analytics`) is retired; use a new GA4 `G-…` measurement ID (not the UA property).
+
 ---
 
 ## Redirect map (FR12)
@@ -114,3 +116,4 @@ Add a row here only for routes that need **ScrollMagic / GSAP / React** parity r
 | Date | Change |
 |------|--------|
 | 2026-04-20 | Initial checklist seeded from `gatsby-node.js` + `src/content/**` paths |
+| 2026-05-22 | Story 6.5 — GA4 analytics env + `Analytics.astro`; UA retired |

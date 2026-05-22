@@ -1,6 +1,7 @@
 # Story 1.3 — Astro static site → GitHub Pages (FR18, ADR-002).
 # Story 2.4 — FR17 schema validation gate: `npm run check` before build.
 # Story 6.4 — FR21 internal link gate: `npm run test:links` after build.
+# Story 6.5 — GA4 gtag via PUBLIC_GA_MEASUREMENT_ID (optional repo variable).
 name: Deploy Astro site to GitHub Pages
 
 on:
@@ -44,6 +45,8 @@ jobs:
       - name: Build
         run: npm run build
         working-directory: site
+        env:
+          PUBLIC_GA_MEASUREMENT_ID: ${{ vars.PUBLIC_GA_MEASUREMENT_ID }}
 
       - name: Internal link integrity (FR21)
         run: npm run test:links

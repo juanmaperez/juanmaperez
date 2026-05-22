@@ -26,7 +26,9 @@
 
 ## Analytics
 
-`gatsby-plugin-google-analytics` with tracking ID in config — ensure compliance with your privacy policy; plan **GA4** or removal if UA is deprecated.
+**Legacy (Gatsby):** `gatsby-plugin-google-analytics` with Universal Analytics `UA-98892695-1` in `gatsby-config.js` — deprecated; do not reuse that ID.
+
+**Astro (`site/`):** Story **6.5** — `site/src/components/analytics/Analytics.astro` injects the official GA4 **gtag.js** snippet (async loader only; no GTM container) on every `BaseLayout` page when `PUBLIC_GA_MEASUREMENT_ID` is set at build time. Copy `site/.env.example` to `site/.env` for local builds, or set repository variable **`PUBLIC_GA_MEASUREMENT_ID`** in GitHub Actions (wired in `.github/workflows/deploy-astro-pages.yml`). When unset, no analytics scripts are emitted. Create a GA4 property at [Google Analytics](https://analytics.google.com/) and use the `G-…` measurement ID.
 
 ## Astro site (`site/`) — URL and `base`
 
