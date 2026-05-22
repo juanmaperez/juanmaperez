@@ -8,7 +8,7 @@
 # STATUS DEFINITIONS: see bmad-sprint-planning skill workflow.md
 
 generated: "2026-04-20T12:00:00Z"
-last_updated: "2026-05-22T15:10:00Z"
+last_updated: "2026-05-22T15:18:00Z"
 project: juanmaperez
 project_key: juanmaperez
 tracking_system: file-system
@@ -57,7 +57,7 @@ development_status:
   6-1-per-page-title-description-and-open-graph: done
   6-2-sitemap-generation: done
   6-3-redirect-map-for-url-changes: done
-  6-4-internal-link-integrity-check: backlog
+  6-4-internal-link-integrity-check: done
   6-5-analytics-snippet-ga4-or-alternative: backlog
   epic-6-retrospective: optional
 

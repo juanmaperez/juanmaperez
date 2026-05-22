@@ -64,3 +64,6 @@ export function buildRedirectMap(): Record<string, RedirectEntry> {
 }
 
 export const redirectMap = buildRedirectMap();
+
+/** Redirect source paths that resolve to built redirect pages (FR21 link checker). */
+export const redirectSources = Object.keys(redirectMap);

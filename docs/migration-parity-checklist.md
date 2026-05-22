@@ -17,6 +17,8 @@
 
 **SEO (FR12):** Story **6.3** — `site/src/config/redirects.ts` → `astro.config.mjs` `redirects` (301). Post/project slugs unchanged vs legacy; aliases only. See **Redirect map** below.
 
+**Integrity (FR21):** Story **6.4** — `npm run test:links` after build crawls `site/dist/` for broken internal links; CI gate in `.github/workflows/deploy-astro-pages.yml`.
+
 ---
 
 ## Redirect map (FR12)

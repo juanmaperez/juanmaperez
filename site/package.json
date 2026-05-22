@@ -11,6 +11,7 @@
     "preview": "astro preview",
     "check": "astro check",
     "test:schema": "node scripts/verify-content-schema.mjs",
+    "test:links": "node scripts/verify-internal-links.mjs",
     "astro": "astro"
   },
   "dependencies": {

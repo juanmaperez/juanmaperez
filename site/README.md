@@ -48,6 +48,10 @@ Push or pull request targeting **`main`** or **`master`** runs [`.github/workflo
 
 CI runs `npm run check` (Astro + Zod content schema validation) **before** `npm run build`. Any post or project with invalid frontmatter fails the workflow at this step and blocks deploy. The local equivalent is `cd site && npm run check`.
 
+### CI internal link gate (FR21, Story 6.4)
+
+After `npm run build`, CI runs `npm run test:links`, which crawls `dist/**/*.html` for broken root-relative `href`/`src` targets. Run locally: `cd site && npm run build && npm run test:links`.
+
 ## Heading policy
 
 Each page contributes exactly one `<h1>`. The `<h1>` is owned by the page (or a route-family layout), never by `BaseLayout`. `BaseLayout` emits no headings — it is only the document shell (`src/layouts/BaseLayout.astro`). Later headings on a page follow content order without skipping levels (UX-DR2 / accessibility). Site-wide title and description defaults live in `src/site.config.ts`; pages may pass optional `title` and `description` props to `BaseLayout` (defaults apply when omitted).
