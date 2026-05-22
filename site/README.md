@@ -69,9 +69,23 @@ Production: add repository variable **`PUBLIC_GA_MEASUREMENT_ID`** in GitHub (Se
 
 Legacy Gatsby motion (GSAP, ScrollMagic, react-spring, cookie gate) is inventoried in [docs/migration-parity-checklist.md](../docs/migration-parity-checklist.md) (**§ Legacy animation & JS inventory**). Target parity is **`same`** on `/`, `/cv/`, and project detail contact sections; Epic **7.2** implements only checklist-approved **`client:*` islands** or vanilla scripts per **ADR-004**. Current Astro build is still **static-only** (no `@astrojs/react` until 7.2).
 
-### Typography / FR22 (Story 8.1+)
+### Typography / FR22 (Story 8.2)
 
-Legacy fonts (**Questrial** body, **MFred** headings, **Montserrat** blog titles, `#fbf9f3` canvas) are inventoried in [docs/migration-parity-checklist.md](../docs/migration-parity-checklist.md) (**§ Legacy typography & styling inventory**). Epics 3–5 used **system UI** and scoped component CSS as an interim; target **Visual parity = same**. Story **8.2** adds global styles and font loading (**NFR-V1**); **8.3** reconciles per-template rules and sign-off. This story does **not** add fonts or `global.css` yet.
+Global styles: `site/src/styles/global.css` imported from `BaseLayout.astro`.
+
+| Asset | Location |
+|-------|----------|
+| **MFred** (headings, brand) | Self-hosted: `site/public/fonts/mfred/MFred.woff2` (+ woff/ttf fallbacks); preloaded in layout `<head>` |
+| **Questrial** (body) | Google Fonts (`display=swap`) |
+| **Montserrat** (blog titles, 8.3) | Google Fonts via same stylesheet; CSS var `--font-blog-title` |
+
+**Design tokens** (`:root`): `--color-canvas` `#fbf9f3`, `--color-text` `#323846`, `--color-accent` `#b7c8cb`, `--color-link` `#1c768f`.
+
+**NFR-V1:** `font-display: swap` on MFred; preload woff2 for faster heading render. Home hero is LCP-sensitive — avoid adding render-blocking font requests beyond this set without measuring in Story **7.4** / baselines.
+
+**Still for Story 8.3:** per-template sizes (blog teaser 26px/800, CV section scale, header glitch, home hero 100vh), Shiki vs Prism colors remain **simplified** (FR14).
+
+Inventory: [migration-parity-checklist.md](../docs/migration-parity-checklist.md) (**§ Legacy typography & styling inventory**).
 
 ## Heading policy
 

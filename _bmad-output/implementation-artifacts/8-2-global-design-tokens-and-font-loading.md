@@ -2,7 +2,7 @@
 
 **Story ID:** 8.2  
 **Story key:** `8-2-global-design-tokens-and-font-loading`  
-**Status:** ready-for-dev  
+**Status:** done  
 **Epic:** 8 — Typography and visual design parity  
 **Depends on:** Story **8.1** (typography inventory + Visual parity **`same`**)  
 **Parallel with:** Story **7.2** (motion) — ship **8.2 before** or **with** 7.2 header so MFred/Questrial apply to `SiteHeader`  
@@ -66,9 +66,9 @@ So that **FR22** brand recognition holds across routes.
 
 ## Tasks / subtasks
 
-- [ ] **Copy font assets** (AC2) — From `src/assets/fonts/mfred/` → `site/public/fonts/mfred/` (`MFred.woff2`, `MFred.woff`, `MFred.ttf` minimum).
+- [x] **Copy font assets** (AC2) — From `src/assets/fonts/mfred/` → `site/public/fonts/mfred/` (`MFred.woff2`, `MFred.woff`, `MFred.ttf` minimum).
 
-- [ ] **Create `site/src/styles/global.css`** (AC1, AC4) — Contents:
+- [x] **Create `site/src/styles/global.css`** (AC1, AC4) — Contents:
   - `@font-face` MFred (`font-display: swap`)
   - `:root` tokens (table above)
   - `html, body { background: var(--color-canvas); color: var(--color-text); font-family: var(--font-body); }`
@@ -77,7 +77,7 @@ So that **FR22** brand recognition holds across routes.
   - Optional: `code, pre { font-family: var(--font-mono); }`
   - Base `box-sizing` / minimal reset if needed (avoid fighting Astro defaults)
 
-- [ ] **Wire `BaseLayout.astro`** (AC1) — In `<head>` after charset/viewport:
+- [x] **Wire `BaseLayout.astro`** (AC1) — In `<head>` after charset/viewport:
   ```html
   <link rel="preload" href="/fonts/mfred/MFred.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" />
@@ -88,23 +88,23 @@ So that **FR22** brand recognition holds across routes.
   ```
   (Astro pattern: frontmatter import or `<link>` to built asset — use project convention.)
 
-- [ ] **Questrial + optional Montserrat** (AC3, AC6) — Google Fonts `display=swap`; add Montserrat weights 400/800 if loading in 8.2 for blog.
+- [x] **Questrial + optional Montserrat** (AC3, AC6) — Google Fonts `display=swap`; add Montserrat weights 400/800 if loading in 8.2 for blog.
 
-- [ ] **Site header brand** (AC1) — Ensure `.site-header__brand` uses heading font (MFred) via global rule or token; remove `font-weight: 700` as substitute for brand face where MFred applies.
+- [x] **Site header brand** (AC1) — Ensure `.site-header__brand` uses heading font (MFred) via global rule or token; remove `font-weight: 700` as substitute for brand face where MFred applies.
 
-- [ ] **Smoke visual** (AC1) — `npm run build && npm run preview`:
+- [x] **Smoke visual** (AC1) — `npm run build && npm run preview`:
   - Home: body Questrial, `h1` MFred visible
   - `/cv/`: section headings MFred
   - `/blog`: body Questrial (teaser Montserrat may wait for 8.3)
   - Computed `font-family` on `body` and `h1` not system-ui
 
-- [ ] **Update `site/README.md`** (AC5) — Expand **Typography / FR22**: font paths, preload, NFR-V1, what 8.3 will finish (teaser sizes, glitch).
+- [x] **Update `site/README.md`** (AC5) — Expand **Typography / FR22**: font paths, preload, NFR-V1, what 8.3 will finish (teaser sizes, glitch).
 
-- [ ] **Update checklist** (optional) — `docs/migration-parity-checklist.md` inventory **Notes** on Global/Fonts rows: “8.2 shipped global.css”.
+- [x] **Update checklist** (optional) — `docs/migration-parity-checklist.md` inventory **Notes** on Global/Fonts rows: “8.2 shipped global.css”.
 
-- [ ] **Gate quartet** (AC7) — All **0**.
+- [x] **Gate quartet** (AC7) — All **0**.
 
-- [ ] **Do not** in this story: full template pixel parity (8.3), glitch keyframes (7.2/8.3), sign-off column, change motion code beyond font coordination.
+- [x] **Do not** in this story: full template pixel parity (8.3), glitch keyframes (7.2/8.3), sign-off column, change motion code beyond font coordination.
 
 ---
 
@@ -158,10 +158,10 @@ docs/migration-parity-checklist.md   # optional note
 
 ### Testing / verification checklist
 
-- [ ] `@font-face` resolves (no 404 on `/fonts/mfred/MFred.woff2`)
-- [ ] Body and headings use correct families on `/`, `/cv/`, `/blog`
-- [ ] Canvas background `#fbf9f3` on all pages
-- [ ] Gate quartet green
+- [x] `@font-face` resolves (no 404 on `/fonts/mfred/MFred.woff2`)
+- [x] Body and headings use correct families on `/`, `/cv/`, `/blog`
+- [x] Canvas background `#fbf9f3` on all pages
+- [x] Gate quartet green
 
 ---
 
@@ -178,15 +178,29 @@ docs/migration-parity-checklist.md   # optional note
 
 ### Agent Model Used
 
-_(fill on implementation)_
+Amelia (Senior Software Engineer) — Composer
 
 ### Completion Notes List
 
-_(fill on implementation)_
+- Copied MFred woff2/woff/ttf to `site/public/fonts/mfred/`.
+- Added `site/src/styles/global.css` with tokens, `@font-face`, body/heading/link/mono rules, `.site-header__brand` MFred styling.
+- `BaseLayout.astro`: import global CSS; preload MFred; Google Fonts Questrial + Montserrat (`display=swap`).
+- `SiteHeader.astro`: removed `font-weight: 700` on brand (MFred via global).
+- Montserrat: `--font-blog-title` token loaded; teaser styles deferred to **8.3**.
+- Amatic SC deferred (unused on MVP routes).
+- Build verify: `dist/fonts/mfred/*` present; global CSS inlined in HTML with Questrial/MFred vars.
+- Gates: check/build/test:schema/test:links → 0.
 
 ### File List
 
-_(fill on implementation)_
+- `site/public/fonts/mfred/MFred.woff2`
+- `site/public/fonts/mfred/MFred.woff`
+- `site/public/fonts/mfred/MFred.ttf`
+- `site/src/styles/global.css`
+- `site/src/layouts/BaseLayout.astro`
+- `site/src/components/nav/SiteHeader.astro`
+- `site/README.md`
+- `docs/migration-parity-checklist.md`
 
 ---
 
@@ -195,3 +209,33 @@ _(fill on implementation)_
 | Date | Change | Agent |
 |------|--------|-------|
 | 2026-05-22 | Story created from 8.1 inventory; status → ready-for-dev. | create-story |
+| 2026-05-22 | Global CSS, fonts, tokens; gates green; status → review. | Amelia (bmad-dev-story) |
+| 2026-05-22 | Code review: clean; gates re-verified; status → done. | code-review |
+
+---
+
+### Review Findings
+
+_Code review 2026-05-22 — story `8-2-global-design-tokens-and-font-loading`. Gates re-run from `site/`: check/build/test:schema/test:links → 0._
+
+✅ **Clean review** — Blind Hunter, Edge Case Hunter, Acceptance Auditor: no `patch` or `decision-needed` items.
+
+| AC | Verdict |
+|----|---------|
+| AC1 | `global.css` + `BaseLayout` import; Questrial on `body`, MFred on `h1`–`h6` and `.site-header__brand`; brand `font-weight: 700` removed |
+| AC2 | `site/public/fonts/mfred/{woff2,woff,ttf}`; `@font-face` without repo-root `src/assets` paths |
+| AC3 | Google Fonts Questrial + Montserrat with `display=swap`; Amatic SC deferred (unused on MVP) |
+| AC4 | Palette and font tokens on `:root`; canvas/text on `html`/`body`; mono on `code, pre` |
+| AC5 | `font-display: swap`; MFred `woff2` preload + `crossorigin`; `site/README.md` documents loading / LCP note |
+| AC6 | `--font-blog-title` + Montserrat 400/800 in layout (teaser sizes → **8.3**) |
+| AC7 | Quartet green (re-run at CR) |
+| AC8 | No broad removal of scoped `font-weight`; no template size reconciliation (correct scope) |
+
+**defer (informational):**
+
+- Legacy `* { font-family: Questrial }` vs Astro `body` only — inheritance covers normal content; no change required.
+- Link color scoped to `main a` (not global `a`) — header/nav links stay body text color, matching legacy header styling; in-main links get `#1c768f`.
+- `--color-accent` token defined but not wired to footer/CV/home bands yet — **8.3**; scoped hex literals remain.
+- Montserrat requested on every page for blog token readiness — acceptable per AC6(a); **8.3** may narrow to blog routes or self-host.
+- Optional: `preconnect` to `fonts.googleapis.com` if font latency becomes measurable.
+- `blog/[...slug].astro` still uses `ui-monospace` on code — reconcile with `--font-mono` in **8.3** / **4.5** follow-up.

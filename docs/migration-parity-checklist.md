@@ -52,7 +52,7 @@ Audit source: repo-root Gatsby `src/` + `gatsby-node.js` (not `site/`). **Build 
 
 **Astro baseline (7.1):** `site/` has **no** `client:*` directives and **no** `@astrojs/react` — motion not implemented yet; static MVP from Epics 3–5.
 
-**Visual (FR22 prep):** Story **8.1** — typography/styling inventory below; route tables include **Visual parity** defaulting to **`same`** where legacy used brand fonts or shared palette. Epics 3–5 shipped **system-font interim** CSS — **8.2** global tokens/fonts, **8.3** per-template sign-off.
+**Visual (FR22):** Story **8.1** inventory below; Story **8.2** ships `site/src/styles/global.css` (Questrial body, MFred headings, palette tokens, Montserrat var for blog). **8.3** per-template reconciliation and sign-off.
 
 ---
 
@@ -62,8 +62,8 @@ Audit source: repo-root Gatsby `src/styles/`, `src/components/`, `src/templates/
 
 | Template / area | Legacy source(s) | Legacy fonts & key rules | Astro source(s) | Gap | Recommended fix | Visual parity | Notes |
 |-----------------|-------------------|--------------------------|-----------------|-----|-----------------|---------------|-------|
-| **Global** | `src/styles/main.css` | `*` Questrial; `h1–h6` MFred; canvas `#fbf9f3`; links `#1c768f` (`--secondaryColor`); code Consolas stack | `BaseLayout.astro` — **no** stylesheet import | No global typography or palette | `global-token` | same | **8.2:** `site/src/styles/global.css` + layout link |
-| **Fonts** | `main.css` `@import` + `@font-face` | Google **Questrial**, **Amatic SC**; self-host **MFred** (`src/assets/fonts/mfred/*`) | Browser system UI stack | Wrong typefaces site-wide | `global-token` | same | Copy MFred to `site/public/fonts/` or `site/src/assets/` in 8.2 |
+| **Global** | `src/styles/main.css` | `*` Questrial; `h1–h6` MFred; canvas `#fbf9f3`; links `#1c768f` (`--secondaryColor`); code Consolas stack | `site/src/styles/global.css` + `BaseLayout.astro` | **8.2 done** — global tokens + fonts | `global-token` | same | Amatic SC deferred unless 8.3 needs it |
+| **Fonts** | `main.css` `@import` + `@font-face` | Google **Questrial**, **Amatic SC**; self-host **MFred** (`src/assets/fonts/mfred/*`) | `site/public/fonts/mfred/` + Google Fonts links | **8.2 done** | `global-token` | same | Montserrat loaded for 8.3 blog teasers |
 | **Header (global)** | `header.js`, `mixins.scss` | Brand **MFred** 24px uppercase; nav **Questrial**; glitch mixin on brand | `SiteHeader.astro` | `font-weight: 700` only; no MFred/glitch | `global-token` + `component-css` | same | Glitch tied to Epic 7 motion/CSS port |
 | **Home hero** | `main-block.js` | Full viewport hero; `#323846` links 18px Questrial; cover `#fbf9f3` | `HomeHero.astro` | `min-height: 50vh` vs 100vh; inherits system font | `component-css` | same | Background image path parity OK |
 | **Home about** | `about-block.js` | Section typography via global + image layout | `HomeAbout.astro` | Clamp sizes; no Questrial/MFred | `component-css` | same | Palette `#fbf9f3` / `#323846` matched |
@@ -78,7 +78,7 @@ Audit source: repo-root Gatsby `src/styles/`, `src/components/`, `src/templates/
 | **Footer (global)** | `main.css` / layout | Questrial; contact in global flow | `SiteFooter.astro` | Border `#b7c8cb` OK; fonts system | `global-token` | same | |
 | **Prism / code (global)** | `main.css` gatsby-remark-prismjs rules | Consolas + dark pre `#011627` | Shiki `github-light` in `astro.config.mjs` | Different theme | `n/a` | simplified | FR14 functional parity; not FR22 blocker |
 
-**Astro baseline (8.1):** No `site/src/styles/` directory; no `@font-face` in `site/`; per-component scoped CSS only.
+**Astro baseline (8.2):** `site/src/styles/global.css` + MFred in `site/public/fonts/mfred/`; per-component scoped CSS remains for template-specific rules (8.3).
 
 ---
 
@@ -179,3 +179,4 @@ Add a row here only for routes that need **ScrollMagic / GSAP / React** parity r
 | 2026-05-22 | Story 6.5 — GA4 analytics env + `Analytics.astro`; UA retired |
 | 2026-05-22 | Story 7.1 — legacy animation inventory; Home/CV/projects → **same**; blog → **n/a** |
 | 2026-05-22 | Story 8.1 — typography/styling inventory; **Visual parity** column; target **same** (system-font interim) |
+| 2026-05-22 | Story 8.2 — `global.css`, MFred/Questrial/Montserrat loading, design tokens |
