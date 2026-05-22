@@ -1,0 +1,67 @@
+---
+import { cvData } from '../../data/cv';
+---
+<section class="cv-experiences" data-cv-reveal aria-labelledby="cv-experiences-heading">
+	<h2 id="cv-experiences-heading">Work Experience</h2>
+	{cvData.experiences.map((job) => (
+		<article class="cv-experiences__item">
+			<div class="cv-experiences__title">
+				<p class="cv-experiences__name">
+					<strong>{job.company}</strong> | <span>{job.role}</span>
+				</p>
+				<p class="cv-experiences__date"><span>{job.dates}</span></p>
+			</div>
+			<ul class="cv-experiences__bullets">
+				{job.bullets.map((bullet) => (
+					<li>{bullet}</li>
+				))}
+			</ul>
+		</article>
+	))}
+</section>
+
+<style>
+	.cv-experiences {
+		margin: 1.25rem 0;
+		max-width: 100%;
+	}
+	.cv-experiences h2 {
+		font-size: 44px;
+		font-weight: normal;
+		width: 100%;
+		border-bottom: 1px solid #b7c8cb;
+		text-transform: uppercase;
+		padding-bottom: 0.3125rem;
+		margin: 0 0 1rem;
+		line-height: 1.1;
+	}
+	.cv-experiences__item {
+		margin: 1.875rem 0;
+	}
+	.cv-experiences__name {
+		line-height: 1.4;
+		font-size: 22px;
+		letter-spacing: 1px;
+		margin: 0;
+	}
+	.cv-experiences__name strong {
+		color: #000;
+	}
+	.cv-experiences__name span {
+		color: #b7c8cb;
+	}
+	.cv-experiences__date {
+		color: #999;
+		margin: 0.25rem 0 0;
+	}
+	.cv-experiences__bullets {
+		padding: 1.25rem 0.625rem;
+		margin: 0;
+	}
+	.cv-experiences__bullets li {
+		font-size: 18px;
+		margin-bottom: 0.625rem;
+		letter-spacing: 1px;
+		line-height: 1.4;
+	}
+</style>

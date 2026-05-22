@@ -1,0 +1,15 @@
+# Treat design / vector source files as binary so git does not attempt
+# line-ending normalization or text diffs (would corrupt PostScript streams).
+*.ai binary
+*.psd binary
+*.sketch binary
+*.fig binary
+
+# Raster / vector image formats — git auto-detects most, but pinning prevents
+# accidental text-diff or CRLF normalization regressions across editors.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary

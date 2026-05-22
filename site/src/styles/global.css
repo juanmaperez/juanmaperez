@@ -1,0 +1,67 @@
+/* Story 8.2 — global design tokens & font loading (FR22, NFR-V1, ADR-005) */
+
+@font-face {
+	font-family: 'MFred';
+	src:
+		url('/fonts/mfred/MFred.woff2') format('woff2'),
+		url('/fonts/mfred/MFred.woff') format('woff'),
+		url('/fonts/mfred/MFred.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+:root {
+	--color-canvas: #fbf9f3;
+	--color-text: #323846;
+	--color-accent: #b7c8cb;
+	--color-link: #1c768f;
+	--font-body: 'Questrial', sans-serif;
+	--font-heading: 'MFred', 'Oswald', sans-serif;
+	--font-mono: Consolas, Menlo, Monaco, 'source-code-pro', 'Courier New', monospace;
+	/* Blog teaser titles — Story 8.3 applies sizes; token ready here */
+	--font-blog-title: 'Montserrat', sans-serif;
+	--color-blog-accent: #fa991c;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	width: 100%;
+	max-width: 100%;
+	margin: 0;
+	background: var(--color-canvas);
+	color: var(--color-text);
+	font-family: var(--font-body);
+	line-height: 1.4;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: var(--font-heading);
+	font-weight: normal;
+}
+
+.site-header__brand {
+	font-family: var(--font-heading);
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
+
+main a {
+	color: var(--color-link);
+}
+
+code,
+pre {
+	font-family: var(--font-mono);
+}

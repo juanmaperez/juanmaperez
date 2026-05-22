@@ -1,0 +1,15 @@
+<script>
+	import { initCvStagger } from '../../scripts/motion/cv-stagger';
+	import { initCvTypewriter } from '../../scripts/motion/cv-typewriter';
+
+	initCvTypewriter();
+	initCvStagger();
+
+	document.addEventListener(
+		'cv:ready',
+		() => {
+			document.documentElement.classList.add('cv-ready');
+		},
+		{ once: true },
+	);
+</script>

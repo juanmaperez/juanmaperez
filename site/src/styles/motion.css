@@ -1,0 +1,129 @@
+/* Story 7.2 — motion CSS (glitch, typewriter cursor, home reveal) */
+
+@keyframes blink {
+	0% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+@keyframes glitch-skew {
+	0% {
+		transform: skew(0deg);
+	}
+	10% {
+		transform: skew(-2deg);
+	}
+	20% {
+		transform: skew(1deg);
+	}
+	30% {
+		transform: skew(0deg);
+	}
+	100% {
+		transform: skew(0deg);
+	}
+}
+
+.site-header__brand {
+	position: relative;
+	animation: glitch-skew 1s infinite linear alternate-reverse;
+}
+
+.site-header__brand:hover::before,
+.site-header__brand:hover::after {
+	display: block;
+}
+
+.site-header__brand::before,
+.site-header__brand::after {
+	content: attr(data-text);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
+	text-transform: uppercase;
+}
+
+.site-header__brand::before {
+	left: 1px;
+	text-shadow: -0.25px 0 #ff00c1;
+	clip: rect(44px, 450px, 56px, 0);
+}
+
+.site-header__brand::after {
+	left: -1px;
+	text-shadow: -0.45px 0 #00fff9, 0.45px 0.65px #ffffff;
+}
+
+html:not([data-home-ready]) [data-home-block] {
+	visibility: hidden;
+	height: 0;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html:not([data-home-ready]) [data-home-block] {
+		visibility: visible;
+		height: auto;
+		overflow: visible;
+	}
+}
+
+noscript [data-home-block] {
+	visibility: visible !important;
+	height: auto !important;
+	overflow: visible !important;
+}
+
+[data-home-about-p] {
+	opacity: 0;
+	transition: opacity 600ms linear;
+}
+
+[data-home-about-p].is-visible {
+	opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	[data-home-about-p] {
+		opacity: 1;
+	}
+}
+
+[data-home-about-image] {
+	opacity: 0;
+}
+
+[data-home-about-image].is-pinned {
+	position: absolute;
+}
+
+.cv-summary__cursor {
+	animation: blink 500ms infinite;
+}
+
+.cv-summary__cursor--done {
+	display: none;
+	animation: none;
+}
+
+.home-hero__cover {
+	background: var(--color-canvas);
+	position: absolute;
+	inset: 0;
+	z-index: 10;
+	transform-origin: 0 0;
+	pointer-events: none;
+}
+

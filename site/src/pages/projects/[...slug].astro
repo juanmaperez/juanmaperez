@@ -1,0 +1,150 @@
+---
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
+import HomeContact from '../../components/home/HomeContact.astro';
+import ProjectImage from '../../components/projects/ProjectImage.astro';
+import { getSortedProjects, getProjectSlugFromPath } from '../../utils/projectPosts';
+import { render, type CollectionEntry } from 'astro:content';
+import ProjectContactMotion from '../../components/motion/ProjectContactMotion.astro';
+
+export async function getStaticPaths() {
+	const projects = await getSortedProjects();
+	return projects.map((entry) => ({
+		params: { slug: getProjectSlugFromPath(entry.data.path) },
+		props: { entry },
+	}));
+}
+
+interface Props {
+	entry: CollectionEntry<'projects'>;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<ProjectLayout
+	title={entry.data.title}
+	description={entry.data.excerpt}
+	canonicalPath={entry.data.path}
+>
+	<article class="project-detail">
+		<div class="project-detail__container">
+			<h1>{entry.data.title}</h1>
+			<div class="project-detail__excerpt">
+				<p>{entry.data.excerpt}</p>
+			</div>
+			<div class="project-detail__content">
+				<Content />
+			</div>
+			{
+				entry.data.images?.map((item) => (
+					<figure class="project-detail__gallery-item">
+						<ProjectImage src={item.image} alt={item.title} variant="gallery" />
+						<h3>{item.title}</h3>
+					</figure>
+				))
+			}
+		</div>
+	</article>
+	<HomeContact />
+	<ProjectContactMotion />
+</ProjectLayout>
+
+<style>
+	.project-detail {
+		background: #fbf9f3;
+		max-width: 100%;
+		box-sizing: border-box;
+		overflow-x: hidden;
+		color: #323846;
+	}
+	.project-detail__container {
+		width: 60%;
+		max-width: 1000px;
+		margin: 0 auto;
+		padding: 7.5rem 1rem 3rem;
+		box-sizing: border-box;
+	}
+	.project-detail h1 {
+		margin: 0 0 50px;
+		font-size: 140px;
+		line-height: 1;
+		text-transform: uppercase;
+		font-weight: normal;
+		font-family: var(--font-heading);
+	}
+	.project-detail__excerpt {
+		margin: 0 0 30px;
+		font-size: 18px;
+		font-weight: 300;
+		line-height: 1.4;
+	}
+	.project-detail__excerpt p {
+		margin: 0 0 1.5rem;
+	}
+	.project-detail__content {
+		margin: 0 0 60px;
+		font-size: 18px;
+		font-weight: 300;
+		line-height: 1.4;
+	}
+	.project-detail__content :global(p) {
+		margin: 0 0 1.5rem;
+	}
+	.project-detail__content :global(img) {
+		max-width: 100%;
+		height: auto;
+	}
+	.project-detail__content :global(a:focus-visible) {
+		outline: 2px solid currentColor;
+		outline-offset: 2px;
+	}
+	.project-detail__gallery-item {
+		margin: 0 0 5.5rem;
+	}
+	.project-detail__gallery-item :global(img) {
+		display: block;
+		max-width: 100%;
+		height: auto;
+		margin: 0 0 0.5rem;
+	}
+	.project-detail__gallery-item h3 {
+		margin: 0;
+		font-size: 20px;
+		letter-spacing: 1px;
+		text-transform: uppercase;
+		font-weight: normal;
+		font-family: var(--font-heading);
+	}
+	@media (max-width: 1024px) {
+		.project-detail__container {
+			width: 75%;
+		}
+	}
+	@media (max-width: 768px) {
+		.project-detail__container {
+			width: 80%;
+		}
+	}
+	@media (max-width: 1024px) {
+		.project-detail h1 {
+			font-size: 100px;
+		}
+	}
+	@media (max-width: 768px) {
+		.project-detail h1 {
+			font-size: 72px;
+		}
+	}
+	@media (max-width: 480px) {
+		.project-detail__container {
+			width: 90%;
+		}
+		.project-detail h1 {
+			font-size: 48px;
+			margin-bottom: 2rem;
+		}
+		.project-detail__gallery-item {
+			margin-bottom: 3rem;
+		}
+	}
+</style>

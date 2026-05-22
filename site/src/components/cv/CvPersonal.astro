@@ -1,0 +1,74 @@
+---
+import { cvData } from '../../data/cv';
+
+const { personal } = cvData;
+---
+<div class="cv-personal">
+	<img
+		class="cv-personal__photo"
+		data-cv-personal-photo
+		src={personal.image}
+		alt="Juanma Perez"
+		width="200"
+		height="200"
+		loading="eager"
+	/>
+	<div class="cv-personal__data">
+		<p class="cv-personal__name">{personal.name}</p>
+		<p class="cv-personal__role">{personal.role}</p>
+		<p>
+			<a href={`mailto:${personal.email}`}>{personal.email}</a>
+		</p>
+		<p>{personal.phone}</p>
+		<p>
+			<a href={personal.website} target="_blank" rel="noopener noreferrer">{personal.website}</a>
+		</p>
+	</div>
+</div>
+
+<style>
+	.cv-personal {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 1.25rem;
+		max-width: 100%;
+	}
+	.cv-personal__photo {
+		width: 200px;
+		height: 200px;
+		border-radius: 50%;
+		object-fit: cover;
+		flex-shrink: 0;
+	}
+	.cv-personal__data {
+		flex: 1 1 12rem;
+		min-width: 0;
+	}
+	.cv-personal__name {
+		letter-spacing: 1px;
+		font-size: 44px;
+		text-transform: uppercase;
+		margin: 0 0 0.25rem;
+		font-weight: normal;
+		line-height: 1.1;
+	}
+	.cv-personal__role {
+		letter-spacing: 1px;
+		font-size: 36px;
+		text-transform: uppercase;
+		margin: 0 0 20px;
+		color: #b7c8cb;
+		line-height: 1.1;
+		font-weight: normal;
+	}
+	.cv-personal__data p {
+		line-height: 1.4;
+		font-size: 18px;
+		margin: 0 0 0.25rem;
+	}
+	.cv-personal a:focus-visible {
+		outline: 2px solid currentColor;
+		outline-offset: 2px;
+	}
+</style>

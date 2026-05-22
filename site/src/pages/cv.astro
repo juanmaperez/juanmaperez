@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CvPersonal from '../components/cv/CvPersonal.astro';
+import CvSummary from '../components/cv/CvSummary.astro';
+import CvExperiences from '../components/cv/CvExperiences.astro';
+import CvEducation from '../components/cv/CvEducation.astro';
+import CvSkills from '../components/cv/CvSkills.astro';
+import CvMotion from '../components/motion/CvMotion.astro';
+---
+<BaseLayout
+	title="Juanma Perez | CV"
+	description="Personal Website by Juanma Perez. I'm Juanma Perez and here you can find my update resume."
+>
+	<div class="cv-page">
+		<div class="cv-container">
+			<h1>Juanma Perez</h1>
+			<CvPersonal />
+			<CvSummary />
+			<CvExperiences />
+			<CvEducation />
+			<CvSkills />
+		</div>
+	</div>
+	<CvMotion />
+</BaseLayout>
+
+<style>
+	.cv-page {
+		background: #fbf9f3;
+		max-width: 100%;
+		box-sizing: border-box;
+		overflow-x: hidden;
+	}
+	.cv-container {
+		width: min(60%, 100%);
+		max-width: 1000px;
+		margin: 0 auto;
+		padding: 7.5rem 1rem;
+		box-sizing: border-box;
+		color: #323846;
+	}
+	.cv-container h1 {
+		letter-spacing: 1px;
+		font-size: 44px;
+		text-transform: uppercase;
+		margin: 0 0 1.5rem;
+		font-weight: normal;
+	}
+
+	@media print {
+		.cv-page {
+			background: white;
+		}
+		.cv-container {
+			width: 100%;
+			max-width: none;
+			padding: 0;
+			color: black;
+		}
+		.cv-container :global(section),
+		.cv-container :global(.cv-personal),
+		.cv-container :global(.cv-summary) {
+			overflow: visible;
+			break-inside: avoid;
+		}
+		.cv-container :global(ul) {
+			overflow: visible;
+		}
+	}
+</style>

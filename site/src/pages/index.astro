@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HomeHero from '../components/home/HomeHero.astro';
+import HomeAbout from '../components/home/HomeAbout.astro';
+import HomeWorks from '../components/home/HomeWorks.astro';
+import HomeContact from '../components/home/HomeContact.astro';
+import HomeMotion from '../components/motion/HomeMotion.astro';
+---
+<BaseLayout
+	title="Juanma Perez | Home"
+	description="Personal website by Juanma Perez, I'm Juanma Perez, a software engineer from Seville working at Cazoo."
+>
+	<!-- Visible site name on home is fixed header brand (legacy Header h1.web-title). One sr-only h1 for UX-DR2. -->
+	<h1 class="page-home__title">Juanma Perez</h1>
+	<HomeHero />
+	<div data-home-block>
+		<HomeAbout />
+	</div>
+	<div data-home-block>
+		<HomeWorks />
+	</div>
+	<div data-home-block>
+		<HomeContact />
+	</div>
+	<HomeMotion />
+</BaseLayout>
+
+<style>
+	.page-home__title {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+</style>

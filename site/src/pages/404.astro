@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+	title="Juanma Perez | 404"
+	description="Page not found on juanmaperez.dev."
+	canonicalPath="/404"
+	noindex={true}
+>
+	<section class="not-found" aria-labelledby="not-found-heading">
+		<h1 id="not-found-heading">404</h1>
+		<p class="not-found__message">
+			Be focused or <a href="/">go Home</a> or <a href="/blog">browse the blog</a>.
+		</p>
+	</section>
+</BaseLayout>
+
+<style>
+	.not-found {
+		min-height: 100vh;
+		width: 100%;
+		max-width: 100%;
+		box-sizing: border-box;
+		overflow-x: hidden;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		padding: 1rem;
+		background: url('/images/404.jpg') center / cover no-repeat;
+		color: #fff;
+		text-align: center;
+	}
+	.not-found h1 {
+		font-family: var(--font-heading);
+		font-size: 300px;
+		line-height: 1;
+		text-transform: uppercase;
+		margin: 0 0 1rem;
+		font-weight: normal;
+		text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+	}
+	.not-found__message {
+		font-family: var(--font-heading);
+		font-size: 36px;
+		text-transform: uppercase;
+		letter-spacing: 2.2px;
+		margin: 0;
+		text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+	}
+	.not-found a {
+		color: inherit;
+		text-decoration: underline;
+		font-family: inherit;
+	}
+	.not-found a:focus-visible {
+		outline: 2px solid currentColor;
+		outline-offset: 2px;
+	}
+	@media (max-width: 768px) {
+		.not-found h1 {
+			font-size: 160px;
+		}
+		.not-found__message {
+			font-size: 24px;
+		}
+	}
+	@media (max-width: 480px) {
+		.not-found h1 {
+			font-size: 100px;
+		}
+		.not-found__message {
+			font-size: 18px;
+		}
+	}
+</style>

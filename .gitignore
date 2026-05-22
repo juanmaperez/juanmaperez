@@ -54,9 +54,10 @@ typings/
 # dotenv environment variables file
 .env
 
-# gatsby files
+# gatsby files (scoped — do not ignore Astro `site/public/` static assets)
 .cache/
-public
+/public
+legacy/gatsby/public
 
 # Mac files
 .DS_Store
@@ -68,6 +69,13 @@ yarn-error.log
 # Yarn Integrity file
 .yarn-integrity
 
-# locks
+# locks (site/package-lock.json is tracked for Astro CI — `npm ci` in `.github/workflows/deploy-astro-pages.yml`)
 package-lock.json
+!site/package-lock.json
 yarn-lock.json
+
+.cursor/
+
+# Scratch/transient artifacts produced by code-review workflow (review diffs, etc).
+# Outputs live here intentionally; tracked artifacts go in implementation-artifacts/.
+_bmad-output/tmp/

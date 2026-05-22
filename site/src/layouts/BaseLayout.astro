@@ -1,0 +1,70 @@
+---
+// site/src/layouts/BaseLayout.astro
+// Slots:
+//   - head:   optional extra tags after PageHead + Analytics (Stories 6.1, 6.5)
+//   - header: default fill SiteHeader (Story 3.2); pages may override via slot="header"
+//   - default (in <main>): page content
+//   - footer: default fill SiteFooter (Story 3.6); pages may override via slot="footer"
+import { siteConfig } from '../site.config';
+import SiteHeader from '../components/nav/SiteHeader.astro';
+import SiteFooter from '../components/nav/SiteFooter.astro';
+import PageHead from '../components/seo/PageHead.astro';
+import Analytics from '../components/analytics/Analytics.astro';
+import { formatPageTitle, truncateDescription } from '../utils/seo';
+import '../styles/global.css';
+import '../styles/motion.css';
+
+interface Props {
+	title?: string;
+	description?: string;
+	canonicalPath?: string;
+	ogType?: 'website' | 'article';
+	noindex?: boolean;
+}
+
+const { title, description, canonicalPath, ogType, noindex } = Astro.props;
+const resolvedTitle = formatPageTitle(title ?? siteConfig.title);
+const resolvedDescription = truncateDescription(
+	description ?? siteConfig.description,
+);
+const resolvedCanonicalPath = canonicalPath ?? Astro.url.pathname;
+---
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link
+			rel="preload"
+			href="/fonts/mfred/MFred.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin
+		/>
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Questrial&family=Montserrat:wght@400;800&display=swap"
+		/>
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{resolvedTitle}</title>
+		<meta name="description" content={resolvedDescription} />
+		<PageHead
+			title={resolvedTitle}
+			description={resolvedDescription}
+			canonicalPath={resolvedCanonicalPath}
+			ogType={ogType}
+			noindex={noindex}
+		/>
+		<Analytics />
+		<slot name="head" />
+	</head>
+	<body>
+		<slot name="header"><SiteHeader /></slot>
+		<main>
+			<slot />
+		</main>
+		<slot name="footer"><SiteFooter /></slot>
+	</body>
+</html>

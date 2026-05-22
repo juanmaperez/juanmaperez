@@ -1,0 +1,20 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import BlogIndexShell from '../../components/blog/BlogIndexShell.astro';
+import { getSortedPosts, getNumPages, getPostsForPage } from '../../utils/blogPosts';
+
+const posts = await getSortedPosts();
+const numPages = getNumPages(posts.length);
+const pagePosts = getPostsForPage(posts, 1);
+---
+<BlogLayout
+	title="Juanma Perez | Blog"
+	description="Juanma Perez personal blog about javascript and other technologies. Sometimes I also write about bread or recipes"
+>
+	<BlogIndexShell
+		h1="Blog"
+		entries={pagePosts}
+		currentPage={1}
+		numPages={numPages}
+	/>
+</BlogLayout>
