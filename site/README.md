@@ -56,6 +56,8 @@ CI runs `npm run check` (Astro + Zod content schema validation) **before** `npm 
 
 After `npm run build`, CI runs `npm run test:links`, which crawls `dist/**/*.html` for broken root-relative `href`/`src` targets. Run locally: `cd site && npm run build && npm run test:links`.
 
+After deploy, cutover smoke (Story **9.3**) checks live routes + FR21: `BASE=<pages-deploy-url> ../scripts/verify-production-smoke.sh`. Use `https://juanmaperez.dev` only when DNS is configured (script exits **2** with guidance if the host is unreachable).
+
 ### Analytics (GA4, Story 6.5)
 
 Optional GA4 via `PUBLIC_GA_MEASUREMENT_ID` (public `G-…` ID — not a secret API key). Copy `.env.example` to `.env` and set the ID for local builds with analytics, or leave unset for zero third-party scripts.

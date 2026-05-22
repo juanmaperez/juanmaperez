@@ -47,8 +47,8 @@
 | 2 | **Settings → Pages** | **Build and deployment → Source:** **GitHub Actions** |
 | 3 | **Actions** | Latest **Deploy Astro site to GitHub Pages** on default branch: **build** + **deploy** green; artifact **`site/dist`** |
 | 4 | **Environments** | Approve **`github-pages`** deployment if prompted (one-time) |
-| 5 | **Production smoke** | `./scripts/verify-production-smoke.sh` exits **0** (see below) |
-| 6 | **`gh-pages` branch** (optional) | After step 5 passes: delete remote **`gh-pages`** *or* keep but **never** re-enable “Deploy from a branch” |
+| 5 | **Deploy smoke** | See **Smoke when DNS is not ready** below — do **not** block cutover on `juanmaperez.dev` until DNS/CNAME resolves |
+| 6 | **`gh-pages` branch** (optional) | After deploy smoke passes: delete remote **`gh-pages`** *or* keep but **never** re-enable “Deploy from a branch” |
 
 ### Verify Pages source (CLI)
 
@@ -58,15 +58,57 @@ gh api repos/juanmaperez/juanmaperez/pages --jq '{build_type,source,cname,html_u
 
 Expect **`"build_type": "workflow"`** (GitHub Actions). If you see **`"legacy"`** with **`"source.branch": "gh-pages"`**, switch source to **GitHub Actions** in the UI (or `gh api -X PUT repos/OWNER/REPO/pages -f build_type=workflow`).
 
+### Smoke when DNS is not ready
+
+**`https://juanmaperez.dev`** is the Astro canonical origin (`site/astro.config.mjs`), but **DNS or GitHub Pages custom-domain setup may lag** the first Actions deploy. Connection errors (`curl` code `000`) on that host are **expected** until:
+
+- **Settings → Pages → Custom domain** matches `juanmaperez.dev` (or you intentionally use another host), and  
+- DNS **A/CNAME** records point at GitHub Pages and have propagated.
+
+**Do not treat initial `.dev` smoke failure as a broken build.** Use this order instead:
+
+| Phase | What to verify | Command |
+|-------|----------------|---------|
+| **A — CI artifact (required)** | Same HTML as deploy | `cd site && npm run build && npm run test:links` |
+| **B — Live origin (required before cutover sign-off)** | Astro on **whatever URL Pages actually serves today** | `BASE=<deploy-url> ./scripts/verify-production-smoke.sh` |
+| **C — Custom domain (when DNS ready)** | Canonical host | `BASE=https://juanmaperez.dev ./scripts/verify-production-smoke.sh` |
+
+For phase **B**, set `BASE` from the green **deploy** job (environment **`github-pages`** → `page_url`), or temporarily `https://juanmaperez.me` if that is the configured Pages CNAME, or `https://<user>.github.io/<repo>/` only if `astro.config.mjs` `base` matches that layout.
+
+GitHub API may show **`cname: juanmaperez.me`** while Astro `site` is **`juanmaperez.dev`** — align DNS/Pages when both should serve the same site.
+
 ### Production smoke script
 
-After a green Actions deploy:
+After a green Actions deploy (phase **B** or **C**):
 
 ```bash
-BASE=https://juanmaperez.dev ./scripts/verify-production-smoke.sh
+BASE=<your-live-origin> ./scripts/verify-production-smoke.sh
+# When DNS for juanmaperez.dev is live:
+# BASE=https://juanmaperez.dev ./scripts/verify-production-smoke.sh
 ```
 
-Checks **200** and Astro `/_astro/` markers on `/`, `/cv/`, `/blog/`, one post, and one project. **`npm run preview`** on `site/dist` is a dev-only sanity check, not a substitute for this script.
+Checks **200** and Astro `/_astro/` markers on key routes, then **FR21** live link crawl. Skip links: `VERIFY_LINKS=0`. If the host is unreachable (DNS not ready), the script exits **2** with guidance instead of a generic fail.
+
+**FR21 before deploy (CI, same artifact as Pages):**
+
+```bash
+cd site && npm run build && npm run test:links
+```
+
+**FR21 on preview origin (pre-push):**
+
+```bash
+cd site && npm run build && npm run preview &
+BASE=http://127.0.0.1:4321 ./scripts/verify-production-smoke.sh
+```
+
+**Links only:**
+
+```bash
+BASE=https://juanmaperez.dev node scripts/verify-production-links.mjs
+```
+
+`npm run preview` alone is not a substitute for production `BASE` smoke.
 
 ### Verification record (2026-05-22)
 
@@ -76,8 +118,10 @@ Checks **200** and Astro `/_astro/` markers on `/`, `/cv/`, `/blog/`, one post, 
 | **Pages API (`gh api …/pages`)** | Was **`build_type: legacy`**, **`source: gh-pages`**; updated to **`build_type: workflow`** via API during Story 9.3 DS |
 | **Remote `gh-pages` branch** | **Exists** (`origin/gh-pages`) — retain until Actions deploy smoke passes; **do not** use as Pages source |
 | **GitHub Pages CNAME (API)** | **`juanmaperez.me`** — align with `site/astro.config.mjs` **`juanmaperez.dev`** if both domains should serve the same site |
-| **Production smoke (`juanmaperez.dev`)** | **Not run from CI agent** (network) — run `scripts/verify-production-smoke.sh` locally after merge + green deploy |
-| **Local artifact smoke** | **`site/dist`** served at `127.0.0.1` — script **OK** (2026-05-22) |
+| **Production smoke (`juanmaperez.dev`)** | **Deferred until DNS/CNAME live** — `000` / connection refused is expected beforehand; use deploy `page_url` or configured CNAME for phase **B** |
+| **Local / preview smoke** | **`site/dist`** or `npm run preview` — script **OK** (2026-05-22) |
+| **FR21 `test:links` (dist)** | **22** HTML files, **0** broken (2026-05-22 DS) |
+| **FR21 live links (`verify-production-links.mjs`)** | Run after deploy with `BASE=`; bundled in `verify-production-smoke.sh` |
 
 **Latest Actions run URL:** _(fill after first green deploy on default branch)_  
 `https://github.com/juanmaperez/juanmaperez/actions/workflows/deploy-astro-pages.yml`

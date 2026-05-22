@@ -129,3 +129,4 @@ _(Items above moved to **Resolved in Story 9.4**.)_
 - **Story 9.3 closure** — merge `deploy-astro-pages.yml` + `site/` to `master`, green Actions deploy, fill run URL in deployment guide, `BASE=https://juanmaperez.dev ./scripts/verify-production-smoke.sh` → **0**, then mark story **done**.
 - **Delete `origin/gh-pages`** — after production Astro smoke passes.
 - **Pages CNAME `juanmaperez.me` vs Astro `juanmaperez.dev`** — reconcile DNS/Pages custom domain when cutting over.
+- **`juanmaperez.dev` production smoke** — run `verify-production-smoke.sh` when DNS/CNAME live; until then use deploy `page_url` (script exit **2** on unreachable host is expected).

@@ -200,4 +200,5 @@ Add a row here only for routes that need **ScrollMagic / GSAP / React** parity r
 | 2026-05-22 | Story **9.1** — docs/README state **`site/`** + Actions as production; legacy Gatsby deprecated pending **9.2** |
 | 2026-05-22 | Story **9.2** — Gatsby app moved to **`legacy/gatsby/`**; no root `package.json` |
 | 2026-05-22 | Story **9.3** — Pages cutover checklist + `scripts/verify-production-smoke.sh`; merge workflow to default branch before live Actions deploy |
+| 2026-05-22 | Story **9.3** — FR21 live link check: `scripts/verify-production-links.mjs` (bundled in production smoke); CI `test:links` on `site/dist` unchanged |
 | 2026-05-22 | Story **9.4** — repo hygiene: docs tree refresh; prune unused `site/` icons; `source-tree-analysis` / `architecture` production-first |
