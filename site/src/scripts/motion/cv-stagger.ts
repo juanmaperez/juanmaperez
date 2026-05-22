@@ -25,17 +25,21 @@ export function initCvStagger(): void {
 
 		const photo = document.querySelector<HTMLElement>('[data-cv-personal-photo]');
 		if (photo) {
-			gsap.fromTo(
-				photo,
-				{ x: -300, autoAlpha: 0 },
-				{ x: 0, autoAlpha: 1, duration: 0.8, ease: 'power2.out' },
-			);
+			if (prefersReducedMotion()) {
+				gsap.set(photo, { x: 0, autoAlpha: 1 });
+			} else {
+				gsap.fromTo(
+					photo,
+					{ x: -300, autoAlpha: 0 },
+					{ x: 0, autoAlpha: 1, duration: 0.8, ease: 'power2.out' },
+				);
+			}
 		}
 	};
 
-	document.addEventListener('cv:ready', reveal, { once: true });
-
 	if (prefersReducedMotion()) {
 		reveal();
+	} else {
+		document.addEventListener('cv:ready', reveal, { once: true });
 	}
 }

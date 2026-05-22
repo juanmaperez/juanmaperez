@@ -2,7 +2,7 @@
 
 **Story ID:** 7.2  
 **Story key:** `7-2-implement-approved-islands-only`  
-**Status:** review  
+**Status:** done  
 **Epic:** 7 — Motion parity and client islands (where approved)  
 **Depends on:** Story **7.1** (inventory + checklist `same` rows); Epics **3–6** (static routes)  
 **Parallel with:** Story **8.2** (global fonts) — coordinate **header** (7.2 `header-intro.ts` after MFred loads in 8.2, or ship header motion last)  
@@ -213,6 +213,8 @@ Amelia (Senior Software Engineer) — Composer
 - `motion.css`: glitch brand, blink cursor, home/CV reveal helpers.
 - Astro 6: route scripts via `<script>` in `.astro` (not `client:visible` on empty Astro components).
 - Bundle gzip: ~27 KiB GSAP+ScrollTrigger shared; ~47 KiB total on `/` including home modules.
+- **2026-05-22 re-verify (post-8.3):** Motion hooks/DOM selectors still valid; `dist/index.html` loads `HomeMotion` script; `dist/blog/index.html` has no motion JS; gates re-run → 0.
+- **CR 2026-05-22:** Fixed CV `prefers-reduced-motion` double `reveal()` in `cv-stagger.ts`.
 
 ### File List
 
@@ -258,3 +260,33 @@ Amelia (Senior Software Engineer) — Composer
 |------|--------|-------|
 | 2026-05-22 | Story created; ADR-008 spike-first plan; status → ready-for-dev. | create-story |
 | 2026-05-22 | GSAP 3 motion port; gates green; status → review. | Amelia (bmad-dev-story) |
+| 2026-05-22 | Re-verified after 8.3 layout CSS; no code changes required. | DS 7.2 (re-check) |
+| 2026-05-22 | CR: fix CV reduced-motion double-reveal; status → done. | code-review |
+
+---
+
+### Review Findings
+
+_Code review 2026-05-22 — story `7-2-implement-approved-islands-only`. Gates re-run after patch: check/build/test:schema/test:links → 0._
+
+✅ **Approved** — one **patch** applied during review; no `decision-needed` items.
+
+| AC | Verdict |
+|----|---------|
+| AC1 | Cookie gate → hero intro → unlock about/works/contact; CV typewriter → `cv:ready` → stagger; header fade; project contact scroll — narrative order matches legacy intent |
+| AC2 | GSAP 3 + `ScrollTrigger` only; no ScrollMagic / GSAP2 APIs in `site/` |
+| AC3 | Spike folded into `home-main-block` + `home-work-item`; bundle sizes in Dev Agent Record |
+| AC4 | Motion **JS** on `/`, `/cv/`, `/projects/*` + conditional header script; **blog/404** built HTML has no motion module scripts |
+| AC5 | `prefers-reduced-motion` guards in all inits; CSS unhides `[data-home-block]`; noscript fallback |
+| AC6 | No `@astrojs/react`; GSAP CV stagger used |
+| AC7 | Quartet green (re-run post-patch) |
+| AC8 | ~27 KiB gz GSAP shared + ~47 KiB home route total documented |
+
+**patch (fixed in CR):** `cv-stagger.ts` called `reveal()` immediately under `prefers-reduced-motion` **and** again on `cv:ready`, causing a double animation/flicker. Now branches: reduced motion → `reveal()` once; otherwise wait for `cv:ready`. Photo slide uses `gsap.set` when reduced motion.
+
+**defer (informational):**
+
+- Legacy hero intro **first/second** background class swap not ported (single `first.jpg` in Astro); cover + link stagger still run — note for **7.3** visual/motion joint sign-off.
+- Glitch keyframes in `motion.css` load on **all** routes via `BaseLayout` (CSS only); motion **JS** correctly scoped per AC4.
+- `ScrollTrigger` instances are not explicitly `kill()`ed — acceptable for static MPA; document if bfcache revisit in **7.4**.
+- Bundle ~47 KiB gz on `/` — LCP/JS exception rows remain justified; **7.4** should measure against baselines.
