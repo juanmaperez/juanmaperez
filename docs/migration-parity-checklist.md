@@ -68,11 +68,11 @@ Distinct categories from current content: `javascript`, `react`, `recipes`.
 
 | Route / template | Legacy path | Motion parity | Islands (Y/N, names) | LCP/JS ex. | Sign-off | Notes |
 |------------------|-------------|---------------|----------------------|------------|----------|-------|
-| Project | `/projects/umaicha` | | N | | | |
-| Project | `/projects/sainsburys` | | N | | | |
-| Project | `/projects/oysho` | | N | | | |
-| Project | `/projects/colossus-bets` | | N | | | |
-| Project | `/projects/australis` | | N | | | |
+| Project | `/projects/umaicha` | removed | N | | | Story 5.1: static detail; no legacy prev/next; gallery co-located imgs; astro:assets deferred to 5.2 |
+| Project | `/projects/sainsburys` | removed | N | | | Story 5.1: static detail; no legacy prev/next; gallery co-located imgs; astro:assets deferred to 5.2 |
+| Project | `/projects/oysho` | removed | N | | | Story 5.1: static detail; no legacy prev/next; gallery co-located imgs; astro:assets deferred to 5.2 |
+| Project | `/projects/colossus-bets` | removed | N | | | Story 5.1: static detail; no legacy prev/next; gallery co-located imgs; astro:assets deferred to 5.2 |
+| Project | `/projects/australis` | removed | N | | | Story 5.1: static detail; no legacy prev/next; gallery co-located imgs; astro:assets deferred to 5.2 |
 
 ---
 

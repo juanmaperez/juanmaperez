@@ -1,0 +1,138 @@
+---
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
+import HomeContact from '../../components/home/HomeContact.astro';
+import { getSortedProjects, getProjectSlugFromPath } from '../../utils/projectPosts';
+import { resolveProjectAsset } from '../../utils/resolveProjectAsset';
+import { render, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+	const projects = await getSortedProjects();
+	return projects.map((entry) => ({
+		params: { slug: getProjectSlugFromPath(entry.data.path) },
+		props: { entry },
+	}));
+}
+
+interface Props {
+	entry: CollectionEntry<'projects'>;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const galleryItems =
+	entry.data.images?.map((item) => ({
+		title: item.title,
+		src: resolveProjectAsset(entry.id, item.image),
+	})) ?? [];
+---
+<ProjectLayout title={entry.data.title} description={entry.data.excerpt}>
+	<article class="project-detail">
+		<div class="project-detail__container">
+			<h1>{entry.data.title}</h1>
+			<div class="project-detail__excerpt">
+				<p>{entry.data.excerpt}</p>
+			</div>
+			<div class="project-detail__content">
+				<Content />
+			</div>
+			{
+				galleryItems.map((item) =>
+					item.src ? (
+						<figure class="project-detail__gallery-item">
+							<img src={item.src} alt={item.title} loading="lazy" />
+							<h3>{item.title}</h3>
+						</figure>
+					) : null,
+				)
+			}
+		</div>
+	</article>
+	<HomeContact />
+</ProjectLayout>
+
+<style>
+	.project-detail {
+		background: #fbf9f3;
+		max-width: 100%;
+		box-sizing: border-box;
+		overflow-x: hidden;
+		color: #323846;
+	}
+	.project-detail__container {
+		width: 60%;
+		max-width: 1000px;
+		margin: 0 auto;
+		padding: 7.5rem 1rem 3rem;
+		box-sizing: border-box;
+	}
+	.project-detail h1 {
+		margin: 0 0 3rem;
+		font-size: clamp(3rem, 18vw, 8.75rem);
+		line-height: 1;
+		text-transform: uppercase;
+		font-weight: 700;
+	}
+	.project-detail__excerpt {
+		margin: 0 0 2rem;
+		font-size: 1.125rem;
+		font-weight: 300;
+		line-height: 1.4;
+	}
+	.project-detail__excerpt p {
+		margin: 0 0 1.5rem;
+	}
+	.project-detail__content {
+		margin: 0 0 3.75rem;
+		font-size: 1.125rem;
+		font-weight: 300;
+		line-height: 1.4;
+	}
+	.project-detail__content :global(p) {
+		margin: 0 0 1.5rem;
+	}
+	.project-detail__content :global(img) {
+		max-width: 100%;
+		height: auto;
+	}
+	.project-detail__content :global(a:focus-visible) {
+		outline: 2px solid currentColor;
+		outline-offset: 2px;
+	}
+	.project-detail__gallery-item {
+		margin: 0 0 5.5rem;
+	}
+	.project-detail__gallery-item img {
+		display: block;
+		max-width: 100%;
+		height: auto;
+		margin: 0 0 0.5rem;
+	}
+	.project-detail__gallery-item h3 {
+		margin: 0;
+		font-size: 1.25rem;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		font-weight: 700;
+	}
+	@media (max-width: 1024px) {
+		.project-detail__container {
+			width: 75%;
+		}
+	}
+	@media (max-width: 768px) {
+		.project-detail__container {
+			width: 80%;
+		}
+	}
+	@media (max-width: 480px) {
+		.project-detail__container {
+			width: 90%;
+		}
+		.project-detail h1 {
+			margin-bottom: 2rem;
+		}
+		.project-detail__gallery-item {
+			margin-bottom: 3rem;
+		}
+	}
+</style>

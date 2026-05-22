@@ -1,30 +1,15 @@
 ---
 // site/src/components/home/HomeWorks.astro
-import { getCollection } from 'astro:content';
+import { getSortedProjects } from '../../utils/projectPosts';
+import { resolveProjectAsset } from '../../utils/resolveProjectAsset';
 
-const thumbModules = import.meta.glob<{ default: { src: string } }>(
-	'../../content/projects/**/*.{png,jpg}',
-	{ eager: true },
-);
-
-function resolveThumb(projectId: string, thumbnail: string): string | undefined {
-	const needle = thumbnail.replace('./', '');
-	const folder = projectId.split('/')[0];
-	const key = Object.keys(thumbModules).find(
-		(k) => k.includes(`/${folder}/`) && k.endsWith(`/${needle}`),
-	);
-	return key ? thumbModules[key].default.src : undefined;
-}
-
-const projects = (await getCollection('projects')).sort(
-	(a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
-);
+const projects = await getSortedProjects();
 ---
 <section class="home-works" aria-labelledby="home-works-heading">
 	<h2 id="home-works-heading" class="home-works__title">projects</h2>
 	<ul class="home-works__list">
 		{projects.map((project) => {
-			const thumbSrc = resolveThumb(project.id, project.data.thumbnail);
+			const thumbSrc = resolveProjectAsset(project.id, project.data.thumbnail);
 			return (
 				<li class="home-works__item">
 					<a class="home-works__link" href={project.data.path}>
