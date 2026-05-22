@@ -5,7 +5,7 @@ import type { ImageMetadata } from 'astro';
 interface Props {
 	src: ImageMetadata;
 	alt: string;
-	variant: 'listing' | 'gallery';
+	variant: 'listing' | 'gallery' | 'home-work';
 	class?: string;
 }
 
@@ -19,7 +19,16 @@ const gallery = {
 	widths: [640, 1000, 1600] as const,
 	sizes: '(max-width: 1000px) 100vw, 1000px',
 };
-const cfg = variant === 'listing' ? listing : gallery;
+const homeWork = {
+	widths: [600, 1200] as const,
+	sizes: '600px',
+};
+const cfg =
+	variant === 'listing'
+		? listing
+		: variant === 'home-work'
+			? homeWork
+			: gallery;
 ---
 <Image
 	src={src}

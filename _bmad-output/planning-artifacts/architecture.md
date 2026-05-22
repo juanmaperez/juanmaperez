@@ -72,9 +72,9 @@ This document is the **technical single source of truth** for replatforming the 
 
 ### ADR-005 — Styling: **scoped `.astro` + ported global CSS + optional Sass**
 
-- **Decision:** Phase 1: migrate **critical global styles** (`main.css`, mixins) into `src/styles/` and component-scoped CSS; avoid `styled-components` unless trapped inside an approved React island.  
-- **Rationale:** Remove runtime CSS-in-JS from default path; reduce bundle.  
-- **Consequences:** Visual diff per template during migration.
+- **Decision:** Phase 1: migrate **critical global styles** (`main.css`, mixins) into `src/styles/` and component-scoped CSS; **port styled-components rules verbatim** (layout, image boxes, breakpoints) into Astro `<style>` blocks — do not re-derive with generic flex/`clamp()` only. Avoid **runtime** styled-components unless inside an approved React island.  
+- **Rationale:** Remove CSS-in-JS runtime; preserve **visual** parity from legacy `*View = styled.div` definitions (Epic **8.3**, FR22). Home **workItem** / **about-block** image sizing is CSS-driven, not `gatsby-image`.  
+- **Consequences:** Story **8.3** owns per-template port; fonts in **8.2** alone are insufficient for home/projects look.
 
 ### ADR-006 — Images: **`astro:assets`** (or documented Astro image pipeline)
 

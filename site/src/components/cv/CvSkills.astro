@@ -1,7 +1,7 @@
 ---
 import { cvData } from '../../data/cv';
 ---
-<section class="cv-skills" aria-labelledby="cv-skills-heading">
+<section class="cv-skills" data-cv-reveal aria-labelledby="cv-skills-heading">
 	<h2 id="cv-skills-heading">Skills</h2>
 	<ul>
 		{cvData.skills.map((skill) => (
@@ -16,7 +16,8 @@ import { cvData } from '../../data/cv';
 		max-width: 100%;
 	}
 	.cv-skills h2 {
-		font-size: 2.75rem;
+		font-size: 44px;
+		font-weight: normal;
 		width: 100%;
 		border-bottom: 1px solid #b7c8cb;
 		text-transform: uppercase;
@@ -32,7 +33,7 @@ import { cvData } from '../../data/cv';
 	}
 	.cv-skills li {
 		letter-spacing: 1px;
-		font-size: 1.125rem;
+		font-size: 18px;
 		margin-bottom: 1rem;
 		line-height: 1.4;
 	}

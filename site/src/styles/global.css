@@ -21,6 +21,7 @@
 	--font-mono: Consolas, Menlo, Monaco, 'source-code-pro', 'Courier New', monospace;
 	/* Blog teaser titles — Story 8.3 applies sizes; token ready here */
 	--font-blog-title: 'Montserrat', sans-serif;
+	--color-blog-accent: #fa991c;
 }
 
 *,

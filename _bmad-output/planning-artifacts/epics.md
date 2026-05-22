@@ -45,7 +45,7 @@ FR18: Maintainer can deploy via **documented CI pipeline** without manual FTP.
 FR19: For scroll/timeline-heavy routes, visitor completes the same primary narrative per **migration parity checklist**; motion same/simplified/removed and approved.  
 FR20: Visitor can reach **at least one primary contact path** from **home** or **global navigation**.  
 FR21: Visitor does not hit **broken internal links** on MVP routes (release checklist: automated or manual).  
-FR22: Visitor experiences **typography, color, and spacing** per **migration parity checklist** Visual parity (`same` / `simplified` / `removed` / `n/a`); Epic 8 restores legacy brand fonts and styling where feasible.
+FR22: Visitor experiences **typography, color, spacing, layout, and image presentation** per checklist Visual parity; Epic 8 restores legacy brand CSS including **styled-components** home/project rules (8.2 fonts, 8.3 layout/images).
 
 ### Non-functional requirements
 
@@ -146,9 +146,9 @@ Search engines and social previews work; **redirects** and **internal links** ar
 Where legacy UX demands it, visitors still complete the **narrative** with **controlled motion** and **bounded JS** per checklist.  
 **FRs covered:** FR19 — **NFRs:** NFR-P1 (regression check), NFR-P2 (islands)  
 
-### Epic 8: Typography and visual design parity
-Visitors see the **legacy brand** (fonts, palette, spacing, template styling) on the Astro site, not a generic system-font approximation.  
-**FRs covered:** FR22 — **NFRs:** NFR-V1 (font loading), NFR-A1 (contrast after token changes) — **UX-DR:** UX-DR5  
+### Epic 8: Typography, layout, and visual design parity
+Visitors see the **legacy brand** on the Astro site: fonts, palette, **styled-components layout**, and **image crop/scale** (especially home), not a generic system-font + flex approximation.  
+**FRs covered:** FR22 (with **FR13** for asset pipeline only) — **NFRs:** NFR-V1, NFR-A1 — **UX-DR:** UX-DR4–5  
 
 ---
 
@@ -724,9 +724,9 @@ So that **NFR-P1** and **NFR-P2** still pass after islands.
 
 ---
 
-## Epic 8: Typography and visual design parity
+## Epic 8: Typography, layout, and visual design parity
 
-**Goal:** Checklist-driven **FR22** delivery—legacy fonts and CSS reconciled with the static Astro site without a full redesign.
+**Goal:** Checklist-driven **FR22** delivery—legacy fonts, **styled-components layout**, and **image presentation** reconciled with the static Astro site without a full redesign.
 
 ### Story 8.1: Legacy typography and styling inventory
 
@@ -773,13 +773,15 @@ So that **FR22** is satisfied route by route.
 
 **Acceptance criteria:**
 
-**Given** global tokens from Story 8.2  
-**When** home, CV, blog (list/post/teaser), projects, header, and 404 are updated per inventory  
-**Then** template-specific rules match inventory **`same`** rows (e.g. blog teaser **Montserrat** titles, home hero/contact scale, CV section heading sizes, header glitch/brand styling where inventory marks **`same`**)  
-**And** checklist **Visual parity** and **Sign-off** columns are updated; mandatory rows signed before cutover (with Epic 7 motion sign-off)  
+**Given** global tokens from Story 8.2 and inventory **`component-css`** / **`layout-css`** rows  
+**When** templates are updated by porting legacy **styled-components** rules into scoped Astro `<style>` (or shared `site/src/styles/home.css` if DRY)  
+**Then** **home** matches legacy presentation for: hero link position/size; about **girl.jpg** at **32vw** fixed/absolute positioning and **6vw** intro copy with legacy padding; works cards **~600×900** cover crops with overflow clip and MFred rotated titles; contact **MFred** display scale (**400px** month/year class)  
+**And** blog teasers, CV sections, project hero, header brand, and 404 match inventory **`same`** rows  
+**And** side-by-side smoke (legacy build or screenshots vs `site` dev) documented for **home `/`** in Dev Agent Record  
+**And** checklist **Visual parity** and **Sign-off** columns updated; mandatory rows signed before cutover  
 **And** no horizontal scroll regression on FR15 smoke routes
 
-**Maps to:** FR22, FR15, UX-DR4–5.
+**Maps to:** FR22, FR15, UX-DR4–5; ADR-005.
 
 ---
 

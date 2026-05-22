@@ -5,19 +5,30 @@ import { getSortedProjects } from '../../utils/projectPosts';
 
 const projects = await getSortedProjects();
 ---
-<section class="home-works" aria-labelledby="home-works-heading">
-	<h2 id="home-works-heading" class="home-works__title">projects</h2>
+<section class="home-works block-works" data-home-works aria-labelledby="home-works-heading">
+	<h2 id="home-works-heading" class="home-works__title section-title">projects</h2>
 	<ul class="home-works__list">
-		{projects.map((project) => (
-			<li class="home-works__item">
-				<a class="home-works__link" href={project.data.path}>
-					<ProjectImage
-						src={project.data.thumbnail}
-						alt={project.data.title}
-						variant="listing"
-					/>
-					<span class="home-works__name">{project.data.title}</span>
-				</a>
+		{projects.map((project, index) => (
+			<li
+				class:list={[
+					'home-works__item',
+					index % 2 !== 0 && 'home-works__item--left',
+				]}
+				data-work-item
+				data-work-index={index}
+			>
+				<div class="home-works__container work-container" data-work-wrapper>
+					<a class="home-works__link image-wrapper" href={project.data.path}>
+						<span class="home-works__image image">
+							<ProjectImage
+								src={project.data.thumbnail}
+								alt={project.data.title}
+								variant="home-work"
+							/>
+						</span>
+						<span class="home-works__chip title">{project.data.title}</span>
+					</a>
+				</div>
 			</li>
 		))}
 	</ul>
@@ -25,50 +36,162 @@ const projects = await getSortedProjects();
 
 <style>
 	.home-works {
-		background: #fbf9f3;
+		position: relative;
+		width: 100%;
 		max-width: 100%;
+		min-height: 100vh;
+		background: #fbf9f3;
+		padding: 300px 200px 100px;
 		box-sizing: border-box;
-		padding: 2rem 1rem;
 		overflow: hidden;
 	}
 	.home-works__title {
-		margin: 0 0 1.5rem;
-		font-size: clamp(2rem, 12vw, 6rem);
+		position: absolute;
+		font-size: 20vw;
+		top: 160px;
+		left: 120px;
 		text-transform: uppercase;
+		font-family: var(--font-heading);
 		color: #b7c8cb;
+		z-index: 10;
+		margin: 0;
 		line-height: 1;
 	}
 	.home-works__list {
 		list-style: none;
 		margin: 0;
 		padding: 0;
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr));
-		gap: 1.5rem;
-		max-width: 100%;
-		box-sizing: border-box;
 	}
 	.home-works__item {
-		min-width: 0;
+		width: 100%;
+		height: 1000px;
+		display: flex;
+		justify-content: flex-end;
+		position: relative;
+	}
+	.home-works__item--left {
+		justify-content: flex-start;
+	}
+	.home-works__container {
+		width: 600px;
+		height: 900px;
+		position: absolute;
+		max-height: 100%;
+		overflow: hidden;
 	}
 	.home-works__link {
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
+		display: block;
+		position: relative;
+		width: 600px;
+		height: 900px;
 		color: #323846;
 		text-decoration: none;
-		max-width: 100%;
 	}
-	.home-works__link :global(img) {
+	.home-works__image {
+		z-index: 6;
+		top: 0;
+		position: absolute;
+		width: 600px;
+		height: 900px;
+		overflow: hidden;
+	}
+	.home-works__image :global(img) {
 		display: block;
-		max-width: 100%;
-		height: auto;
+		position: relative;
+		top: -150px;
+		width: 600px;
+		height: 1100px;
+		max-width: none;
+		object-fit: cover;
+		object-position: center center;
+		will-change: transform;
 	}
-	.home-works__name {
-		font-weight: 700;
+	.home-works__chip {
+		z-index: 5;
+		position: absolute;
+		transform: rotate(-90deg);
+		width: 180px;
+		bottom: 80px;
+		padding: 5px 10px;
+		font-size: 20px;
+		letter-spacing: 1px;
+		font-weight: lighter;
+		color: #666;
+		text-transform: uppercase;
+		background: #fbf9f3;
+		font-family: var(--font-heading);
 	}
 	.home-works__link:focus-visible {
 		outline: 2px solid currentColor;
 		outline-offset: 2px;
+	}
+	.home-works__item:not(.home-works__item--left) .home-works__chip {
+		right: -88px;
+		left: auto;
+	}
+	.home-works__item--left .home-works__chip {
+		left: -88px;
+		right: auto;
+	}
+	@media (max-width: 1300px) {
+		.home-works {
+			padding: 300px 120px 100px;
+		}
+		.home-works__item {
+			height: 900px;
+		}
+		.home-works__container,
+		.home-works__link,
+		.home-works__image {
+			width: 500px;
+			height: 700px;
+		}
+		.home-works__image :global(img) {
+			width: 500px;
+			height: 900px;
+		}
+	}
+	@media (max-width: 1024px) {
+		.home-works {
+			padding: 200px 90px 100px;
+		}
+		.home-works__title {
+			top: 60px;
+			left: 50px;
+		}
+	}
+	@media (max-width: 768px) {
+		.home-works {
+			padding: 150px 60px 100px;
+		}
+		.home-works__title {
+			top: 40px;
+			left: 50px;
+			font-size: 22vw;
+		}
+	}
+	@media (max-width: 480px) {
+		.home-works {
+			padding: 100px 25px 100px;
+		}
+		.home-works__title {
+			top: 30px;
+			left: 10px;
+			font-size: 30vw;
+		}
+		.home-works__item {
+			height: 600px;
+		}
+		.home-works__container,
+		.home-works__link,
+		.home-works__image {
+			width: 350px;
+			height: 475px;
+		}
+		.home-works__image :global(img) {
+			top: -110px;
+			width: 350px;
+			height: 600px;
+		}
 	}
 </style>

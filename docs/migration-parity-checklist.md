@@ -50,9 +50,9 @@ Audit source: repo-root Gatsby `src/` + `gatsby-node.js` (not `site/`). **Build 
 | `/404` | `src/pages/404.js` | styled-components | Static full-viewport background | `n/a` | n/a | N | Story 3.5 static 404 |
 | Build | `gatsby-node.js` | webpack null-loader, aliases | Strip ScrollMagic from SSR HTML; resolve GSAP min paths | `n/a` | n/a | N | Mirror in 7.2: client-only boundaries |
 
-**Astro baseline (7.1):** `site/` has **no** `client:*` directives and **no** `@astrojs/react` — motion not implemented yet; static MVP from Epics 3–5.
+**Astro baseline (7.2 shipped):** GSAP 3 + ScrollTrigger via route-scoped Astro `<script>` modules (`HomeMotion`, `CvMotion`, `ProjectContactMotion`, conditional header script). **No** `@astrojs/react`. Blog/404: no motion JS. **Islands approved** still **N** until **7.3**.
 
-**Visual (FR22):** Story **8.1** inventory below; Story **8.2** ships `site/src/styles/global.css` (Questrial body, MFred headings, palette tokens, Montserrat var for blog). **8.3** per-template reconciliation and sign-off.
+**Visual (FR22):** Story **8.1** inventory below; Story **8.2** ships global fonts/tokens. **8.3** ports **styled-components layout** and **image presentation** (home priority: about image **32vw**, works **600×900** cover crops, contact display type)—not fonts alone.
 
 ---
 
@@ -65,10 +65,10 @@ Audit source: repo-root Gatsby `src/styles/`, `src/components/`, `src/templates/
 | **Global** | `src/styles/main.css` | `*` Questrial; `h1–h6` MFred; canvas `#fbf9f3`; links `#1c768f` (`--secondaryColor`); code Consolas stack | `site/src/styles/global.css` + `BaseLayout.astro` | **8.2 done** — global tokens + fonts | `global-token` | same | Amatic SC deferred unless 8.3 needs it |
 | **Fonts** | `main.css` `@import` + `@font-face` | Google **Questrial**, **Amatic SC**; self-host **MFred** (`src/assets/fonts/mfred/*`) | `site/public/fonts/mfred/` + Google Fonts links | **8.2 done** | `global-token` | same | Montserrat loaded for 8.3 blog teasers |
 | **Header (global)** | `header.js`, `mixins.scss` | Brand **MFred** 24px uppercase; nav **Questrial**; glitch mixin on brand | `SiteHeader.astro` | `font-weight: 700` only; no MFred/glitch | `global-token` + `component-css` | same | Glitch tied to Epic 7 motion/CSS port |
-| **Home hero** | `main-block.js` | Full viewport hero; `#323846` links 18px Questrial; cover `#fbf9f3` | `HomeHero.astro` | `min-height: 50vh` vs 100vh; inherits system font | `component-css` | same | Background image path parity OK |
-| **Home about** | `about-block.js` | Section typography via global + image layout | `HomeAbout.astro` | Clamp sizes; no Questrial/MFred | `component-css` | same | Palette `#fbf9f3` / `#323846` matched |
-| **Home works** | `works-block.js`, `workItem.js` | **MFred** work titles; parallax layout (motion 7.2) | `HomeWorks.astro` | System sans titles | `component-css` | same | |
-| **Home contact** | `contact-block.js` | **MFred** large type; band `#b7c8cb` | `HomeContact.astro` | Clamp scales close; MFred missing | `component-css` | same | |
+| **Home hero** | `main-block.js` (`MainBlockView`) | `100vh`/`100vw`; `background-attachment: fixed`; dual bg swap `first`/`second.jpg`; links `bottom: 50px; right: 120px; font-size: 18px` | `HomeHero.astro` | Single bg; no cover wipe; link `bottom: 1rem; right: 1rem` | `layout-css` | same | Motion: 7.2 cover timeline; **visual**: link position + bg swap CSS |
+| **Home about** | `about-block.js` (`AboutBlockView`) | `.intro-text` **75%** width, **6vw** font, `padding: 100vh 120px 50px`; `p` **mix-blend-mode: difference**, `margin-bottom: 100px`; `.image` **32vw** `fixed` `right: 120px` (60–70vw mobile) | `HomeAbout.astro` | **8.3 done** — legacy layout ported | `layout-css` | same | 7.2 `data-home-about*` hooks preserved |
+| **Home works** | `workItem.js` (`WorkItemView`) | Section **1000px** tall; card **600×900**; `.image` **1100px** height **`background-size: cover`** + **top: -150px** crop; rotated **MFred** title on `#fbf9f3` chip | `HomeWorks.astro` | **8.3 done** — cover box + chip | `layout-css` | same | 7.2 parallax on `.home-works__image img` |
+| **Home contact** | `contact-block.js` (`ContactBlockView`) | `100vh`; cover `#B7C8Cb`; `.month`/`.year` **400px MFred**; right column **32px** | `HomeContact.astro` | **8.3 done** — two-column flex + display type | `layout-css` | same | |
 | **CV page** | `cv.js`, `cv/*.js` | Section `h2` **44px** MFred; roles **22px**; body **18px**; accent `#b7c8cb` | `cv.astro`, `Cv*.astro` | rem clamps ≈ sizes; wrong families | `global-token` + `component-css` | same | |
 | **Blog teaser** | `post-item.js` | Title **Montserrat** 26px/800; date `var(--primaryColor)` | `BlogPostTeaser.astro` | `1.25rem` system sans | `component-css` | same | Montserrat via Google Fonts in 8.2/8.3 |
 | **Blog post** | `postTemplate.js` | Title **Montserrat**; body Questrial; inline `h2` MFred | `blog/[...slug].astro` | System fonts; code `ui-monospace` not Consolas | `global-token` + `component-css` | same | Shiki theme ≠ Prism colors (FR14 **simplified** for code colors only) |
@@ -78,7 +78,21 @@ Audit source: repo-root Gatsby `src/styles/`, `src/components/`, `src/templates/
 | **Footer (global)** | `main.css` / layout | Questrial; contact in global flow | `SiteFooter.astro` | Border `#b7c8cb` OK; fonts system | `global-token` | same | |
 | **Prism / code (global)** | `main.css` gatsby-remark-prismjs rules | Consolas + dark pre `#011627` | Shiki `github-light` in `astro.config.mjs` | Different theme | `n/a` | simplified | FR14 functional parity; not FR22 blocker |
 
-**Astro baseline (8.2):** `site/src/styles/global.css` + MFred in `site/public/fonts/mfred/`; per-component scoped CSS remains for template-specific rules (8.3).
+**Astro baseline (8.3):** Global tokens/fonts (**8.2**) + per-template layout CSS ported from legacy styled-components (home about/works/contact/hero, CV, blog, projects, 404, header).
+
+### Home layout & image presentation (Story 8.3 — FR22)
+
+Port rules from legacy **styled-components** into Astro `<style>` (coordinate with Epic **7.2** motion on same DOM hooks):
+
+| Block | Legacy CSS to port | Astro file |
+|-------|-------------------|------------|
+| About image | `width: 32vw`; `position: fixed`; `right: 120px`; `bottom: 10px`; breakpoints 60vw / 70vw | `HomeAbout.astro` |
+| About copy | `.intro-text` width **75%**; **6vw** font; vertical padding rhythm; optional `mix-blend-mode` on `p` | `HomeAbout.astro` |
+| Works card | `.work-container` **600×900**; `.image` cover **1100px** height, negative `top`, `overflow: hidden` | `HomeWorks.astro` (+ `ProjectImage` or `background-image`) |
+| Hero chrome | `.main-list` position **right: 120px; bottom: 50px**; `font-size: 18px` | `HomeHero.astro` |
+| Contact display | `.month`/`.year` **400px** MFred, `.right` **32px** | `HomeContact.astro` |
+
+**Do not** rely on `clamp()`-only approximations where legacy used fixed vw/px layout for brand look.
 
 ---
 
@@ -101,9 +115,9 @@ Source of truth: `site/src/config/redirects.ts` (built from content `path` front
 
 | Route / template | Legacy path | Motion parity | Visual parity | Islands (Y/N, names) | LCP/JS ex. | Sign-off | Notes |
 |------------------|-------------|---------------|---------------|----------------------|------------|----------|-------|
-| Home | `/` | same | same | N | Y | | 3.3 interim CSS; **7.1** motion + **8.1** fonts — inventory §7.1 / §8.1 |
-| CV | `/cv/` | same | same | N | Y | | 3.4 interim; **8.1** Questrial/MFred section scale |
-| Not found | `/404/` or host 404 | n/a | same | N | N | | 3.5 static; **8.1** MFred display type |
+| Home | `/` | same | same | N | Y | 8.3 DS 2026-05-22 | Layout CSS ported (§ Home layout); **7.2** motion; **7.3** PO sign-off pending |
+| CV | `/cv/` | same | same | N | Y | 8.3 DS 2026-05-22 | 44px/22px/18px MFred scale; **7.3** PO sign-off pending |
+| Not found | `/404/` or host 404 | n/a | same | N | N | 8.3 DS 2026-05-22 | MFred 300px / 36px display type |
 
 ---
 
@@ -113,7 +127,7 @@ Legacy `gatsby-node.js`: first page `/blog`, further pages `/blog/page/{n}` (1-b
 
 | Route / template | Legacy path | Motion parity | Visual parity | Islands (Y/N, names) | LCP/JS ex. | Sign-off | Notes |
 |------------------|-------------|---------------|---------------|----------------------|------------|----------|-------|
-| Blog list page 1 | `/blog` | n/a | same | N | N | | 4.1 static; **8.1** Montserrat teasers + global tokens |
+| Blog list page 1 | `/blog` | n/a | same | N | N | 8.3 DS 2026-05-22 | Montserrat 26px/800 teasers |
 | Blog list page 2+ | `/blog/page/2` (add rows if `ceil(posts/12) > 1`) | n/a | same | N | N | | 4.2 pagination; inherits blog list styling |
 
 ---
@@ -152,7 +166,7 @@ Distinct categories from current content: `javascript`, `react`, `recipes`.
 
 | Route / template | Legacy path | Motion parity | Visual parity | Islands (Y/N, names) | LCP/JS ex. | Sign-off | Notes |
 |------------------|-------------|---------------|---------------|----------------------|------------|----------|-------|
-| Project | `/projects/umaicha` | same | same | N | Y | | 5.1/5.2 static; **8.1** MFred hero + body scale |
+| Project | `/projects/umaicha` | same | same | N | Y | 8.3 DS 2026-05-22 | MFred 140px hero; 18px body |
 | Project | `/projects/sainsburys` | same | same | N | Y | | 5.2 images |
 | Project | `/projects/oysho` | same | same | N | Y | | 5.2 images |
 | Project | `/projects/colossus-bets` | same | same | N | Y | | 5.2 images |
@@ -180,3 +194,4 @@ Add a row here only for routes that need **ScrollMagic / GSAP / React** parity r
 | 2026-05-22 | Story 7.1 — legacy animation inventory; Home/CV/projects → **same**; blog → **n/a** |
 | 2026-05-22 | Story 8.1 — typography/styling inventory; **Visual parity** column; target **same** (system-font interim) |
 | 2026-05-22 | Story 8.2 — `global.css`, MFred/Questrial/Montserrat loading, design tokens |
+| 2026-05-22 | EP — expand FR22/Epic 8: home **layout-css** + image presentation; 8.3 scope (not fonts only) |

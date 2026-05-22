@@ -87,6 +87,8 @@ So that **FR22** gaps are data-driven.
 
 Reproduce **legacy typography and styling where possible** — same default as Epic 7 motion: checklist target **`same`**, not “system font MVP is final.”
 
+**EP 2026-05-22 (follow-up):** **8.2 fonts alone do not fix home.** Missing **styled-components** layout (image **32vw**, works **cover boxes**, contact **display type**) is **Story 8.3** — see checklist § *Home layout & image presentation*.
+
 ---
 
 ## Dev notes

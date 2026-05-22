@@ -60,7 +60,7 @@ So that **FR22** brand recognition holds across routes.
 
 8. **Given** scoped component CSS from Epics 3–5  
    **When** globals land  
-   **Then** remove redundant `font-family` overrides that fight globals only where they duplicate body stack; **do not** fully reconcile per-template sizes (Story **8.3**).
+   **Then** remove redundant `font-family` overrides that fight globals only where they duplicate body stack; **do not** fully reconcile per-template **layout, image crops, or styled-components positioning** (Story **8.3** — home about/works/contact are explicit scope).
 
 ---
 

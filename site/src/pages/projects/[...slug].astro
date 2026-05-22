@@ -4,6 +4,7 @@ import HomeContact from '../../components/home/HomeContact.astro';
 import ProjectImage from '../../components/projects/ProjectImage.astro';
 import { getSortedProjects, getProjectSlugFromPath } from '../../utils/projectPosts';
 import { render, type CollectionEntry } from 'astro:content';
+import ProjectContactMotion from '../../components/motion/ProjectContactMotion.astro';
 
 export async function getStaticPaths() {
 	const projects = await getSortedProjects();
@@ -45,6 +46,7 @@ const { Content } = await render(entry);
 		</div>
 	</article>
 	<HomeContact />
+	<ProjectContactMotion />
 </ProjectLayout>
 
 <style>
@@ -63,15 +65,16 @@ const { Content } = await render(entry);
 		box-sizing: border-box;
 	}
 	.project-detail h1 {
-		margin: 0 0 3rem;
-		font-size: clamp(3rem, 18vw, 8.75rem);
+		margin: 0 0 50px;
+		font-size: 140px;
 		line-height: 1;
 		text-transform: uppercase;
-		font-weight: 700;
+		font-weight: normal;
+		font-family: var(--font-heading);
 	}
 	.project-detail__excerpt {
-		margin: 0 0 2rem;
-		font-size: 1.125rem;
+		margin: 0 0 30px;
+		font-size: 18px;
 		font-weight: 300;
 		line-height: 1.4;
 	}
@@ -79,8 +82,8 @@ const { Content } = await render(entry);
 		margin: 0 0 1.5rem;
 	}
 	.project-detail__content {
-		margin: 0 0 3.75rem;
-		font-size: 1.125rem;
+		margin: 0 0 60px;
+		font-size: 18px;
 		font-weight: 300;
 		line-height: 1.4;
 	}
@@ -106,10 +109,11 @@ const { Content } = await render(entry);
 	}
 	.project-detail__gallery-item h3 {
 		margin: 0;
-		font-size: 1.25rem;
-		letter-spacing: 0.05em;
+		font-size: 20px;
+		letter-spacing: 1px;
 		text-transform: uppercase;
-		font-weight: 700;
+		font-weight: normal;
+		font-family: var(--font-heading);
 	}
 	@media (max-width: 1024px) {
 		.project-detail__container {
@@ -121,11 +125,22 @@ const { Content } = await render(entry);
 			width: 80%;
 		}
 	}
+	@media (max-width: 1024px) {
+		.project-detail h1 {
+			font-size: 100px;
+		}
+	}
+	@media (max-width: 768px) {
+		.project-detail h1 {
+			font-size: 72px;
+		}
+	}
 	@media (max-width: 480px) {
 		.project-detail__container {
 			width: 90%;
 		}
 		.project-detail h1 {
+			font-size: 48px;
 			margin-bottom: 2rem;
 		}
 		.project-detail__gallery-item {

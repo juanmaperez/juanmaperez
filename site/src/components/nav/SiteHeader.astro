@@ -3,6 +3,10 @@
 import { siteConfig } from '../../site.config';
 
 const currentPath = Astro.url.pathname;
+const enableHeaderMotion =
+	currentPath === '/' ||
+	currentPath.startsWith('/cv') ||
+	currentPath.startsWith('/projects');
 const isPageLink = (href: string): boolean =>
 	href.startsWith('/') && !href.startsWith('//');
 const isCurrent = (href: string): boolean => {
@@ -12,12 +16,17 @@ const isCurrent = (href: string): boolean => {
 };
 ---
 <header class="site-header">
-	<a class="site-header__brand" href="/">{siteConfig.title}</a>
+	<a
+		class="site-header__brand web-title"
+		href="/"
+		data-text={siteConfig.title}
+	>{siteConfig.title}</a>
 	<nav aria-label="Primary">
 		<ul class="site-header__nav-list">
 			{siteConfig.nav.map((item) => (
 				<li>
 					<a
+						class="site-header__nav-link"
 						href={item.href}
 						aria-current={isCurrent(item.href) ? 'page' : undefined}
 					>
@@ -31,31 +40,59 @@ const isCurrent = (href: string): boolean => {
 
 <style>
 	.site-header {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: 1rem;
-		padding: 1rem;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
 		max-width: 100%;
 		box-sizing: border-box;
+		padding: 30px 120px 20px;
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		z-index: 100;
 	}
 	.site-header__brand {
 		text-decoration: none;
+		font-size: 24px;
+		letter-spacing: 1px;
+		text-transform: uppercase;
+		color: #323846;
 	}
 	.site-header__nav-list {
 		list-style: none;
 		margin: 0;
 		padding: 0;
 		display: flex;
-		gap: 1rem;
-		flex-wrap: wrap;
+		flex-direction: column;
+		justify-content: center;
+		gap: 0.25rem;
+	}
+	.site-header__nav-link {
+		font-family: var(--font-body);
+		font-size: 18px;
+		text-transform: capitalize;
+		color: #323846;
+		text-decoration: none;
 	}
 	.site-header__nav-list a[aria-current='page'] {
 		text-decoration: underline;
 	}
-	/* Focus visibility — UX-DR5 / WCAG 2.4.11. */
 	.site-header a:focus-visible {
 		outline: 2px solid currentColor;
 		outline-offset: 2px;
 	}
+	@media (max-width: 480px) {
+		.site-header {
+			padding: 30px 20px 20px;
+		}
+	}
 </style>
+
+{enableHeaderMotion && (
+	<script>
+		import { initHeaderIntro } from '../../scripts/motion/header-intro';
+
+		initHeaderIntro();
+	</script>
+)}

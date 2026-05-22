@@ -1,11 +1,18 @@
 ---
 import { cvData } from '../../data/cv';
+
+const typewriterText = cvData.summary.join(' ');
 ---
-<section class="cv-summary" aria-labelledby="cv-summary-heading">
+<section
+	class="cv-summary"
+	data-cv-typewriter
+	data-cv-typewriter-text={typewriterText}
+	aria-labelledby="cv-summary-heading"
+>
 	<h2 id="cv-summary-heading" class="visually-hidden">Summary</h2>
-	{cvData.summary.map((paragraph) => (
-		<p>{paragraph}</p>
-	))}
+	<p>
+		<span data-cv-typewriter-text></span><span class="cv-summary__cursor" aria-hidden="true">|</span>
+	</p>
 </section>
 
 <style>
@@ -16,7 +23,7 @@ import { cvData } from '../../data/cv';
 	.cv-summary p {
 		margin: 0 0 0.625rem;
 		line-height: 1.4;
-		font-size: 1.125rem;
+		font-size: 18px;
 		letter-spacing: 1px;
 	}
 	.visually-hidden {

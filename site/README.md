@@ -65,9 +65,25 @@ grep gtag dist/index.html   # should match when ID is set
 
 Production: add repository variable **`PUBLIC_GA_MEASUREMENT_ID`** in GitHub (Settings → Secrets and variables → Actions → Variables). CI passes the variable to the build step in [`.github/workflows/deploy-astro-pages.yml`](../.github/workflows/deploy-astro-pages.yml). Legacy Universal Analytics `UA-98892695-1` is not used — create a GA4 property and use its measurement ID.
 
-### Motion / FR19 (Story 7.1+)
+### Motion / FR19 (Story 7.2)
 
-Legacy Gatsby motion (GSAP, ScrollMagic, react-spring, cookie gate) is inventoried in [docs/migration-parity-checklist.md](../docs/migration-parity-checklist.md) (**§ Legacy animation & JS inventory**). Target parity is **`same`** on `/`, `/cv/`, and project detail contact sections; Epic **7.2** implements only checklist-approved **`client:*` islands** or vanilla scripts per **ADR-004**. Current Astro build is still **static-only** (no `@astrojs/react` until 7.2).
+Legacy motion inventory: [docs/migration-parity-checklist.md](../docs/migration-parity-checklist.md) (**§ Legacy animation & JS inventory**). Implementation uses **GSAP 3 + ScrollTrigger** only (ADR-008) — no ScrollMagic, no `@astrojs/react` (CV stagger via GSAP).
+
+| Route | Scripts loaded |
+|-------|----------------|
+| `/` | `HomeMotion` → cookie gate, hero intro, about/works/contact scroll, work parallax |
+| `/cv/` | `CvMotion` → typewriter + section stagger |
+| `/projects/*` | `ProjectContactMotion` → contact cover/content scroll |
+| `/`, `/cv/`, `/projects/*` | Header fade-in (`SiteHeader` route-scoped `<script>`) |
+| Blog / 404 | **No** GSAP bundles |
+
+**Modules:** `site/src/scripts/motion/*.ts` (orchestration, home blocks, header, CV). **CSS:** `site/src/styles/motion.css` (glitch brand, blink cursor, `data-home-ready` gate).
+
+**`prefers-reduced-motion: reduce`:** Skips timelines; home blocks visible immediately; CV summary shown without typewriter delay.
+
+**Cookie:** `animationCompleted` (1 day) — first visit runs hero intro; return visit skips intro.
+
+**Bundle (post-build, gzip, approximate):** GSAP+ScrollTrigger shared chunk ~27 KiB; home route entry ~18 KiB additional; CV entry ~0.6 KiB + shared chunk. Blog HTML has zero `/_astro/*.js` motion references. **7.4** should re-measure LCP/JS vs baselines.
 
 ### Typography / FR22 (Story 8.2)
 
@@ -83,7 +99,7 @@ Global styles: `site/src/styles/global.css` imported from `BaseLayout.astro`.
 
 **NFR-V1:** `font-display: swap` on MFred; preload woff2 for faster heading render. Home hero is LCP-sensitive — avoid adding render-blocking font requests beyond this set without measuring in Story **7.4** / baselines.
 
-**Still for Story 8.3:** per-template sizes (blog teaser 26px/800, CV section scale, header glitch, home hero 100vh), Shiki vs Prism colors remain **simplified** (FR14).
+**Story 8.3:** Per-template layout CSS ported from legacy styled-components (home about/works/contact/hero, CV px scale, blog Montserrat, project MFred hero, 404 display type, fixed header). Shiki vs Prism colors remain **simplified** (FR14).
 
 Inventory: [migration-parity-checklist.md](../docs/migration-parity-checklist.md) (**§ Legacy typography & styling inventory**).
 

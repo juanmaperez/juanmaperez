@@ -6,6 +6,7 @@ const { personal } = cvData;
 <div class="cv-personal">
 	<img
 		class="cv-personal__photo"
+		data-cv-personal-photo
 		src={personal.image}
 		alt="Juanma Perez"
 		width="200"
@@ -46,23 +47,24 @@ const { personal } = cvData;
 	}
 	.cv-personal__name {
 		letter-spacing: 1px;
-		font-size: 2.75rem;
+		font-size: 44px;
 		text-transform: uppercase;
 		margin: 0 0 0.25rem;
-		font-weight: 700;
+		font-weight: normal;
 		line-height: 1.1;
 	}
 	.cv-personal__role {
 		letter-spacing: 1px;
-		font-size: 2.25rem;
+		font-size: 36px;
 		text-transform: uppercase;
-		margin: 0 0 1.25rem;
+		margin: 0 0 20px;
 		color: #b7c8cb;
 		line-height: 1.1;
+		font-weight: normal;
 	}
 	.cv-personal__data p {
 		line-height: 1.4;
-		font-size: 1.125rem;
+		font-size: 18px;
 		margin: 0 0 0.25rem;
 	}
 	.cv-personal a:focus-visible {

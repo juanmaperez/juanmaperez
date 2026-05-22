@@ -1,62 +1,137 @@
 ---
 // site/src/components/home/HomeAbout.astro
 ---
-<section class="home-about" aria-labelledby="home-about-heading">
+<section class="home-about block-about" data-home-about aria-labelledby="home-about-heading">
 	<h2 id="home-about-heading" class="visually-hidden">About</h2>
-	<div class="home-about__inner">
-		<div class="home-about__text">
-			<p>I'm <strong>Juanma Perez</strong>, a web developer from Seville and based in London.</p>
-			<p>I build blazing fast and high perfomance websites or apps based on the most modern technologies.</p>
-			<p>I love Javascript and all the frameworks related to this language such as React, Angular or Vue.</p>
-			<p>As a freelance I work with companies, agencies, startups and individuals all around the world.</p>
-			<p><a class="home-about__read-more" href="/cv">Read more.</a></p>
-		</div>
-		<figure class="home-about__figure">
+	<div class="home-about__wrapper about-wrapper">
+		<figure class="home-about__figure image" data-home-about-image>
 			<img src="/images/home/girl.jpg" alt="lady madrid" width="640" height="960" loading="lazy" />
 		</figure>
+		<div class="home-about__text intro-text">
+			<p data-home-about-p>I'm <strong>Juanma Perez</strong>, a web developer from Seville and based in London.</p>
+			<p data-home-about-p>I build blazing fast and high perfomance websites or apps based on the most modern technologies.</p>
+			<p data-home-about-p>I love Javascript and all the frameworks related to this language such as React, Angular or Vue.</p>
+			<p data-home-about-p>As a freelance I work with companies, agencies, startups and individuals all around the world.</p>
+			<p data-home-about-p><a class="home-about__read-more" href="/cv">Read more.</a></p>
+		</div>
 	</div>
 </section>
 
 <style>
 	.home-about {
+		min-height: 100vh;
+		padding-top: 100px;
 		background: #fbf9f3;
+		width: 100%;
 		max-width: 100%;
 		box-sizing: border-box;
-		padding: 2rem 1rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		position: relative;
 		overflow: hidden;
 	}
-	.home-about__inner {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 1.5rem;
-		align-items: flex-start;
-		max-width: 100%;
-		box-sizing: border-box;
-	}
-	.home-about__text {
-		flex: 1 1 16rem;
-		min-width: 0;
-		font-size: clamp(1.125rem, 4vw, 2.5rem);
-		line-height: 1.2;
-		color: #323846;
-	}
-	.home-about__text p {
-		margin: 0 0 1.5rem;
+	.home-about__wrapper {
+		background: #fbf9f3;
+		position: relative;
+		top: 0;
+		left: 0;
+		width: 100%;
+		clip-path: inset(0 0 0 0);
 	}
 	.home-about__figure {
-		flex: 0 1 20rem;
+		position: fixed;
+		right: 120px;
+		bottom: 10px;
+		width: 32vw;
 		margin: 0;
-		min-width: 0;
-		max-width: 100%;
+		z-index: 1;
+	}
+	.home-about__figure.is-pinned {
+		position: absolute;
 	}
 	.home-about__figure img {
 		display: block;
 		max-width: 100%;
 		height: auto;
 	}
+	.home-about__text {
+		position: relative;
+		z-index: 10;
+		width: 75%;
+		font-size: 6vw;
+		color: #323846;
+		line-height: 1.2;
+		padding: 100vh 120px 50px;
+		box-sizing: border-box;
+	}
+	.home-about__text p {
+		mix-blend-mode: difference;
+		margin: 0 0 100px;
+		font-weight: bolder;
+	}
 	.home-about a:focus-visible {
 		outline: 2px solid currentColor;
 		outline-offset: 2px;
+	}
+	@media (max-width: 1080px) {
+		.home-about {
+			padding-top: 200px;
+			min-height: 400px;
+		}
+		.home-about__text {
+			padding: 20px;
+			font-size: 9vw;
+		}
+		.home-about__text p {
+			margin-bottom: 80px;
+		}
+		.home-about__figure {
+			right: 70px;
+			bottom: 35px;
+			width: 60vw;
+		}
+	}
+	@media (max-width: 1024px) {
+		.home-about__text {
+			width: 85%;
+		}
+		.home-about__text p {
+			font-size: 9vw;
+		}
+	}
+	@media (max-width: 768px) {
+		.home-about {
+			padding-top: 200px;
+			min-height: 400px;
+		}
+		.home-about__text {
+			width: 85%;
+			font-size: 9vw;
+		}
+		.home-about__text p {
+			margin-bottom: 50px;
+		}
+	}
+	@media (max-width: 480px) {
+		.home-about {
+			padding-top: 120px;
+		}
+		.home-about__text {
+			padding: 10px;
+			font-size: 9vw;
+		}
+		.home-about__text p {
+			margin-bottom: 40px;
+		}
+		.home-about__text p strong {
+			color: #323846;
+		}
+		.home-about__figure {
+			right: 20px;
+			width: 70vw;
+		}
 	}
 	.visually-hidden {
 		position: absolute;

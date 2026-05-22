@@ -1,7 +1,7 @@
 ---
 import { cvData } from '../../data/cv';
 ---
-<section class="cv-education" aria-labelledby="cv-education-heading">
+<section class="cv-education" data-cv-reveal aria-labelledby="cv-education-heading">
 	<h2 id="cv-education-heading">Education</h2>
 	{cvData.education.map((entry) => (
 		<article class="cv-education__item">
@@ -19,7 +19,8 @@ import { cvData } from '../../data/cv';
 		max-width: 100%;
 	}
 	.cv-education h2 {
-		font-size: 2.75rem;
+		font-size: 44px;
+		font-weight: normal;
 		width: 100%;
 		border-bottom: 1px solid #b7c8cb;
 		text-transform: uppercase;
@@ -32,7 +33,7 @@ import { cvData } from '../../data/cv';
 	}
 	.cv-education__title {
 		line-height: 1.4;
-		font-size: 1.375rem;
+		font-size: 22px;
 		letter-spacing: 1px;
 		margin: 0;
 	}
@@ -44,7 +45,7 @@ import { cvData } from '../../data/cv';
 	}
 	.cv-education__details {
 		margin: 1.25rem 0 0;
-		font-size: 1.125rem;
+		font-size: 18px;
 		letter-spacing: 1px;
 		line-height: 1.4;
 	}

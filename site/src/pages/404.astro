@@ -17,7 +17,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <style>
 	.not-found {
-		min-height: calc(100vh - 4rem);
+		min-height: 100vh;
+		width: 100%;
 		max-width: 100%;
 		box-sizing: border-box;
 		overflow-x: hidden;
@@ -31,25 +32,45 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 		text-align: center;
 	}
 	.not-found h1 {
-		font-size: clamp(4rem, 25vw, 18.75rem);
+		font-family: var(--font-heading);
+		font-size: 300px;
 		line-height: 1;
 		text-transform: uppercase;
 		margin: 0 0 1rem;
+		font-weight: normal;
 		text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
 	}
 	.not-found__message {
-		font-size: clamp(1.125rem, 4vw, 2.25rem);
+		font-family: var(--font-heading);
+		font-size: 36px;
 		text-transform: uppercase;
-		letter-spacing: 0.14em;
+		letter-spacing: 2.2px;
 		margin: 0;
 		text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
 	}
 	.not-found a {
 		color: inherit;
 		text-decoration: underline;
+		font-family: inherit;
 	}
 	.not-found a:focus-visible {
 		outline: 2px solid currentColor;
 		outline-offset: 2px;
+	}
+	@media (max-width: 768px) {
+		.not-found h1 {
+			font-size: 160px;
+		}
+		.not-found__message {
+			font-size: 24px;
+		}
+	}
+	@media (max-width: 480px) {
+		.not-found h1 {
+			font-size: 100px;
+		}
+		.not-found__message {
+			font-size: 18px;
+		}
 	}
 </style>

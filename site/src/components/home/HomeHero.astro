@@ -1,13 +1,14 @@
 ---
 // site/src/components/home/HomeHero.astro
 ---
-<section class="home-hero" aria-labelledby="home-hero-heading">
+<section class="home-hero block-home" data-home-hero aria-labelledby="home-hero-heading">
 	<h2 id="home-hero-heading" class="visually-hidden">Hero</h2>
-	<ul class="home-hero__links">
+	<div class="home-hero__cover main-block-cover" aria-hidden="true"></div>
+	<ul class="home-hero__links main-list">
 		<li>
 			<span>Ig: [</span>
 			<a
-				class="home-hero__link"
+				class="home-hero__link text"
 				href="https://www.instagram.com/finejavascript/"
 				target="_blank"
 				rel="noopener noreferrer"
@@ -17,7 +18,7 @@
 		<li>
 			<span>Tw: [</span>
 			<a
-				class="home-hero__link"
+				class="home-hero__link text"
 				href="https://twitter.com/juanmaperezvar"
 				target="_blank"
 				rel="noopener noreferrer"
@@ -27,7 +28,7 @@
 		<li>
 			<span>In: [</span>
 			<a
-				class="home-hero__link"
+				class="home-hero__link text"
 				href="https://www.linkedin.com/in/juanmaperezvargas/"
 				target="_blank"
 				rel="noopener noreferrer"
@@ -36,7 +37,7 @@
 		</li>
 		<li>
 			<span>Bl: [</span>
-			<a class="home-hero__link home-hero__link--blog" href="/blog">//blog</a>
+			<a class="home-hero__link home-hero__link--blog text" href="/blog">//blog</a>
 			<span> ]</span>
 		</li>
 	</ul>
@@ -45,32 +46,37 @@
 <style>
 	.home-hero {
 		position: relative;
-		min-height: 50vh;
+		min-height: 100vh;
+		width: 100%;
 		max-width: 100%;
 		box-sizing: border-box;
 		background-color: #fbf9f3;
 		background-image: url('/images/home/first.jpg');
 		background-size: cover;
 		background-position: center center;
+		background-attachment: fixed;
 		overflow: hidden;
 	}
 	.home-hero__links {
 		list-style: none;
 		margin: 0;
-		padding: 1rem;
+		padding: 0;
 		position: absolute;
-		right: 1rem;
-		bottom: 1rem;
-		max-width: calc(100% - 2rem);
+		right: 120px;
+		bottom: 50px;
+		max-width: calc(100% - 240px);
 		box-sizing: border-box;
 		text-align: right;
+		z-index: 11;
 	}
 	.home-hero__links li {
-		margin-bottom: 0.25rem;
-		font-size: 1.125rem;
+		margin-bottom: 5px;
+		font-size: 18px;
+		color: #323846;
 	}
 	.home-hero__link {
 		color: inherit;
+		transition: all 100ms linear;
 	}
 	.home-hero__link--blog {
 		font-weight: 600;
@@ -78,6 +84,16 @@
 	.home-hero a:focus-visible {
 		outline: 2px solid currentColor;
 		outline-offset: 2px;
+	}
+	@media (max-width: 520px) {
+		.home-hero {
+			background-attachment: scroll;
+		}
+		.home-hero__links {
+			right: 20px;
+			bottom: 10px;
+			max-width: calc(100% - 40px);
+		}
 	}
 	.visually-hidden {
 		position: absolute;

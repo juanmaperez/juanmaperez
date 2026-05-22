@@ -39,7 +39,7 @@ classification:
 prdVersion: '1.1'
 completedDate: '2026-04-20'
 lastEdited: '2026-05-22'
-editSource: 'Epic 7 motion stack (GSAP 3 + ScrollTrigger, ADR-008) + Epic 8 visual parity ([EP] Edit PRD)'
+editSource: 'Epic 8 FR22 — layout, images, styled-components port (not fonts only) ([EP] Edit PRD)'
 ---
 
 # Product Requirements Document — juanmaperez
@@ -197,7 +197,8 @@ Derived from `web_app` signals (SEO, browser support, performance, accessibility
 
 - **Typography & styling inventory** comparing legacy Gatsby CSS/fonts to Astro (checklist-driven).
 - **Global design tokens** (fonts, palette, base typography) applied via shared styles in `site/`.
-- **Per-template visual reconciliation** so the migrated site matches the legacy brand feel, not only layout and copy.
+- **Per-template visual reconciliation** — port **styled-components** layout rules (especially **home**: hero, about image scale/position, works card dimensions/`background-size: cover`, contact typographic scale), not only fonts and palette.
+- **Image presentation parity** on home and projects: viewport-relative sizing, overflow clipping, and object-fit/cover behavior as in legacy CSS (distinct from **FR13** pipeline optimization).
 
 ---
 
@@ -246,7 +247,7 @@ Derived from `web_app` signals (SEO, browser support, performance, accessibility
 
 ### Brand, typography, and visual presentation
 
-- **FR22:** Visitor experiences **typography, color, and spacing** consistent with the legacy site’s brand as recorded in the **migration parity checklist** **Visual parity** column (`same` | `simplified` | `removed` | `n/a`). **Epic 8 default:** where legacy used named fonts (e.g. Questrial body, MFred headings), shared palette (`#fbf9f3`, `#323846`, `#b7c8cb`), or template-specific rules in `src/styles/`, inventory and implementation target **`same`** unless *simplified* is documented with rationale. Global fonts and tokens load from **`site/`** (not ad hoc per-component system stacks only).
+- **FR22:** Visitor experiences **typography, color, spacing, layout, and image presentation** consistent with the legacy site as recorded in the **migration parity checklist** **Visual parity** column (`same` | `simplified` | `removed` | `n/a`). **Epic 8 default:** where legacy used named fonts, shared palette, **styled-components** rules in `src/components/**` (home blocks, `workItem`, header, CV, blog teasers), or **gatsby-era image wrappers** with CSS-driven dimensions, inventory and implementation target **`same`** unless *simplified* is documented. **Story 8.2** covers global fonts/tokens; **Story 8.3** ports per-template CSS (home is highest risk: wrong image scale, missing `6vw` about copy, works cards not `600×900` cover crops). Global fonts load from **`site/`**; component-scoped CSS must match legacy breakpoints and positioning, not approximate with generic flex/clamp alone.
 
 ---
 

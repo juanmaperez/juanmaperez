@@ -76,8 +76,11 @@ const formattedDate = entry.data.date.toLocaleDateString('en-GB', {
 	}
 	.blog-post h1 {
 		margin: 0 0 1rem;
-		font-size: 2rem;
+		font-family: var(--font-blog-title);
+		font-size: 32px;
+		font-weight: 800;
 		line-height: 1.2;
+		color: var(--color-blog-accent);
 	}
 	.blog-post__meta {
 		display: flex;
@@ -105,6 +108,7 @@ const formattedDate = entry.data.date.toLocaleDateString('en-GB', {
 	}
 	.blog-post__content :global(h2) {
 		margin: 2rem 0 1rem;
+		font-family: var(--font-heading);
 		font-size: 1.5rem;
 		line-height: 1.3;
 	}
@@ -134,7 +138,7 @@ const formattedDate = entry.data.date.toLocaleDateString('en-GB', {
 		line-height: 1.45;
 	}
 	.blog-post__content :global(:not(pre) > code) {
-		font-family: ui-monospace, monospace;
+		font-family: var(--font-mono);
 		font-size: 0.9em;
 		background: #f0ede6;
 		padding: 0.1em 0.35em;

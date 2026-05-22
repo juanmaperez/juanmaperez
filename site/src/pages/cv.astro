@@ -5,6 +5,7 @@ import CvSummary from '../components/cv/CvSummary.astro';
 import CvExperiences from '../components/cv/CvExperiences.astro';
 import CvEducation from '../components/cv/CvEducation.astro';
 import CvSkills from '../components/cv/CvSkills.astro';
+import CvMotion from '../components/motion/CvMotion.astro';
 ---
 <BaseLayout
 	title="Juanma Perez | CV"
@@ -20,6 +21,7 @@ import CvSkills from '../components/cv/CvSkills.astro';
 			<CvSkills />
 		</div>
 	</div>
+	<CvMotion />
 </BaseLayout>
 
 <style>
@@ -39,10 +41,10 @@ import CvSkills from '../components/cv/CvSkills.astro';
 	}
 	.cv-container h1 {
 		letter-spacing: 1px;
-		font-size: 2.75rem;
+		font-size: 44px;
 		text-transform: uppercase;
 		margin: 0 0 1.5rem;
-		font-weight: 700;
+		font-weight: normal;
 	}
 
 	@media print {
