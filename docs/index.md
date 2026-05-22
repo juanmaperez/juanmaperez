@@ -1,8 +1,8 @@
 # Project documentation index
 
 **Project:** juanmaperez-portfolio  
-**Type:** Monolith — **web** — **production:** **Astro 6** in **`site/`**; legacy **Gatsby 2** at repo root is **deprecated** (archive pending Epic 9).  
-**Primary language:** TypeScript + Astro in **`site/`** (production); JavaScript (React) at root (legacy reference only).  
+**Type:** Monolith — **web** — **production:** **Astro 6** in **`site/`**; legacy **Gatsby 2** archived under **`legacy/gatsby/`**.  
+**Primary language:** TypeScript + Astro in **`site/`** (production); JavaScript (React) in **`legacy/gatsby/`** (archive reference only).  
 **Architecture:** Production: static `site/dist/` build, content collections, GitHub Actions deploy. Legacy Gatsby tree: static generation + GraphQL (not production).  
 
 ## Quick reference
@@ -10,7 +10,7 @@
 - **Production (`site/`):** Astro 6, **Node ≥ 22.12** (`site/.nvmrc`) — `cd site && nvm use && npm install && npm run dev|build`.  
 - **Content (production):** `site/src/content/posts/`, `site/src/content/projects/`.  
 - **Deploy (production):** `site/dist/` → [GitHub Actions → Pages](./deployment-guide.md) on push to `main`.  
-- **Legacy Gatsby (deprecated):** repo root — older Node (14/16) only if you must run it before **9.2** removal; see [development-guide.md](./development-guide.md#production-app-vs-legacy-gatsby-reference).  
+- **Legacy Gatsby (archived):** `legacy/gatsby/` — Node 14/16 only for historical diff; see [development-guide.md](./development-guide.md#production-app-vs-legacy-gatsby-reference).  
 - **Perf (advisory):** checklist **LCP/JS ex.** + optional [`_baseline/README.md`](../_baseline/README.md); not a mandatory regression gate (PRD v1.2).  
 
 ## Generated documentation
@@ -23,7 +23,7 @@
 - [Deployment guide](./deployment-guide.md)  
 - [API contracts](./api-contracts.md) — build-time GraphQL; no REST API  
 - [Data models](./data-models.md) — Markdown frontmatter  
-- [Migration parity checklist](./migration-parity-checklist.md) — Astro cutover (FR19 / NFR-P2)  
+- [Migration parity checklist](./migration-parity-checklist.md) — motion/visual parity (FR19 / FR22)  
 
 ## Existing documentation
 
@@ -37,9 +37,9 @@
 
 ## Scan state
 
-- **Workflow:** `initial_scan`  
+- **Workflow:** `initial_scan` (2026-04) — **superseded for repo layout** by Story **9.4**; production root is **`site/`**.  
 - **Depth:** `quick`  
-- **State file:** [project-scan-report.json](./project-scan-report.json)  
+- **State file:** [project-scan-report.json](./project-scan-report.json) (`production_root`: `site/`)  
 
 ---
 

@@ -105,9 +105,27 @@ Items deferred from code reviews and stories (not blocking current slice).
 
 - **§7.1 component inventory table** still labels CV modules as `island` / react-spring in **Recommended Astro** while route tables correctly show **Islands approved = N** after 7.3 — optional doc alignment pass.
 
+## Resolved in Story 9.4 (2026-05-22)
+
+- **`docs/architecture.md`** — production-first; legacy under § Legacy (archived).
+- **`docs/source-tree-analysis.md`** — rewritten for `site/` + `legacy/gatsby/`.
+- **`docs/component-inventory.md`** — production table + legacy banner.
+- **`docs/project-scan-report.json`** — `production_root`, `superseded_by` metadata.
+- **`docs/development-guide.md`** — § Content authoring (production) added.
+- **`docs/index.md`** — checklist wording; scan state note.
+- **Unused blog icons** pruned from `site/public/icons/` and `site/src/assets/icons/` (kept javascript, react, recipes + favicon PNGs).
+- **Legacy `src/content` at repo root** — resolved by **9.2** archive to `legacy/gatsby/`.
+
 ## Deferred from: code review of 9-1-document-site-as-sole-production-application (2026-05-22)
 
-- **`docs/architecture.md` § Deployment** still describes Gatsby `public/` + `gh-pages` as primary — update in **9.4** repo hygiene or a follow-on doc pass.
-- **`docs/source-tree-analysis.md`** + **`docs/project-scan-report.json`** still Gatsby-first from 2026-04-20 scan — refresh when legacy tree is archived (**9.2**).
-- **`docs/development-guide.md` Content authoring** lists legacy `src/content/*` without a “legacy only” label — label or move below production section in **9.4**.
-- **`docs/index.md`** migration checklist blurb still says “Astro cutover” — cosmetic wording; optional in **9.4**.
+_(Items above moved to **Resolved in Story 9.4**.)_
+
+## Deferred from: code review of 9-2-archive-or-remove-legacy-gatsby-tree (2026-05-22)
+
+- **Checklist §7.1 / §8.1 inventory rows** — legacy file columns still use short `src/...` paths (audit headers cite `legacy/gatsby/`); optional cosmetic prefix on each row.
+
+## Deferred from: code review of 9-3-confirm-github-pages-ci-default-to-astro (2026-05-22)
+
+- **Story 9.3 closure** — merge `deploy-astro-pages.yml` + `site/` to `master`, green Actions deploy, fill run URL in deployment guide, `BASE=https://juanmaperez.dev ./scripts/verify-production-smoke.sh` → **0**, then mark story **done**.
+- **Delete `origin/gh-pages`** — after production Astro smoke passes.
+- **Pages CNAME `juanmaperez.me` vs Astro `juanmaperez.dev`** — reconcile DNS/Pages custom domain when cutting over.

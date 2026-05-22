@@ -4,7 +4,7 @@ This directory **is** the **production application** for [juanmaperez.dev](https
 
 **Deploy:** push to **`main`** / **`master`** or **`workflow_dispatch`** on [`.github/workflows/deploy-astro-pages.yml`](../.github/workflows/deploy-astro-pages.yml) → GitHub Pages from **`dist/`**. See [deployment-guide.md](../docs/deployment-guide.md).
 
-Legacy **Gatsby 2** at the repository root is **deprecated** (Epic 9 will archive it); do not use root `npm run deploy` for production.
+Legacy **Gatsby 2** is **archived** under **`legacy/gatsby/`**; do not use its `npm run deploy` for production.
 
 ## Requirements
 

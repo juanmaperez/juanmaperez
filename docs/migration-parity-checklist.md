@@ -28,7 +28,7 @@
 
 ## Legacy animation & JS inventory (Story 7.1)
 
-Audit source: repo-root Gatsby `src/` + `gatsby-node.js` (not `site/`). **Build note:** `gatsby-node.js` null-loads ScrollMagic on `build-html` and aliases GSAP min bundles — legacy motion was **client-only** at runtime (same constraint for Astro: no ScrollMagic during static prerender).
+Audit source: archived Gatsby **`legacy/gatsby/src/`** + **`legacy/gatsby/gatsby-node.js`** (not `site/`). **Build note:** `gatsby-node.js` null-loads ScrollMagic on `build-html` and aliases GSAP min bundles — legacy motion was **client-only** at runtime (same constraint for Astro: no ScrollMagic during static prerender).
 
 | Legacy route(s) | Legacy file(s) | Libraries / deps | Behavior (1 line) | Recommended Astro | Motion parity | Islands (Y/N) | Notes |
 |-----------------|----------------|------------------|-------------------|-------------------|---------------|---------------|-------|
@@ -58,7 +58,7 @@ Audit source: repo-root Gatsby `src/` + `gatsby-node.js` (not `site/`). **Build 
 
 ## Legacy typography & styling inventory (Story 8.1)
 
-Audit source: repo-root Gatsby `src/styles/`, `src/components/`, `src/templates/`, `src/pages/` vs Astro `site/src/`. **No fonts or `global.css` in this story** — **8.2** implements global pipeline (**NFR-V1**: self-host MFred, Questrial with `font-display: swap`, wire from `BaseLayout`).
+Audit source: archived Gatsby `legacy/gatsby/src/styles/`, `components/`, `templates/`, `pages/` vs Astro `site/src/`. **No fonts or `global.css` in this story** — **8.2** implements global pipeline (**NFR-V1**: self-host MFred, Questrial with `font-display: swap`, wire from `BaseLayout`).
 
 | Template / area | Legacy source(s) | Legacy fonts & key rules | Astro source(s) | Gap | Recommended fix | Visual parity | Notes |
 |-----------------|-------------------|--------------------------|-----------------|-----|-----------------|---------------|-------|
@@ -198,3 +198,6 @@ Add a row here only for routes that need **ScrollMagic / GSAP / React** parity r
 | 2026-05-22 | Story **7.3** — PO sign-off (`7.3 JP`) on mandatory route rows; motion+visual **same**; Islands **N**; blog CR (MFred h1, black titles, icons, horizontal nav); Home hero bg swap noted as defer |
 | 2026-05-22 | PRD **v1.2** — Story **7.4** dropped; NFR-P1/P2 advisory; cutover gated by checklist + **Epic 9** (`site/` sole deployable) |
 | 2026-05-22 | Story **9.1** — docs/README state **`site/`** + Actions as production; legacy Gatsby deprecated pending **9.2** |
+| 2026-05-22 | Story **9.2** — Gatsby app moved to **`legacy/gatsby/`**; no root `package.json` |
+| 2026-05-22 | Story **9.3** — Pages cutover checklist + `scripts/verify-production-smoke.sh`; merge workflow to default branch before live Actions deploy |
+| 2026-05-22 | Story **9.4** — repo hygiene: docs tree refresh; prune unused `site/` icons; `source-tree-analysis` / `architecture` production-first |

@@ -8,7 +8,7 @@ Personal **portfolio and blog** for Juanma Perez: landing experience, **CV** pag
 
 **Monolith — single production app:** **Astro 6** under **`site/`**, deployed via GitHub Actions to GitHub Pages.
 
-**Legacy (deprecated):** **Gatsby 2** at the repository root remains as a **reference tree** until Epic 9 Story **9.2** archives or removes it. It is **not** the production deploy path.
+**Legacy (archived):** **Gatsby 2** under **`legacy/gatsby/`** (Story **9.2**, 2026-05-22). Reference only — **not** the production deploy path.
 
 ## Technology summary
 
@@ -20,8 +20,8 @@ Personal **portfolio and blog** for Juanma Perez: landing experience, **CV** pag
 | **Motion (production)** | GSAP 3 + ScrollTrigger | Route-scoped scripts; blog/404 have no motion JS |
 | **SEO (production)** | `PageHead.astro`, sitemap, redirects | Stories 6.1–6.3 |
 | **Analytics (production)** | GA4 via `Analytics.astro` | `PUBLIC_GA_MEASUREMENT_ID` at build time |
-| Framework (legacy) | Gatsby 2.x | Deprecated; root `package.json` — do not deploy |
-| UI (legacy) | React 16.8 | Legacy `src/` only |
+| Framework (legacy) | Gatsby 2.x | Archived in `legacy/gatsby/` — do not deploy |
+| UI (legacy) | React 16.8 | `legacy/gatsby/src/` only |
 
 ## Architecture classification
 
@@ -47,4 +47,4 @@ Personal **portfolio and blog** for Juanma Perez: landing experience, **CV** pag
 - **Workflow:** initial_scan  
 - **Depth:** quick (structure, configs, patterns; not every source line)  
 - **Date:** 2026-04-20  
-- **Docs refresh:** 2026-05-22 (Story 9.1 — production = `site/`)
+- **Docs refresh:** 2026-05-22 (Story 9.1 — production = `site/`; Story 9.2 — Gatsby → `legacy/gatsby/`)

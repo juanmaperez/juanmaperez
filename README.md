@@ -15,7 +15,7 @@ npm install
 npm run dev
 ```
 
-**Legacy Gatsby 2** at the repository root (`src/`, `gatsby-config.js`) is **deprecated** and scheduled for archive in Epic 9 — not the production stack. See [docs/development-guide.md](docs/development-guide.md#production-app-vs-legacy-gatsby-reference).
+**Legacy Gatsby 2** is **archived** under [`legacy/gatsby/`](legacy/gatsby/) (reference only, not production). See [docs/development-guide.md](docs/development-guide.md#production-app-vs-legacy-gatsby-reference).
 
 ---
 

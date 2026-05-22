@@ -1,60 +1,82 @@
-# Architecture: juanmaperez-portfolio
+# Architecture: juanmaperez (brownfield docs)
 
-## Executive summary
+> **Production (2026-05-22):** The live application is **Astro 6** under **`site/`**, deployed via **GitHub Actions** to **`site/dist/`**.  
+> **Migration ADRs, FR traceability, and checklist governance:** [_bmad-output/planning-artifacts/architecture.md](../_bmad-output/planning-artifacts/architecture.md).
 
-The site is a **Gatsby 2 static site**: Markdown drives **blog posts** and **project case studies**; **GraphQL** runs only at **build time** to query `allMarkdownRemark` and image nodes. **React** renders pages and templates; **styled-components** and **SCSS** handle styling. **Programmatic routing** in `gatsby-node.js` creates blog pagination, post pages, project pages, and category indexes.
+## Executive summary (production)
 
-## Technology stack
+The **production** site is an **Astro static** portfolio: **content collections** (`posts`, `projects`) with **Zod** validation, **file-based routing**, **scoped component CSS** + **`site/src/styles/global.css`**, and **selective client islands** for legacy motion parity (GSAP 3 + ScrollTrigger). There is **no** runtime GraphQL and **no** server.
 
-See [project-overview.md](./project-overview.md) for the summary table. Primary moving parts: **Gatsby**, **React 16**, **gatsby-transformer-remark**, **gatsby-plugin-sharp** / **gatsby-image**, **styled-components**.
+| Concern | Implementation |
+|---------|----------------|
+| Build | `cd site && npm run build` → `site/dist/` |
+| Deploy | [`.github/workflows/deploy-astro-pages.yml`](../.github/workflows/deploy-astro-pages.yml) → GitHub Pages |
+| Content | `site/src/content/posts/`, `site/src/content/projects/` |
+| Images | `astro:assets` / `ProjectImage` (FR13) |
+| Motion | `site/src/scripts/motion/`, `client:visible` islands (FR19) |
+| SEO | `PageHead.astro`, `@astrojs/sitemap`, redirects in `astro.config.mjs` |
+
+## Technology stack (production)
+
+See [project-overview.md](./project-overview.md). Primary stack: **Astro 6**, **TypeScript**, **content collections**, **GitHub Actions**, **GitHub Pages**.
 
 ## Architecture pattern
 
-| Pattern | How it appears here |
-|---------|---------------------|
-| SSG | HTML generated at `gatsby build` |
-| Component-based UI | `src/components`, `src/templates`, `src/pages` |
-| Build-time data | GraphQL in `gatsby-node.js` and page/template exports |
-| Plugin pipeline | remark (prism, images), filesystem sources, manifest, sitemap, GA |
+| Pattern | How it appears in `site/` |
+|---------|---------------------------|
+| SSG | `output: 'static'` in `astro.config.mjs` |
+| Component islands | `.astro` + optional React only where checklist-approved |
+| Build-time data | `getCollection('posts' \| 'projects')` |
+| Validation | `npm run check` / Zod in `content.config.ts` (FR17) |
 
-## Data architecture
+## Data architecture (production)
 
-- **Source of truth:** Markdown files under `src/content/posts/**` and `src/content/projects/**`.  
-- **Discrimination:** `frontmatter.type` is `post` vs `projects` (used in `gatsby-node.js` filters).  
-- **Detail:** [data-models.md](./data-models.md).
+- **Source of truth:** Markdown under **`site/src/content/`**.  
+- **Schemas:** `site/src/content.config.ts` — see [data-models.md](./data-models.md).  
+- **Legacy reference:** `legacy/gatsby/src/content/` (archive only).
 
-## Routing
+## Routing (production)
 
-1. **Declarative:** `src/pages/index.js`, `cv.js`, `404.js` → `/`, `/cv/`, `/404/`.  
-2. **Programmatic:** `createPage` for blog list, posts, works, categories (paths from frontmatter or conventions).
+Declarative routes in **`site/src/pages/`** plus `getStaticPaths` for blog pagination, categories, posts, and projects. Paths come from frontmatter **`path`** fields (stable URLs / FR12 redirects).
 
 ## API design
 
-There is **no application-owned HTTP API**. “API surface” is **Gatsby’s GraphQL** at build time only — see [api-contracts.md](./api-contracts.md).
+**No application HTTP API.** Build-time only; see [api-contracts.md](./api-contracts.md) for historical GraphQL notes vs current collections.
 
-## Component overview
+## Component overview (production)
 
-High-level groups: **layout** (shell, menu), **home blocks**, **blog** (list, post, category), **work** template, **CV** sections, **SEO**. Full list: [component-inventory.md](./component-inventory.md).
+High-level groups under **`site/src/components/`**: **nav**, **home**, **blog**, **cv**, **projects**, **motion**, **seo**, **analytics**.  
 
-## Build and bundling notes
+Full historical Gatsby inventory (archive paths): [component-inventory.md](./component-inventory.md).
 
-`gatsby-node.js` **onCreateWebpackConfig**:
+## Deployment architecture (production)
 
-- **Null-loader** for ScrollMagic during `build-html` (avoids `window` during SSR).  
-- **Aliases** for GSAP minified paths and ScrollMagic plugins (animation integration).
+Static **`site/dist/`** published by **GitHub Actions** (`actions/deploy-pages`). **Not** branch deploy from **`gh-pages`**.
 
-## Deployment architecture
+See [deployment-guide.md](./deployment-guide.md) for Settings → Pages = **GitHub Actions** and cutover verification (Story **9.3**).
 
-Static files emitted to **`public/`**, published with **`gh-pages`** to the configured GitHub Pages branch. See [deployment-guide.md](./deployment-guide.md).
+## Testing strategy (production)
 
-## Testing strategy
+| Gate | Command |
+|------|---------|
+| Schema / types | `npm run check` |
+| Build | `npm run build` |
+| Schema fixtures | `npm run test:schema` |
+| Internal links | `npm run test:links` |
 
-`package.json` `test` script is a placeholder (`echo`). No automated test suite in tree.
+CI runs the same gates in **`deploy-astro-pages.yml`**.
 
-## Risks relevant to migration (e.g. Astro)
+## Legacy (archived Gatsby 2)
 
-1. **GraphQL →** must become imports / content collections / file routing.  
-2. **gatsby-image fluid** → new image pipeline.  
-3. **ScrollMagic + GSAP** → verify browser-only execution in new framework.  
-4. **styled-components** → map to scoped styles or islands.  
-5. **Universal Analytics** → replace with GA4 or alternative before UA sunset (already a product concern).  
+The pre-migration app lives under **`legacy/gatsby/`** (Story **9.2**). It was a **Gatsby 2** static site: Markdown → GraphQL at build time → React + styled-components. **ScrollMagic + GSAP 2** ran client-only (null-loader on `build-html`).
+
+That stack is **not** production. Retained for:
+
+- Parity checklist audits (`legacy/gatsby/src/`)
+- Historical comparison during Epic 7–8
+
+**Do not** run `legacy/gatsby/npm run deploy` (retired `gh-pages` path).
+
+---
+
+_For April 2026 scan metadata, see [project-scan-report.json](./project-scan-report.json) (superseded for production layout by Story **9.4**)._

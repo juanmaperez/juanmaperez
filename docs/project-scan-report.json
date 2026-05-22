@@ -8,6 +8,8 @@
   "mode": "initial_scan",
   "scan_level": "quick",
   "project_root": "/Users/juanmaperez/Documents/personal/juanmaperez",
+  "production_root": "site/",
+  "superseded_by": "Story 9.4 (2026-05-22) — layout/docs reflect Astro production; scan findings describe pre-archive Gatsby",
   "project_knowledge": "/Users/juanmaperez/Documents/personal/juanmaperez/docs",
   "repository_type": "monolith",
   "completed_steps": [

@@ -1,6 +1,26 @@
 # UI component inventory
 
-**Quick scan** — components discovered under `src/components/` (purpose inferred from paths and names).
+> **Production = `site/src/components/`** (Astro). **Legacy reference = `legacy/gatsby/src/components/`** (Gatsby 2, archived). Updated Story **9.4** (2026-05-22).
+
+## Production (`site/src/components/`)
+
+| Area | Path | Role |
+|------|------|------|
+| Nav | `nav/SiteHeader.astro`, `SiteFooter.astro` | Global chrome (FR7, FR20) |
+| Home | `home/HomeHero.astro`, `HomeAbout.astro`, `HomeWorks.astro`, `HomeContact.astro` | Home sections (FR1) |
+| Motion | `motion/HomeMotion.astro`, `CvMotion.astro` | FR19 client islands |
+| Blog | `blog/BlogPostTeaser.astro`, `BlogPostList.astro`, `BlogIndexShell.astro`, … | FR3–FR5, FR14 |
+| CV | `cv/Cv*.astro` | FR2 |
+| Projects | `projects/ProjectImage.astro` | FR6, FR13 |
+| SEO / analytics | `seo/PageHead.astro`, `analytics/Analytics.astro` | FR10, FR11, NFR-S2 |
+
+Layouts: `site/src/layouts/BaseLayout.astro`, `BlogLayout.astro`, `ProjectLayout.astro`.
+
+---
+
+## Legacy archive (`legacy/gatsby/src/components/`) — historical scan
+
+**Quick scan (2026-04)** — components under archived `src/components/` (purpose inferred from paths and names).
 
 ## Layout and chrome
 

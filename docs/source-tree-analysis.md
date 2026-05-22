@@ -1,67 +1,70 @@
 # Source tree analysis
 
-Annotated tree for **portfolio root** (excluding `node_modules`, `.git`, large binary assets).
+**Last updated:** 2026-05-22 (Story **9.4** — production root = `site/`).
+
+Annotated tree for the **juanmaperez** repository (excluding `node_modules`, `.git`, large binaries).
 
 ```
-juanmaperez/                    # Repository root
-├── gatsby-config.js            # Plugins, siteMetadata, filesystem sources, GA
-├── gatsby-node.js              # createPages: blog list, posts, works, categories; webpack aliases (GSAP/ScrollMagic)
-├── gatsby-browser.js           # Browser hooks (if any)
-├── gatsby-ssr.js               # SSR hooks (if any)
-├── package.json                # Scripts: develop, build, deploy (gh-pages → public)
-├── package-lock.json
-├── README.md                   # Upstream Gatsby starter readme (boilerplate)
-├── LICENSE
-├── .prettierrc
-├── public/                     # Gatsby build output (deploy artifact for gh-pages)
-└── src/
-    ├── pages/                  # File-based routes
-    │   ├── index.js            # Home (GraphQL for works + posts teasers)
-    │   ├── cv.js               # CV page
-    │   └── 404.js              # Not found
-    ├── layouts/
-    │   ├── layout.js           # Site shell; StaticQuery (menu, site title)
-    │   └── blogLayout.js       # Blog wrapper; StaticQuery
-    ├── templates/              # Used by createPage in gatsby-node.js
-    │   ├── postTemplate.js     # Single blog post + GraphQL PostQuery
-    │   ├── blogListTemplate.js # Paginated /blog
-    │   ├── workTemplate.js     # Single project/case study
-    │   └── categoryTemplate.js   # /blog/category/:category
-    ├── components/             # Reusable UI
-    │   ├── seo.js              # Meta tags (useStaticQuery)
-    │   ├── header.js, menu.js, menuLink.js, image.js
-    │   ├── post-item.js, workItem.js
-    │   ├── index/              # Home sections: main-block, about, works, contact
-    │   └── cv/                 # CV sections: personal, description, skills, experiences, education
-    ├── content/
-    │   ├── posts/              # 9 markdown posts (each in own folder)
-    │   └── projects/           # 5 markdown case studies (umaicha, sainsburys, etc.)
-    ├── styles/
-    │   ├── main.css
-    │   └── mixins.scss
-    └── assets/
-        ├── images/             # gatsby-source-filesystem `images`
-        ├── icons/            # gatsby-source-filesystem `icons`
-        └── fonts/
+juanmaperez/                              # Repository root
+├── site/                                 # PRODUCTION — Astro 6 static app
+│   ├── astro.config.mjs
+│   ├── package.json
+│   ├── .nvmrc                            # Node ≥ 22.12
+│   ├── public/                           # Static assets (copied to dist root)
+│   │   ├── fonts/mfred/                  # MFred (FR22)
+│   │   ├── icons/                        # Blog teaser icons (javascript, react, recipes)
+│   │   └── images/                       # Home, 404, etc.
+│   └── src/
+│       ├── pages/                        # File-based routes (index, cv, blog, projects, 404)
+│       ├── layouts/                      # BaseLayout, BlogLayout, ProjectLayout
+│       ├── components/                   # nav, home, blog, cv, motion, seo, analytics
+│       ├── content/
+│       │   ├── posts/                    # 9 blog posts (content collections)
+│       │   └── projects/                 # 5 case studies
+│       ├── styles/                       # global.css, motion.css
+│       ├── scripts/motion/               # GSAP 3 + ScrollTrigger (Epic 7)
+│       ├── assets/icons/                 # Frontmatter icon paths (mirrors public/icons subset)
+│       └── content.config.ts             # Zod schemas (FR17)
+├── legacy/gatsby/                        # ARCHIVE — Gatsby 2 (reference only, Story 9.2)
+│   ├── gatsby-config.js, gatsby-node.js
+│   ├── src/                              # Historical pages, components, content
+│   └── package.json                      # Node 14/16; not production
+├── docs/                                 # Brownfield documentation (this folder)
+├── _bmad-output/                         # Planning & implementation artifacts
+├── .github/workflows/
+│   └── deploy-astro-pages.yml            # Sole Pages deploy (FR18)
+├── _baseline/                            # Optional Lighthouse captures (advisory)
+├── scripts/                              # verify-production-smoke, capture-legacy-baselines
+└── README.md                             # Entry → site/ + docs/index.md
 ```
 
-## Entry points
+## Production application (`site/`)
+
+| Area | Path | Role |
+|------|------|------|
+| Routes | `site/src/pages/` | `/`, `/cv/`, `/blog/`, `/blog/page/[page]`, `/blog/category/[category]`, `/blog/[...slug]`, `/projects/[...slug]`, `/404` |
+| Content | `site/src/content/posts/`, `projects/` | Markdown + frontmatter; build fails on schema violation |
+| Global shell | `site/src/layouts/BaseLayout.astro` | SEO, analytics, fonts, header/footer slots |
+| Motion | `site/src/components/motion/`, `site/src/scripts/motion/` | FR19 islands (home, CV, header) |
+| Deploy output | `site/dist/` | GitHub Actions artifact → Pages |
+
+## Archived Gatsby (`legacy/gatsby/`)
+
+Historical **Gatsby 2** tree for diff and parity inventory (§7.1 / §8.1 checklist audits). **Do not deploy.** See [legacy/gatsby/README.md](../legacy/gatsby/README.md).
 
 | Entry | Role |
 |--------|------|
-| `gatsby-config.js` | Site metadata, plugin pipeline |
-| `gatsby-node.js` | Programmatic routes and webpack config |
-| `src/pages/*.js` | Top-level URLs |
-| `src/layouts/layout.js` | Default chrome for pages using it |
+| `legacy/gatsby/gatsby-config.js` | Plugins, siteMetadata |
+| `legacy/gatsby/gatsby-node.js` | Programmatic routes, webpack GSAP/ScrollMagic aliases |
+| `legacy/gatsby/src/pages/` | `/`, `/cv/`, `/404` |
+| `legacy/gatsby/src/templates/` | Blog list, post, work, category |
 
-## Generated routes (from `gatsby-node.js`)
+## Integration points (production)
 
-- `/blog`, `/blog/page/N` — paginated list (`postsPerPage` = 12)  
-- `/blog/category/:category` — one page per distinct post category  
-- One page per **post** `frontmatter.path`  
-- One page per **project** `frontmatter.path`  
+- **Build-time:** Astro content collections + `astro check` (no GraphQL).
+- **CI:** `deploy-astro-pages.yml` — `check`, `build`, `test:links` in `site/`.
+- **Third party:** GA4 (optional env), external links in markdown.
 
-## Integration points
+## Migration ADRs
 
-- **Build-time only:** Gatsby GraphQL in page components and `gatsby-node.js` (no backend in repo).  
-- **Third party:** Google Analytics (plugin), external links in content.  
+For Astro migration decisions (ADRs, checklist, FR mapping), see [_bmad-output/planning-artifacts/architecture.md](../_bmad-output/planning-artifacts/architecture.md).
