@@ -30,7 +30,7 @@ Legacy `gatsby-node.js`: first page `/blog`, further pages `/blog/page/{n}` (1-b
 | Route / template | Legacy path | Motion parity | Islands (Y/N, names) | LCP/JS ex. | Sign-off | Notes |
 |------------------|-------------|---------------|----------------------|------------|----------|-------|
 | Blog list page 1 | `/blog` | removed | N | | | Story 4.1: static index, 9/12 posts; teasers link to `path` (detail 404 until 4.3) |
-| Blog list page 2+ | `/blog/page/2` (add rows if `ceil(posts/12) > 1`) | | N | | | With 9 posts and 12 per page, **only page 1** exists today |
+| Blog list page 2+ | `/blog/page/2` (add rows if `ceil(posts/12) > 1`) | removed | N | | | Story 4.2: `getStaticPaths` emits page 2+ when `posts > 12`; **none** with 9 posts today |
 
 ---
 

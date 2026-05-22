@@ -1,0 +1,55 @@
+---
+import BlogPostList from './BlogPostList.astro';
+import BlogPagination from './BlogPagination.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+	h1: string;
+	entries: CollectionEntry<'posts'>[];
+	currentPage: number;
+	numPages: number;
+}
+
+const { h1, entries, currentPage, numPages } = Astro.props;
+---
+<div class="blog-index">
+	<h1>{h1}</h1>
+	<BlogPostList entries={entries} />
+	<BlogPagination currentPage={currentPage} numPages={numPages} />
+</div>
+
+<style>
+	.blog-index {
+		max-width: 100%;
+		box-sizing: border-box;
+		overflow-x: hidden;
+		padding: 7.5rem 1rem 3rem;
+		margin: 0 auto;
+		width: min(60%, 100%);
+		max-width: 1000px;
+		color: #323846;
+	}
+	.blog-index :global(h1) {
+		margin: 0 0 2rem;
+	}
+	.blog-index :global(.blog-index__list) {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 2.5rem;
+		max-width: 100%;
+	}
+	.blog-index :global(.visually-hidden) {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+</style>

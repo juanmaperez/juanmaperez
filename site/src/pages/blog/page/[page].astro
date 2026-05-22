@@ -1,0 +1,56 @@
+---
+import BlogLayout from '../../../layouts/BlogLayout.astro';
+import BlogIndexShell from '../../../components/blog/BlogIndexShell.astro';
+import {
+	getSortedPosts,
+	getNumPages,
+	getPostsForPage,
+} from '../../../utils/blogPosts';
+
+export async function getStaticPaths() {
+	const posts = await getSortedPosts();
+	const numPages = getNumPages(posts.length);
+	if (numPages <= 1) return [];
+
+	const paths: {
+		params: { page: string };
+		props: {
+			currentPage: number;
+			numPages: number;
+			pagePosts: typeof posts;
+		};
+	}[] = [];
+
+	for (let currentPage = 2; currentPage <= numPages; currentPage++) {
+		const pagePosts = getPostsForPage(posts, currentPage);
+		if (pagePosts.length === 0) continue;
+		paths.push({
+			params: { page: String(currentPage) },
+			props: { currentPage, numPages, pagePosts },
+		});
+	}
+
+	return paths;
+}
+
+interface Props {
+	currentPage: number;
+	numPages: number;
+	pagePosts: Awaited<ReturnType<typeof getSortedPosts>>;
+}
+
+const { currentPage, numPages, pagePosts } = Astro.props;
+const blogDescription =
+	'Juanma Perez personal blog about javascript and other technologies. Sometimes I also write about bread or recipes';
+---
+<BlogLayout
+	title={`Juanma Perez | Blog — Page ${currentPage}`}
+	description={blogDescription}
+>
+	<BlogIndexShell
+		h1={`Blog — Page ${currentPage}`}
+		entries={pagePosts}
+		currentPage={currentPage}
+		numPages={numPages}
+	/>
+</BlogLayout>

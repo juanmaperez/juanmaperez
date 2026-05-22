@@ -72,6 +72,12 @@ Items deferred from code reviews and stories (not blocking current slice).
 - **`/blog` nav href 404s until Story 4.1** — intentional during Epic 3; story §Edge cases and link inventory document the call. FR21 applies at release, not mid-migration.
 - **`currentColor` focus ring on dark backgrounds** — `SiteHeader.astro` `:focus-visible` uses `currentColor`; safe with default light page today. Revisit when a design system or dark theme lands (story §Edge cases).
 
+## Deferred from: code review of 4-2-blog-pagination (2026-05-21)
+
+- **Page 2+ static routes** — `getStaticPaths` empty until 13th post; infrastructure verified at `POSTS_PER_PAGE = 12`.
+- **`/blog/page/1`** — not emitted; optional redirect to `/blog` not implemented (static 404 acceptable per AC5).
+- **Teaser hrefs 404** until Story **4.3** — unchanged.
+
 ## Deferred from: code review of 4-1-blog-index-first-page (2026-05-21)
 
 - **Teaser links 404 until Story 4.3** — index uses correct `entry.data.path`; post detail routes not in 4.1 scope.

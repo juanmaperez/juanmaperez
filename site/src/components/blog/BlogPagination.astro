@@ -1,0 +1,48 @@
+---
+interface Props {
+	currentPage: number;
+	numPages: number;
+}
+
+const { currentPage, numPages } = Astro.props;
+const isFirst = currentPage === 1;
+const isLast = currentPage === numPages;
+const prevHref =
+	currentPage - 1 === 1 ? '/blog' : `/blog/page/${currentPage - 1}`;
+const nextHref = `/blog/page/${currentPage + 1}`;
+---
+<nav class="blog-pagination" aria-label="Blog pagination">
+	<div class="blog-pagination__slot">
+		{!isFirst && (
+			<a href={prevHref} rel="prev">
+				← Previous Page
+			</a>
+		)}
+	</div>
+	<div class="blog-pagination__slot">
+		{!isLast && (
+			<a href={nextHref} rel="next">
+				Next Page →
+			</a>
+		)}
+	</div>
+</nav>
+
+<style>
+	.blog-pagination {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 1rem;
+		max-width: 100%;
+		margin-top: 2.5rem;
+		flex-wrap: wrap;
+	}
+	.blog-pagination__slot {
+		min-width: 0;
+	}
+	.blog-pagination a:focus-visible {
+		outline: 2px solid currentColor;
+		outline-offset: 2px;
+	}
+</style>

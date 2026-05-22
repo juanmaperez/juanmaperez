@@ -1,0 +1,28 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BlogPostTeaser from './BlogPostTeaser.astro';
+import { resolvePostIcon } from '../../utils/resolvePostIcon';
+
+interface Props {
+	entries: CollectionEntry<'posts'>[];
+}
+
+const { entries } = Astro.props;
+---
+<section aria-labelledby="blog-recent-heading">
+	<h2 id="blog-recent-heading" class="visually-hidden">Recent posts</h2>
+	<ol class="blog-index__list">
+		{entries.map((entry) => (
+			<li>
+				<BlogPostTeaser
+					title={entry.data.title}
+					path={entry.data.path}
+					excerpt={entry.data.excerpt}
+					date={entry.data.date}
+					category={entry.data.category}
+					iconSrc={resolvePostIcon(entry.data.icon)}
+				/>
+			</li>
+		))}
+	</ol>
+</section>
