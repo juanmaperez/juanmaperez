@@ -1,8 +1,8 @@
 ---
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
 import HomeContact from '../../components/home/HomeContact.astro';
+import ProjectImage from '../../components/projects/ProjectImage.astro';
 import { getSortedProjects, getProjectSlugFromPath } from '../../utils/projectPosts';
-import { resolveProjectAsset } from '../../utils/resolveProjectAsset';
 import { render, type CollectionEntry } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -19,11 +19,6 @@ interface Props {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
-const galleryItems =
-	entry.data.images?.map((item) => ({
-		title: item.title,
-		src: resolveProjectAsset(entry.id, item.image),
-	})) ?? [];
 ---
 <ProjectLayout title={entry.data.title} description={entry.data.excerpt}>
 	<article class="project-detail">
@@ -36,14 +31,12 @@ const galleryItems =
 				<Content />
 			</div>
 			{
-				galleryItems.map((item) =>
-					item.src ? (
-						<figure class="project-detail__gallery-item">
-							<img src={item.src} alt={item.title} loading="lazy" />
-							<h3>{item.title}</h3>
-						</figure>
-					) : null,
-				)
+				entry.data.images?.map((item) => (
+					<figure class="project-detail__gallery-item">
+						<ProjectImage src={item.image} alt={item.title} variant="gallery" />
+						<h3>{item.title}</h3>
+					</figure>
+				))
 			}
 		</div>
 	</article>
@@ -101,7 +94,7 @@ const galleryItems =
 	.project-detail__gallery-item {
 		margin: 0 0 5.5rem;
 	}
-	.project-detail__gallery-item img {
+	.project-detail__gallery-item :global(img) {
 		display: block;
 		max-width: 100%;
 		height: auto;

@@ -1,32 +1,25 @@
 ---
 // site/src/components/home/HomeWorks.astro
+import ProjectImage from '../projects/ProjectImage.astro';
 import { getSortedProjects } from '../../utils/projectPosts';
-import { resolveProjectAsset } from '../../utils/resolveProjectAsset';
 
 const projects = await getSortedProjects();
 ---
 <section class="home-works" aria-labelledby="home-works-heading">
 	<h2 id="home-works-heading" class="home-works__title">projects</h2>
 	<ul class="home-works__list">
-		{projects.map((project) => {
-			const thumbSrc = resolveProjectAsset(project.id, project.data.thumbnail);
-			return (
-				<li class="home-works__item">
-					<a class="home-works__link" href={project.data.path}>
-						{thumbSrc ? (
-							<img
-								src={thumbSrc}
-								alt={project.data.title}
-								width="400"
-								height="300"
-								loading="lazy"
-							/>
-						) : null}
-						<span class="home-works__name">{project.data.title}</span>
-					</a>
-				</li>
-			);
-		})}
+		{projects.map((project) => (
+			<li class="home-works__item">
+				<a class="home-works__link" href={project.data.path}>
+					<ProjectImage
+						src={project.data.thumbnail}
+						alt={project.data.title}
+						variant="listing"
+					/>
+					<span class="home-works__name">{project.data.title}</span>
+				</a>
+			</li>
+		))}
 	</ul>
 </section>
 
@@ -66,7 +59,7 @@ const projects = await getSortedProjects();
 		text-decoration: none;
 		max-width: 100%;
 	}
-	.home-works__link img {
+	.home-works__link :global(img) {
 		display: block;
 		max-width: 100%;
 		height: auto;
