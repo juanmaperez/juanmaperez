@@ -13,7 +13,6 @@ export const siteConfig = {
 	nav: [
 		{ label: 'Home', href: '/' },
 		{ label: 'CV', href: '/cv' },
-		// TODO(4.1): /blog route
 		{ label: 'Blog', href: '/blog' },
 		{ label: 'Contact', href: 'mailto:juanmaperezvar@gmail.com' },
 	],

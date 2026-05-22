@@ -71,3 +71,15 @@ Items deferred from code reviews and stories (not blocking current slice).
 
 - **`/blog` nav href 404s until Story 4.1** — intentional during Epic 3; story §Edge cases and link inventory document the call. FR21 applies at release, not mid-migration.
 - **`currentColor` focus ring on dark backgrounds** — `SiteHeader.astro` `:focus-visible` uses `currentColor`; safe with default light page today. Revisit when a design system or dark theme lands (story §Edge cases).
+
+## Deferred from: code review of 4-1-blog-index-first-page (2026-05-21)
+
+- **Teaser links 404 until Story 4.3** — index uses correct `entry.data.path`; post detail routes not in 4.1 scope.
+- **`resolvePostIcon` eager glob** — all `assets/icons/*.png` enter the build graph; only javascript/react/recipes used today; narrow glob or `image()` in Epic 5.
+- **`/blog` FR15 smoke** — not in `docs/core-pages-smoke-checklist.md` yet; add row when extending checklist (4.2+).
+
+## Deferred from: code review of 3-7-core-responsive-and-accessibility-smoke (2026-05-21)
+
+- **Checklist commit `484fff2` predates checklist file** — SHA captures site code at smoke time; refresh when 3.7 docs are committed to `main`.
+- **`/blog` nav 404** until Story **4.1** — same Epic 3 deferral; not a core-trio FR15 failure.
+- **CV print smoke** — readability taken from Story **3.4**; optional explicit print re-check when extending checklist for Epic 4+.

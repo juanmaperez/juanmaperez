@@ -57,3 +57,17 @@ Global header links use `outline: 2px solid currentColor` with `outline-offset: 
 ## Contact (FR20)
 
 Primary contact path: **Contact** in the global nav (`mailto:` from `site.config.ts` `contact.email`) and the same address in `SiteFooter` on every `BaseLayout` page. `mailto:` opens the system mail client (no `target="_blank"`). External social links on the home contact block use `target="_blank"` and `rel="noopener noreferrer"`. The home `HomeContact` section duplicates the affordance by design (legacy parity).
+
+## Responsive smoke (FR15 / Story 3.7)
+
+Core routes **`/`**, **`/cv`**, and **`/404`** are checked at these viewport widths before Epic 3 sign-off:
+
+| Token | Width |
+|-------|-------|
+| `xs` | 320px |
+| `sm` | 375px |
+| `md` | 768px |
+| `lg` | 1024px |
+| `xl` | 1280px |
+
+**Procedure:** `npm run build && npm run preview` (default http://localhost:4321), then run the matrix in [docs/core-pages-smoke-checklist.md](../docs/core-pages-smoke-checklist.md). PASS when there is no horizontal scroll (`scrollWidth <= clientWidth`) and accessibility rows pass. Blog and project routes extend this pattern in later epics.

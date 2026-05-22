@@ -1,0 +1,73 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import BlogPostTeaser from '../../components/blog/BlogPostTeaser.astro';
+import { getCollection } from 'astro:content';
+import { POSTS_PER_PAGE } from '../../constants/blog';
+import { resolvePostIcon } from '../../utils/resolvePostIcon';
+
+const allPosts = (await getCollection('posts')).sort(
+	(a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+const pagePosts = allPosts.slice(0, POSTS_PER_PAGE);
+---
+<BlogLayout
+	title="Juanma Perez | Blog"
+	description="Juanma Perez personal blog about javascript and other technologies. Sometimes I also write about bread or recipes"
+>
+	<div class="blog-index">
+		<h1>Blog</h1>
+		<section aria-labelledby="blog-recent-heading">
+			<h2 id="blog-recent-heading" class="visually-hidden">Recent posts</h2>
+			<ol class="blog-index__list">
+				{pagePosts.map((entry) => (
+					<li>
+						<BlogPostTeaser
+							title={entry.data.title}
+							path={entry.data.path}
+							excerpt={entry.data.excerpt}
+							date={entry.data.date}
+							category={entry.data.category}
+							iconSrc={resolvePostIcon(entry.data.icon)}
+						/>
+					</li>
+				))}
+			</ol>
+		</section>
+	</div>
+</BlogLayout>
+
+<style>
+	.blog-index {
+		max-width: 100%;
+		box-sizing: border-box;
+		overflow-x: hidden;
+		padding: 7.5rem 1rem 3rem;
+		margin: 0 auto;
+		width: min(60%, 100%);
+		max-width: 1000px;
+		color: #323846;
+	}
+	.blog-index h1 {
+		margin: 0 0 2rem;
+	}
+	.blog-index__list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 2.5rem;
+		max-width: 100%;
+	}
+	.visually-hidden {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+</style>

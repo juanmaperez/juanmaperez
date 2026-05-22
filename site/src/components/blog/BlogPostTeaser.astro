@@ -1,0 +1,67 @@
+---
+interface Props {
+	title: string;
+	path: string;
+	excerpt: string;
+	date?: Date;
+	category?: string;
+	iconSrc?: string;
+}
+
+const { title, path, excerpt, date, category, iconSrc } = Astro.props;
+---
+<article class="blog-teaser">
+	<h2 class="blog-teaser__title">
+		<a href={path}>{title}</a>
+	</h2>
+	{date && (
+		<p class="blog-teaser__date">
+			<time datetime={date.toISOString()}>
+				{date.toLocaleDateString('en-GB', {
+					year: 'numeric',
+					month: 'long',
+					day: 'numeric',
+				})}
+			</time>
+		</p>
+	)}
+	{category && (
+		<p class="blog-teaser__category">
+			{iconSrc && <img class="blog-teaser__icon" src={iconSrc} alt="" width="16" height="16" />}
+			{category}
+		</p>
+	)}
+	<p class="blog-teaser__excerpt">{excerpt}</p>
+</article>
+
+<style>
+	.blog-teaser {
+		max-width: 100%;
+		box-sizing: border-box;
+	}
+	.blog-teaser__title {
+		margin: 0 0 0.5rem;
+		font-size: 1.25rem;
+	}
+	.blog-teaser__title a {
+		color: inherit;
+	}
+	.blog-teaser__date,
+	.blog-teaser__category,
+	.blog-teaser__excerpt {
+		margin: 0 0 0.5rem;
+	}
+	.blog-teaser__category {
+		display: flex;
+		align-items: center;
+		gap: 0.35rem;
+		font-size: 0.875rem;
+	}
+	.blog-teaser__excerpt {
+		line-height: 1.5;
+	}
+	.blog-teaser a:focus-visible {
+		outline: 2px solid currentColor;
+		outline-offset: 2px;
+	}
+</style>
