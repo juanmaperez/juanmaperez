@@ -40,9 +40,9 @@ Distinct categories from current content: `javascript`, `react`, `recipes`.
 
 | Route / template | Legacy path | Motion parity | Islands (Y/N, names) | LCP/JS ex. | Sign-off | Notes |
 |------------------|-------------|---------------|----------------------|------------|----------|-------|
-| Category | `/blog/category/javascript` | | N | | | |
-| Category | `/blog/category/react` | | N | | | |
-| Category | `/blog/category/recipes` | | N | | | |
+| Category | `/blog/category/javascript` | removed | N | | | Story 4.4: 7 posts, `BlogPostTeaser` category links |
+| Category | `/blog/category/react` | removed | N | | | Story 4.4: 1 post |
+| Category | `/blog/category/recipes` | removed | N | | | Story 4.4: 1 post |
 
 ---
 

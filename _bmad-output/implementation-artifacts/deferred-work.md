@@ -95,3 +95,8 @@ Items deferred from code reviews and stories (not blocking current slice).
 - **Checklist commit `484fff2` predates checklist file** — SHA captures site code at smoke time; refresh when 3.7 docs are committed to `main`.
 - **`/blog` nav 404** until Story **4.1** — same Epic 3 deferral; not a core-trio FR15 failure.
 - **CV print smoke** — readability taken from Story **3.4**; optional explicit print re-check when extending checklist for Epic 4+.
+
+## Deferred from: code review of 4-4-category-index-pages (2026-05-22)
+
+- **Category icon not inside category link on teaser** — legacy `post-item.js` linked icon only; AC5 met by text `<a>`; wrap `<img>` in same anchor if icon parity required.
+- **`getPostsByCategory` sort contract** — order depends on caller passing `getSortedPosts()` output; add explicit `date` DESC in helper if reused outside `getStaticPaths`.

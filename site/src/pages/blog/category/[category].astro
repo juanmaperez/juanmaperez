@@ -1,0 +1,40 @@
+---
+import BlogLayout from '../../../layouts/BlogLayout.astro';
+import BlogIndexShell from '../../../components/blog/BlogIndexShell.astro';
+import {
+	getSortedPosts,
+	getDistinctCategories,
+	getPostsByCategory,
+} from '../../../utils/blogPosts';
+import type { CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+	const posts = await getSortedPosts();
+	const categories = getDistinctCategories(posts);
+	return categories.map((category) => ({
+		params: { category },
+		props: {
+			category,
+			entries: getPostsByCategory(posts, category),
+		},
+	}));
+}
+
+interface Props {
+	category: string;
+	entries: CollectionEntry<'posts'>[];
+}
+
+const { category, entries } = Astro.props;
+---
+<BlogLayout
+	title={`Juanma Perez | ${category}`}
+	description={`Little of knowledge about ${category}`}
+>
+	<BlogIndexShell
+		h1={`All about ${category}`}
+		entries={entries}
+		currentPage={1}
+		numPages={1}
+	/>
+</BlogLayout>

@@ -39,3 +39,20 @@ export function getAdjacentPosts(
 		next: index < posts.length - 1 ? posts[index + 1]! : null,
 	};
 }
+
+export function getDistinctCategories(
+	posts: CollectionEntry<'posts'>[],
+): string[] {
+	return [...new Set(posts.map((p) => p.data.category))].sort();
+}
+
+export function getPostsByCategory(
+	posts: CollectionEntry<'posts'>[],
+	category: string,
+): CollectionEntry<'posts'>[] {
+	return posts.filter((p) => p.data.category === category);
+}
+
+export function getCategoryPath(category: string): string {
+	return `/blog/category/${category}`;
+}

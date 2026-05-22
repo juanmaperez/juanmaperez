@@ -5,6 +5,7 @@ import {
 	getSortedPosts,
 	getBlogSlugFromPath,
 	getAdjacentPosts,
+	getCategoryPath,
 } from '../../utils/blogPosts';
 import { resolvePostIcon } from '../../utils/resolvePostIcon';
 import { render, type CollectionEntry } from 'astro:content';
@@ -48,7 +49,7 @@ const formattedDate = entry.data.date.toLocaleDateString('en-GB', {
 							height="16"
 						/>
 					)}
-					{entry.data.category}
+					<a href={getCategoryPath(entry.data.category)}>{entry.data.category}</a>
 				</span>
 			)}
 		</p>
@@ -86,6 +87,10 @@ const formattedDate = entry.data.date.toLocaleDateString('en-GB', {
 		display: inline-flex;
 		align-items: center;
 		gap: 0.35rem;
+	}
+	.blog-post__category a:focus-visible {
+		outline: 2px solid currentColor;
+		outline-offset: 2px;
 	}
 	.blog-post__content {
 		max-width: 670px;

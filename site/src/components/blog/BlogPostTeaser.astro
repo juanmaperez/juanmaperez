@@ -1,4 +1,6 @@
 ---
+import { getCategoryPath } from '../../utils/blogPosts';
+
 interface Props {
 	title: string;
 	path: string;
@@ -28,7 +30,7 @@ const { title, path, excerpt, date, category, iconSrc } = Astro.props;
 	{category && (
 		<p class="blog-teaser__category">
 			{iconSrc && <img class="blog-teaser__icon" src={iconSrc} alt="" width="16" height="16" />}
-			{category}
+			<a href={getCategoryPath(category)}>{category}</a>
 		</p>
 	)}
 	<p class="blog-teaser__excerpt">{excerpt}</p>
