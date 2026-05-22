@@ -35,6 +35,7 @@ npm run test:schema  # proves invalid frontmatter fails check (Story 2.1)
 
 - **`site`:** `https://juanmaperez.dev` — canonical origin for `import.meta.env.SITE`, sitemap, and absolute OG URLs (aligned with legacy Gatsby `siteUrl`).
 - **Sitemap (Story 6.2):** `npm run build` writes `dist/sitemap-index.xml` and `dist/sitemap-0.xml`; preview at `/sitemap-index.xml` after `npm run preview`.
+- **Redirects (Story 6.3):** `redirects` in `astro.config.mjs` from `src/config/redirects.ts` (301: `/projects/colossus` → `/projects/colossus-bets`; trailing-slash policy in parity checklist — not in `redirectMap` due to Astro route conflict). Static GitHub Pages build emits redirect route pages ([configured redirects](https://docs.astro.build/en/guides/routing/#configured-redirects)); audit: `node scripts/collect-redirect-paths.mjs`.
 - **`base`:** `'/'` — site is served at the **domain root** (custom domain on GitHub Pages), not from `https://<user>.github.io/<repo>/`.
 
 If you ever publish only to **`https://<user>.github.io/<repository>/`** without a custom domain, set `base: '/<repository>/'` (leading and trailing slash) and set `site` to `https://<user>.github.io` per [Astro GitHub Pages](https://docs.astro.build/en/guides/deploy/github/).

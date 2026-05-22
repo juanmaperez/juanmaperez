@@ -15,6 +15,23 @@
 
 **SEO (FR11):** Story **6.2** — `@astrojs/sitemap` emits `sitemap-index.xml` on build; `site/src/pages/robots.txt.ts` points crawlers at the sitemap (legacy `gatsby-plugin-sitemap` parity). `/404` excluded from sitemap via integration `filter`.
 
+**SEO (FR12):** Story **6.3** — `site/src/config/redirects.ts` → `astro.config.mjs` `redirects` (301). Post/project slugs unchanged vs legacy; aliases only. See **Redirect map** below.
+
+---
+
+## Redirect map (FR12)
+
+Source of truth: `site/src/config/redirects.ts` (built from content `path` frontmatter + hub list). List entries: `cd site && node scripts/collect-redirect-paths.mjs`.
+
+| From (redirect source) | To (canonical) | Reason |
+|------------------------|----------------|--------|
+| `/projects/colossus` | `/projects/colossus-bets` | Folder slug ≠ public `path` (Story 2.3) |
+| *(post/project/hub paths)* | *(same as Legacy path column above)* | **No slug change** — migration preserved `path` frontmatter |
+
+**Trailing-slash aliases (not in `redirectMap`):** Astro static output is `path/index.html`; redirecting `path/` → `path` conflicts with the prerendered route (build failure on `/blog/`, etc.). GitHub Pages serves both `/path` and `/path/` for directory indexes; canonicals use non-trailing `path` where set (Story 6.1).
+
+**Legacy `/cv/` note:** Astro serves `/cv` and `/cv/` via `cv/index.html`; no config redirect (same conflict as `/blog/`).
+
 ---
 
 ## Core templates
