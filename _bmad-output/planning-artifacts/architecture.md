@@ -88,6 +88,29 @@ This document is the **technical single source of truth** for replatforming the 
 - **Rationale:** UA sunset; PRD technical success.  
 - **Consequences:** Measurement ID via env at build time if needed: `PUBLIC_GA_ID`.
 
+### ADR-008 — Motion stack: **GSAP 3 + ScrollTrigger** (default); islands only where needed
+
+- **Decision:** Epic **7.2** replaces legacy **GSAP 2 + ScrollMagic** with **GSAP 3** (`gsap` npm package) and the **ScrollTrigger** plugin (official scroll/scene replacement). Do **not** port `scrollmagic` or `react-scrollmagic` to `site/`.  
+- **Rationale:** ScrollMagic is unmaintained; ScrollTrigger is the supported GSAP path for pin, scrub, and scroll-linked tweens. GSAP 3 tree-shakes (`gsap`, `ScrollTrigger` only) and maps 1:1 from legacy `TimelineMax` / `TweenMax` / `ScrollMagic.Scene`. Legacy audit: [migration-parity-checklist.md](../../docs/migration-parity-checklist.md) § Legacy animation inventory.  
+- **Astro integration:**  
+  - **Home + project contact scroll FX:** one or few **client-only** modules under `site/src/scripts/motion/` (or `site/src/components/motion/*.astro`) loaded via `client:visible` on `/` and project layout only — **no** motion JS in global `BaseLayout`.  
+  - **Header intro:** small `client:visible` island or script on `SiteHeader` (GSAP timeline on mount).  
+  - **CV:** prefer **GSAP 3** or **Motion** (`motion` / `@motionone/dom`) for stagger reveals to avoid pulling **react-spring@8** + full React runtime; if spring **feel** cannot be matched in a spike, allow a **CV-only** `@astrojs/react` island with `@react-spring/web` (single route, checklist-approved).  
+  - **Cookie gate / orchestration:** vanilla `document.cookie` + callbacks; no extra library.  
+  - **CSS-only** (glitch, blink cursor): port keyframes; no GSAP.  
+- **Alternatives considered (reject for primary path unless spike fails):**  
+  | Option | Verdict | Why |
+  |--------|---------|-----|
+  | **ScrollMagic 2** (port as-is) | Reject | Unmaintained; SSR/build issues already forced null-loader in Gatsby; no Astro benefit. |
+  | **GSAP 2** | Reject | Superseded; smaller win than GSAP 3 + ScrollTrigger migration. |
+  | **CSS scroll-driven animations only** | Fallback / *simplified* | Cannot match pin + scrub + parallax scenes without rework; use only if product accepts *simplified*. |
+  | **Motion One / anime.js / WAAPI** | Secondary | Viable for CV stagger or micro-interactions; not a drop-in for existing ScrollMagic scenes. |
+  | **Lenis + ScrollTrigger** | Optional polish | Smooth scroll not in legacy; add only if desired post-parity. |
+  | **Framer Motion** | Reject default | Heavy React dependency; conflicts with ADR-004 default. |
+- **NFR / a11y:** Register `ScrollTrigger.matchMedia` and honor **`prefers-reduced-motion`** (static end state, no pin). Document transferred JS per route for **NFR-P2**; expect checklist **LCP/JS ex. = Y** on `/` and `/cv/`.  
+- **Spike (7.2 task 0):** Port `main-block.js` intro timeline + one `ScrollMagic.Scene` (e.g. `workItem` parallax) in a throwaway Astro page; measure bundle size before full home port.  
+- **Consequences:** `site/package.json` adds `gsap` (v3); optional `@astrojs/react` only if CV spike chooses react-spring path. Inventory **Recommended Astro** column should cite **ADR-008** stack, not generic “vanilla-script” alone.
+
 ---
 
 ## 4. Logical view (C4-lite)
@@ -203,10 +226,25 @@ Source of field usage: `docs/api-contracts.md` and `gatsby-node.js` (repo).
 
 ## 8. Islands and legacy animation
 
-1. **Inventory** each template using GSAP, ScrollMagic, `react-spring`, etc. (from `src/`).  
-2. For each, choose: **static HTML/CSS only**, **vanilla `<script>`** in Astro, or **React island** with `client:visible` / `client:media`.  
-3. **No** ScrollMagic during prerender: keep **client-only** execution (parity with legacy `build-html` null-loader intent).  
-4. Record decision in **migration parity checklist** (section 12).
+1. **Inventory** each template using GSAP, ScrollMagic, `react-spring`, etc. (from `src/`). Story **7.1** complete — see checklist inventory table.  
+2. **Implement** per **ADR-008**: GSAP 3 + ScrollTrigger for scroll/timeline parity; CSS for glitch/typewriter cursor; CV stagger via GSAP/Motion first, React spring only as checklist-approved fallback.  
+3. For each surface, choose delivery: **static HTML/CSS**, **client `<script>` module** (preferred for home scroll scenes), or **Astro island** with `client:visible` / `client:media` (header, optional CV).  
+4. **No** scroll-animation library during prerender — init in `connectedCallback`, `DOMContentLoaded`, or island mount only (parity with Gatsby `build-html` null-loader).  
+5. Record motion parity and **7.2 component names** in **migration parity checklist** (section 12).  
+6. **7.2 file layout (target):**
+
+```
+site/src/scripts/motion/
+  home-orchestration.ts    # cookie gate, section unlock
+  home-main-block.ts       # intro timeline (from main-block.js)
+  home-about.ts
+  home-contact.ts
+  home-work-item.ts        # ScrollTrigger parallax per card
+  header-intro.ts
+site/src/components/motion/
+  HomeMotion.astro         # client:visible — imports home-* on index only
+  CvMotion.astro           # client:visible — CV route only (or per-section islands)
+```
 
 ---
 
@@ -278,15 +316,16 @@ Reference: [Deploy your Astro Site to GitHub Pages](https://docs.astro.build/en/
 
 Maintain `docs/migration-parity-checklist.md` (or path in `inputDocuments` once created). **Each row = one legacy URL or template class.**
 
-| Route / template | Legacy path | Motion parity (same / simplified / removed) | Islands approved (Y/N, names) | LCP/JS exception (Y/N) | Sign-off | Notes |
-|------------------|-------------|--------------------------------------------|-------------------------------|--------------------------|----------|-------|
+| Route / template | Legacy path | Motion parity (same / simplified / removed / n/a) | Visual parity (same / simplified / removed / n/a) | Islands approved (Y/N, names) | LCP/JS exception (Y/N) | Sign-off | Notes |
+|------------------|-------------|-----------------------------------------------------|---------------------------------------------------|-------------------------------|--------------------------|----------|-------|
 | Home | `/` | | | | | |
 | CV | `/cv/` | | | | | |
 | Blog list p1 | `/blog/` | | | | | |
 | Example post | `/blog/...` | | | | | |
 | Example project | `/projects/...` | | | | | |
 
-**FR19** approval: product owner checks “motion parity” and narrative columns before cutover.
+**FR19** approval: product owner checks “motion parity” and narrative columns before cutover.  
+**FR22** approval: product owner checks “visual parity” (typography, color, spacing) before cutover; see **Legacy typography & styling inventory** (Epic 8, Story 8.1).
 
 ---
 
@@ -312,6 +351,7 @@ Maintain `docs/migration-parity-checklist.md` (or path in `inputDocuments` once 
 | FR17 | ADR-003 |
 | FR18 | Section 11 |
 | FR19 | Sections 8, 12 |
+| FR22 | Sections 9, 12; ADR-005 |
 | FR20 | `site.config.ts` nav + home template |
 | FR21 | CI step: `npx astro check` + link checker script (optional `lychee` or similar) on `dist/` |
 

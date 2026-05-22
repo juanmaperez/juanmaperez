@@ -8,7 +8,7 @@
 # STATUS DEFINITIONS: see bmad-sprint-planning skill workflow.md
 
 generated: "2026-04-20T12:00:00Z"
-last_updated: "2026-05-22T15:24:00Z"
+last_updated: "2026-05-22T16:15:00Z"
 project: juanmaperez
 project_key: juanmaperez
 tracking_system: file-system
@@ -61,9 +61,15 @@ development_status:
   6-5-analytics-snippet-ga4-or-alternative: done
   epic-6-retrospective: optional
 
-  epic-7: backlog
-  7-1-legacy-animation-inventory: backlog
-  7-2-implement-approved-islands-only: backlog
+  epic-7: in-progress
+  7-1-legacy-animation-inventory: done
+  7-2-implement-approved-islands-only: ready-for-dev
   7-3-checklist-sign-off-before-cutover: backlog
   7-4-post-islands-performance-regression-check: backlog
   epic-7-retrospective: optional
+
+  epic-8: in-progress
+  8-1-legacy-typography-and-styling-inventory: done
+  8-2-global-design-tokens-and-font-loading: ready-for-dev
+  8-3-per-template-visual-reconciliation-and-sign-off: backlog
+  epic-8-retrospective: optional

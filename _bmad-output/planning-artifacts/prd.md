@@ -38,8 +38,8 @@ classification:
   projectContext: brownfield
 prdVersion: '1.1'
 completedDate: '2026-04-20'
-lastEdited: '2026-04-20'
-editSource: '_bmad-output/planning-artifacts/prd-validation-report-2026-04-20.md ([EP] Edit PRD)'
+lastEdited: '2026-05-22'
+editSource: 'Epic 7 motion stack (GSAP 3 + ScrollTrigger, ADR-008) + Epic 8 visual parity ([EP] Edit PRD)'
 ---
 
 # Product Requirements Document — juanmaperez
@@ -114,7 +114,6 @@ This is not a generic “new website”; it is a **precision migration**: preser
 ### Growth (post-MVP)
 
 - **Content collections** schemas with validation; optional MDX where needed.
-- **Visual polish** pass (spacing, typography) where old CSS does not map 1:1.
 - **Search** or **tag** pages if desired later.
 - **Preview deploys** (e.g. Cloudflare/Netlify) for branch previews.
 
@@ -191,6 +190,14 @@ Derived from `web_app` signals (SEO, browser support, performance, accessibility
 | Static hosting + CI | Dynamic server features |
 | GA4 or single analytics | Full cookie consent platform (unless legally required) |
 | Redirect plan for URL changes | Automatic external link checker |
+| Legacy motion (FR19) | Deferred to **Epic 7** after static MVP |
+| Legacy typography, color, spacing (FR22) | Deferred to **Epic 8** after static MVP |
+
+### Post-MVP — brand & visual parity (Epic 8)
+
+- **Typography & styling inventory** comparing legacy Gatsby CSS/fonts to Astro (checklist-driven).
+- **Global design tokens** (fonts, palette, base typography) applied via shared styles in `site/`.
+- **Per-template visual reconciliation** so the migrated site matches the legacy brand feel, not only layout and copy.
 
 ---
 
@@ -230,12 +237,16 @@ Derived from `web_app` signals (SEO, browser support, performance, accessibility
 
 ### Optional / explicit islands (only if parity demands)
 
-- **FR19:** For any route where legacy scroll- or timeline-driven UI cannot be reproduced with static HTML alone, **visitor can complete the same primary narrative** (same section order and substantive copy as recorded in the **migration parity checklist** for that route). **Motion** may be *same*, *simplified*, or *removed*; the checklist entry must state which applies and must be approved before cutover.
+- **FR19:** For any route where legacy scroll- or timeline-driven UI cannot be reproduced with static HTML alone, **visitor can complete the same primary narrative** (same section order and substantive copy as recorded in the **migration parity checklist** for that route). **Motion** may be *same*, *simplified*, or *removed*; the checklist entry must state which applies and must be approved before cutover. **Epic 7 default:** where legacy used GSAP, ScrollMagic, react-spring, or equivalent, inventory and implementation should target **`same`** unless evidence shows *simplified* or *removed* is required; checklist may record **NFR-P2 LCP/JS exceptions** on routes that need them to ship **`same`** motion. **Implementation technology (Architecture ADR-008):** replace legacy **GSAP 2 + ScrollMagic** with **GSAP 3 + ScrollTrigger** in **client-only** Astro modules or islands; do not port ScrollMagic. CV stagger prefers GSAP/Motion over reintroducing legacy **react-spring@8** unless a documented spike shows parity requires a CV-only React island.
 
 ### Contact and link integrity
 
 - **FR20:** Visitor can reach **at least one primary contact path** (e.g. mailto, social profile, or contact section link) from the **home** page or **global navigation** without leaving the primary site experience.
 - **FR21:** Visitor does not hit **broken internal links** on MVP routes (verified by **release checklist**: automated link crawl or manual pass documented per release).
+
+### Brand, typography, and visual presentation
+
+- **FR22:** Visitor experiences **typography, color, and spacing** consistent with the legacy site’s brand as recorded in the **migration parity checklist** **Visual parity** column (`same` | `simplified` | `removed` | `n/a`). **Epic 8 default:** where legacy used named fonts (e.g. Questrial body, MFred headings), shared palette (`#fbf9f3`, `#323846`, `#b7c8cb`), or template-specific rules in `src/styles/`, inventory and implementation target **`same`** unless *simplified* is documented with rationale. Global fonts and tokens load from **`site/`** (not ad hoc per-component system stacks only).
 
 ---
 
@@ -259,6 +270,10 @@ Derived from `web_app` signals (SEO, browser support, performance, accessibility
 ### Accessibility
 
 - **NFR-A1:** New navigation and form controls (if any) meet **keyboard** operation and visible **focus** states.
+
+### Visual / font loading
+
+- **NFR-V1:** **Web font loading** for FR22 must use a documented strategy (`self-host` preferred for MFred; Google Fonts or equivalent for Questrial/Amatic/Montserrat if retained) with **`font-display: swap`** (or better) and must not regress **NFR-P1 LCP** on home without a checklist-noted mitigation (subset, preload, or exception documented alongside FR22 sign-off).
 
 ---
 
@@ -285,7 +300,8 @@ Derived from `web_app` signals (SEO, browser support, performance, accessibility
 1. **[CA] Create Architecture** — Astro folder structure, content collections, redirect map, CI, migration parity checklist template, baseline capture steps.  
 2. **[CE] Create Epics and Stories** — break FRs (including FR20–FR21) into implementation backlog.  
 3. **[IR] Check Implementation Readiness** before heavy build sprint.  
-4. **Re-validate** — run `bmad-validate-prd` again after major PRD or architecture changes.
+4. **Epic 8** — typography & visual parity inventory and implementation (FR22, NFR-V1).  
+5. **Re-validate** — run `bmad-validate-prd` again after major PRD or architecture changes.
 
 ---
 

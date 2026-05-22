@@ -44,7 +44,8 @@ FR17: Maintainer can run a **production build** that **fails** when **content sc
 FR18: Maintainer can deploy via **documented CI pipeline** without manual FTP.  
 FR19: For scroll/timeline-heavy routes, visitor completes the same primary narrative per **migration parity checklist**; motion same/simplified/removed and approved.  
 FR20: Visitor can reach **at least one primary contact path** from **home** or **global navigation**.  
-FR21: Visitor does not hit **broken internal links** on MVP routes (release checklist: automated or manual).
+FR21: Visitor does not hit **broken internal links** on MVP routes (release checklist: automated or manual).  
+FR22: Visitor experiences **typography, color, and spacing** per **migration parity checklist** Visual parity (`same` / `simplified` / `removed` / `n/a`); Epic 8 restores legacy brand fonts and styling where feasible.
 
 ### Non-functional requirements
 
@@ -54,7 +55,8 @@ NFR-R1: Dependencies installable on **documented Node LTS** without deprecated n
 NFR-R2: Repository documents **entry commands** and hosting assumptions in `docs/` and/or README.  
 NFR-S1: No API keys or private tokens committed for MVP static deploy.  
 NFR-S2: Third-party scripts (analytics) load with **defer/async** and minimal surface.  
-NFR-A1: New navigation and form controls meet **keyboard** operation and visible **focus** states.
+NFR-A1: New navigation and form controls meet **keyboard** operation and visible **focus** states.  
+NFR-V1: Web font loading for FR22 uses documented strategy; no LCP regression on home without checklist mitigation.
 
 ### Additional requirements (from Architecture)
 
@@ -104,7 +106,9 @@ UX-DR5: **WCAG 2.1 Level A** minimum for new templates (color contrast for text/
 | FR19 | E7 | 7.2, 7.3 |
 | FR20 | E3 | 3.6 |
 | FR21 | E6 | 6.4 |
+| FR22 | E8 | 8.2, 8.3 |
 | NFR-P1/P2 | E1, E7 | 1.5, 7.4 |
+| NFR-V1 | E8 | 8.2 |
 | NFR-R1/R2 | E1 | 1.1, 1.4 |
 | NFR-S1/S2 | E6 | 6.5 |
 | NFR-A1 | E3 | 3.2, 3.7 |
@@ -141,6 +145,10 @@ Search engines and social previews work; **redirects** and **internal links** ar
 ### Epic 7: Motion parity and client islands (where approved)
 Where legacy UX demands it, visitors still complete the **narrative** with **controlled motion** and **bounded JS** per checklist.  
 **FRs covered:** FR19 — **NFRs:** NFR-P1 (regression check), NFR-P2 (islands)  
+
+### Epic 8: Typography and visual design parity
+Visitors see the **legacy brand** (fonts, palette, spacing, template styling) on the Astro site, not a generic system-font approximation.  
+**FRs covered:** FR22 — **NFRs:** NFR-V1 (font loading), NFR-A1 (contrast after token changes) — **UX-DR:** UX-DR5  
 
 ---
 
@@ -657,9 +665,11 @@ So that **FR19** decisions are data-driven.
 
 **Given** legacy `src/` templates audited  
 **When** inventory is written into `docs/migration-parity-checklist.md`  
-**Then** each affected route has motion parity choice: same / simplified / removed  
+**Then** each affected route has motion parity choice: same / simplified / removed — with **home, CV, header, and legacy contact motion defaulting to `same`** (Stories 3.3/3.4 static MVP is interim, not the cutover target)  
+**And** each `same` row records recommended Astro approach (`vanilla-script` | `island`) and likely **LCP/JS exception** for NFR-P2  
+**And** Story **7.2** scope is explicitly non-empty when inventory lists non-`static` recommendations  
 
-**Maps to:** FR19 prep; Architecture §8.
+**Maps to:** FR19 prep; Architecture §8; NFR-P2 exception path.
 
 ---
 
@@ -671,12 +681,14 @@ So that **FR19** and **NFR-P2** are honored.
 
 **Acceptance criteria:**
 
-**Given** checklist-approved components  
-**When** implemented with explicit `client:*` directives (or vanilla JS per Architecture)  
-**Then** no island loads on routes without approval  
-**And** bundle contribution per island is noted for NFR tracking  
+**Given** checklist-approved components (Story 7.1 inventory)  
+**When** implemented per **ADR-008** (GSAP 3 + ScrollTrigger for scroll/timeline; no ScrollMagic port)  
+**Then** a **spike** on home intro + one scroll scene ships first; full home/CV/header/project contact motion follows inventory  
+**And** motion loads only on routes with checklist approval via `client:visible` / route-scoped scripts (not global layout)  
+**And** `prefers-reduced-motion` shows static end states  
+**And** bundle contribution (gsap + plugins + any React CV island) is noted for NFR-P2  
 
-**Maps to:** FR19, NFR-P2; ADR-004.
+**Maps to:** FR19, NFR-P2; ADR-004, ADR-008.
 
 ---
 
@@ -712,12 +724,71 @@ So that **NFR-P1** and **NFR-P2** still pass after islands.
 
 ---
 
+## Epic 8: Typography and visual design parity
+
+**Goal:** Checklist-driven **FR22** delivery—legacy fonts and CSS reconciled with the static Astro site without a full redesign.
+
+### Story 8.1: Legacy typography and styling inventory
+
+As a **maintainer**,  
+I want **a comparison of legacy vs Astro fonts, colors, and key CSS rules per template**,  
+So that **FR22** gaps are data-driven before implementation.
+
+**Acceptance criteria:**
+
+**Given** legacy `src/styles/` (e.g. `main.css`, `mixins.scss`) and component-level styled rules in `src/` audited  
+**When** inventory is written into `docs/migration-parity-checklist.md`  
+**Then** a **Legacy typography & styling inventory (Story 8.1)** section lists each **template/area**, **legacy fonts/CSS sources**, **current Astro state**, **gap summary**, and **recommended fix** (`global-token` | `component-css` | `n/a`)  
+**And** each route table row gains **Visual parity** (`same` / `simplified` / `removed` / `n/a`) defaulting to **`same`** where legacy used brand fonts or shared palette  
+**And** known gaps are documented (e.g. no `site/src/styles/`; BaseLayout loads no fonts; header lacks MFred/glitch; blog teasers lack Montserrat)
+
+**Maps to:** FR22 prep; Architecture §12; ADR-005.
+
+---
+
+### Story 8.2: Global design tokens and font loading
+
+As a **visitor**,  
+I want **body and heading typography to match the legacy site**,  
+So that **FR22** brand recognition holds across routes.
+
+**Acceptance criteria:**
+
+**Given** Story 8.1 inventory approving global tokens  
+**When** `site/` implements shared styles (e.g. `site/src/styles/global.css` or equivalent) wired from `BaseLayout.astro`  
+**Then** **Questrial** (or documented equivalent) applies to body text and **MFred** (self-hosted from migrated `src/assets/fonts/mfred/`) applies to `h1`–`h6` and brand lockup per inventory  
+**And** legacy page background **`#fbf9f3`** and primary text **`#323846`** / accent **`#b7c8cb`** are available as CSS variables used by templates  
+**And** font loading follows **NFR-V1** (`font-display: swap`, preload/subset strategy documented in `site/README.md`)  
+**And** gate quartet from `site/` still passes
+
+**Maps to:** FR22, NFR-V1, UX-DR5; ADR-005.
+
+---
+
+### Story 8.3: Per-template visual reconciliation and sign-off
+
+As a **visitor**,  
+I want **each primary template to look like the legacy site**, not only read the same copy,  
+So that **FR22** is satisfied route by route.
+
+**Acceptance criteria:**
+
+**Given** global tokens from Story 8.2  
+**When** home, CV, blog (list/post/teaser), projects, header, and 404 are updated per inventory  
+**Then** template-specific rules match inventory **`same`** rows (e.g. blog teaser **Montserrat** titles, home hero/contact scale, CV section heading sizes, header glitch/brand styling where inventory marks **`same`**)  
+**And** checklist **Visual parity** and **Sign-off** columns are updated; mandatory rows signed before cutover (with Epic 7 motion sign-off)  
+**And** no horizontal scroll regression on FR15 smoke routes
+
+**Maps to:** FR22, FR15, UX-DR4–5.
+
+---
+
 ## Final validation (Step 4)
 
 | Check | Result |
 |--------|--------|
-| **FR coverage** | FR1–FR21 each appear in ≥ one story AC scope. |
-| **NFR coverage** | NFR-P1/P2 in 1.5, 7.4 + Epic 7; R1/R2 in 1.1/1.4; S1/S2 in 6.5; A1 in 3.2, 3.7. |
+| **FR coverage** | FR1–FR22 each appear in ≥ one story AC scope. |
+| **NFR coverage** | NFR-P1/P2 in 1.5, 7.4 + Epic 7; NFR-V1 in 8.2; R1/R2 in 1.1/1.4; S1/S2 in 6.5; A1 in 3.2, 3.7, 8.3. |
 | **Architecture** | ADRs reflected in Epics 1–2, 5–7; routing in 4–5; CI in 1. |
 | **Story dependencies** | Stories only rely on earlier stories or prior epics (E2 needs E1 CI optionally—E2.4 extends E1.3). |
 | **Starter template** | Covered by Story 1.1 (create Astro project per Architecture). |

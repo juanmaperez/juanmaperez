@@ -65,6 +65,14 @@ grep gtag dist/index.html   # should match when ID is set
 
 Production: add repository variable **`PUBLIC_GA_MEASUREMENT_ID`** in GitHub (Settings → Secrets and variables → Actions → Variables). CI passes the variable to the build step in [`.github/workflows/deploy-astro-pages.yml`](../.github/workflows/deploy-astro-pages.yml). Legacy Universal Analytics `UA-98892695-1` is not used — create a GA4 property and use its measurement ID.
 
+### Motion / FR19 (Story 7.1+)
+
+Legacy Gatsby motion (GSAP, ScrollMagic, react-spring, cookie gate) is inventoried in [docs/migration-parity-checklist.md](../docs/migration-parity-checklist.md) (**§ Legacy animation & JS inventory**). Target parity is **`same`** on `/`, `/cv/`, and project detail contact sections; Epic **7.2** implements only checklist-approved **`client:*` islands** or vanilla scripts per **ADR-004**. Current Astro build is still **static-only** (no `@astrojs/react` until 7.2).
+
+### Typography / FR22 (Story 8.1+)
+
+Legacy fonts (**Questrial** body, **MFred** headings, **Montserrat** blog titles, `#fbf9f3` canvas) are inventoried in [docs/migration-parity-checklist.md](../docs/migration-parity-checklist.md) (**§ Legacy typography & styling inventory**). Epics 3–5 used **system UI** and scoped component CSS as an interim; target **Visual parity = same**. Story **8.2** adds global styles and font loading (**NFR-V1**); **8.3** reconciles per-template rules and sign-off. This story does **not** add fonts or `global.css` yet.
+
 ## Heading policy
 
 Each page contributes exactly one `<h1>`. The `<h1>` is owned by the page (or a route-family layout), never by `BaseLayout`. `BaseLayout` emits no headings — it is only the document shell (`src/layouts/BaseLayout.astro`). Later headings on a page follow content order without skipping levels (UX-DR2 / accessibility). Site-wide title and description defaults live in `src/site.config.ts`; pages may pass optional `title` and `description` props to `BaseLayout` (defaults apply when omitted).
