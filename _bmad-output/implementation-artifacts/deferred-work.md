@@ -45,6 +45,11 @@ Items deferred from code reviews and stories (not blocking current slice).
 - **`_schema-test/` accidental commit** — if `posts/_schema-test/` or `projects/_schema-test/` is committed, CI `npm run check` fails on invalid fixture. Add `**/_schema-test/` to `.gitignore` in a follow-up hardening pass.
 - **Dev note PR overstatement** — story Dev Notes §Edge cases claimed build job runs on PRs; workflow has no `pull_request` trigger until decision on Review Finding #1 is resolved.
 
+## Deferred from: code review of 3-6-primary-contact-path (2026-05-22)
+
+- **`contact.navLabel` unused** — nav item uses hardcoded `label: 'Contact'`; wire to `navLabel` in a future config DRY pass.
+- **`cv.ts` email literal** — duplicate of `siteConfig.contact.email`; consolidation out of 3.6 scope.
+
 ## Deferred from: code review of 3-5-404-and-recovery-paths (2026-05-22)
 
 - **`/blog` on 404 page still 404** until Story **4.1** — recovery `href` is correct for release.

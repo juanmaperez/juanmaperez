@@ -3,7 +3,10 @@
 import { siteConfig } from '../../site.config';
 
 const currentPath = Astro.url.pathname;
+const isPageLink = (href: string): boolean =>
+	href.startsWith('/') && !href.startsWith('//');
 const isCurrent = (href: string): boolean => {
+	if (!isPageLink(href)) return false;
 	if (href === '/') return currentPath === '/';
 	return currentPath === href || currentPath.startsWith(href + '/');
 };

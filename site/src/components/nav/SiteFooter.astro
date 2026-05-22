@@ -1,0 +1,28 @@
+---
+// site/src/components/nav/SiteFooter.astro
+import { siteConfig } from '../../site.config';
+
+const mailto = `mailto:${siteConfig.contact.email}`;
+---
+<footer class="site-footer">
+	<p>
+		<a href={mailto}>{siteConfig.contact.email}</a>
+	</p>
+</footer>
+
+<style>
+	.site-footer {
+		padding: 1rem;
+		max-width: 100%;
+		box-sizing: border-box;
+		border-top: 1px solid #b7c8cb;
+		text-align: center;
+	}
+	.site-footer p {
+		margin: 0;
+	}
+	.site-footer a:focus-visible {
+		outline: 2px solid currentColor;
+		outline-offset: 2px;
+	}
+</style>

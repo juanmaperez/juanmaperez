@@ -4,9 +4,10 @@
 //   - head:   reserved (Story 6.1 — per-page SEO/OG tags)
 //   - header: default fill SiteHeader (Story 3.2); pages may override via slot="header"
 //   - default (in <main>): page content (this story onwards)
-//   - footer: reserved (Story 3.6 — primary contact path) — may also surface site-wide links
+//   - footer: default fill SiteFooter (Story 3.6); pages may override via slot="footer"
 import { siteConfig } from '../site.config';
 import SiteHeader from '../components/nav/SiteHeader.astro';
+import SiteFooter from '../components/nav/SiteFooter.astro';
 
 interface Props {
 	title?: string;
@@ -34,6 +35,6 @@ const resolvedDescription = description ?? siteConfig.description;
 		<main>
 			<slot />
 		</main>
-		<slot name="footer" />
+		<slot name="footer"><SiteFooter /></slot>
 	</body>
 </html>

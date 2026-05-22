@@ -53,3 +53,7 @@ Each page contributes exactly one `<h1>`. The `<h1>` is owned by the page (or a 
 ## Accessibility (focus)
 
 Global header links use `outline: 2px solid currentColor` with `outline-offset: 2px` on `:focus-visible` (UX-DR5 / WCAG 2.4.11). `currentColor` inherits from text color so the ring meets **3:1 contrast** wherever body text already does — no hardcoded token until a design system lands. Source: `src/components/nav/SiteHeader.astro` scoped styles.
+
+## Contact (FR20)
+
+Primary contact path: **Contact** in the global nav (`mailto:` from `site.config.ts` `contact.email`) and the same address in `SiteFooter` on every `BaseLayout` page. `mailto:` opens the system mail client (no `target="_blank"`). External social links on the home contact block use `target="_blank"` and `rel="noopener noreferrer"`. The home `HomeContact` section duplicates the affordance by design (legacy parity).
