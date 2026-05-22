@@ -8,10 +8,9 @@ export const siteConfig = {
 	origin: 'https://juanmaperez.dev',
 	nav: [
 		{ label: 'Home', href: '/' },
+		{ label: 'CV', href: '/cv' },
 		// TODO(4.1): /blog route
 		{ label: 'Blog', href: '/blog' },
-		// CV lands when 3.4 ships — keep this entry commented out for now:
-		// { label: 'CV', href: '/cv' },
 	],
 } as const;
 

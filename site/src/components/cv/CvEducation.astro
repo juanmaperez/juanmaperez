@@ -1,0 +1,51 @@
+---
+import { cvData } from '../../data/cv';
+---
+<section class="cv-education" aria-labelledby="cv-education-heading">
+	<h2 id="cv-education-heading">Education</h2>
+	{cvData.education.map((entry) => (
+		<article class="cv-education__item">
+			<p class="cv-education__title">
+				<strong>{entry.title}</strong> | <span>{entry.institution}</span>
+			</p>
+			<p class="cv-education__details">{entry.details}</p>
+		</article>
+	))}
+</section>
+
+<style>
+	.cv-education {
+		margin: 2.5rem 0;
+		max-width: 100%;
+	}
+	.cv-education h2 {
+		font-size: 2.75rem;
+		width: 100%;
+		border-bottom: 1px solid #b7c8cb;
+		text-transform: uppercase;
+		padding-bottom: 0.3125rem;
+		margin: 0 0 1rem;
+		line-height: 1.1;
+	}
+	.cv-education__item {
+		margin: 2.5rem 0;
+	}
+	.cv-education__title {
+		line-height: 1.4;
+		font-size: 1.375rem;
+		letter-spacing: 1px;
+		margin: 0;
+	}
+	.cv-education__title strong {
+		color: #000;
+	}
+	.cv-education__title span {
+		color: #b7c8cb;
+	}
+	.cv-education__details {
+		margin: 1.25rem 0 0;
+		font-size: 1.125rem;
+		letter-spacing: 1px;
+		line-height: 1.4;
+	}
+</style>

@@ -45,6 +45,11 @@ Items deferred from code reviews and stories (not blocking current slice).
 - **`_schema-test/` accidental commit** — if `posts/_schema-test/` or `projects/_schema-test/` is committed, CI `npm run check` fails on invalid fixture. Add `**/_schema-test/` to `.gitignore` in a follow-up hardening pass.
 - **Dev note PR overstatement** — story Dev Notes §Edge cases claimed build job runs on PRs; workflow has no `pull_request` trigger until decision on Review Finding #1 is resolved.
 
+## Deferred from: code review of 3-4-cv-page-parity (2026-05-22)
+
+- **Duplicate visible “Juanma Perez” on CV** — page `<h1>` plus `.cv-personal__name` (legacy had `<h4>` in personal only; Story 3.1 requires page `<h1>`). Revisit layout in **Story 3.7** a11y smoke if screen-reader redundancy is noisy.
+- **`/blog` nav still 404** until Story **4.1** — unchanged from 3.2/3.3.
+
 ## Deferred from: code review of 3-3-home-page-content-and-layout-parity (2026-05-21)
 
 - **`/blog`, `/cv`, project detail routes 404 during Epic 3** — intentional; URLs wired correctly for FR21 at release (Stories 4.1, 3.4, 5.1).

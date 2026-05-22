@@ -18,7 +18,7 @@
 | Route / template | Legacy path | Motion parity (same / simplified / removed / n/a) | Islands approved (Y/N, names) | LCP/JS exception (Y/N) | Sign-off | Notes |
 |------------------|-------------|------------------------------------------------------|---------------------------------|------------------------|----------|-------|
 | Home | `/` | removed | N | | | Story 3.3: static hero/about/works/contact; GSAP + ScrollMagic + cookie gate removed |
-| CV | `/cv/` | | N | | | |
+| CV | `/cv/` | removed | N | | | Story 3.4: static sections; react-spring + typewriter removed |
 | Not found | `/404/` or host 404 | n/a | N | | | Match host behavior for GitHub Pages |
 
 ---
