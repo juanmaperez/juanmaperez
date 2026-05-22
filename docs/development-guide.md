@@ -1,15 +1,15 @@
 # Development guide
 
-## Two apps, two Node lines
+## Production app vs legacy Gatsby (reference)
 
-This repo hosts **two** static-site apps until Astro cutover:
+**Day-to-day work:** only **`site/`** (Astro 6). This is the **production application** (PRD v1.2, Story 9.1).
 
-| App | Location | Node.js | Install & dev |
-|-----|----------|---------|----------------|
-| **Astro 6** | `site/` | **≥ 22.12** (see `site/.nvmrc` and `site/package.json` → `engines`; CI uses [`.github/workflows/deploy-astro-pages.yml`](../.github/workflows/deploy-astro-pages.yml) with `node-version-file: site/.nvmrc`) | `cd site && nvm use && npm install && npm run dev` |
-| **Gatsby 2** (legacy) | Repository root | **Older LTS only** (e.g. **14.x or 16.x**). **`node-sass` 4.x** and Gatsby 2 **do not** support Node 22. | At repo root: `nvm install 16 && nvm use 16` (example), then `npm install && npm run develop` |
+| App | Status | Location | Node.js | Install & dev |
+|-----|--------|----------|---------|----------------|
+| **Astro 6** | **Production** | `site/` | **≥ 22.12** (`site/.nvmrc`; CI: [deploy-astro-pages.yml](../.github/workflows/deploy-astro-pages.yml)) | `cd site && nvm use && npm install && npm run dev` |
+| **Gatsby 2** | **Deprecated** (remove in Story 9.2) | Repository root | **Older LTS only** (e.g. **14.x or 16.x**) — **`node-sass` 4.x** fails on Node 22 | Optional: `nvm use 16`, then `npm install && npm run develop` at root |
 
-**Do not** run root `npm install` on **Node 22** and expect `node-sass` to compile. Switch Node with **nvm** (or Volta) when moving between **`site/`** and the **Gatsby** tree.
+You do **not** need root `npm run develop` for production maintenance. **Do not** run root `npm install` on **Node 22**. Switch Node with **nvm** only if you still open the legacy tree before archive.
 
 ### Live reload (FR16)
 
@@ -22,10 +22,10 @@ There is **no** root `.nvmrc` (only `site/.nvmrc` for Astro) to avoid implying o
 
 ## Prerequisites
 
-- **Node.js** — See **[Two apps, two Node lines](#two-apps-two-node-lines)** above. Root **Gatsby** stack needs a **legacy** Node line compatible with **Gatsby 2** and **node-sass 4**; **`site/`** Astro needs **≥ 22.12**.  
+- **Node.js** — **`site/`** needs **≥ 22.12** (see [Production app vs legacy Gatsby](#production-app-vs-legacy-gatsby-reference)). Legacy root Gatsby needs Node 14/16 only if you still run it.  
 - **npm** — Root may use `package-lock.json` (ignored at repo root in `.gitignore`); **`site/package-lock.json`** is tracked for Astro reproducible installs / CI.
 
-## Install (Gatsby — repository root)
+## Install (legacy Gatsby — repository root, deprecated)
 
 ```bash
 # Use Node 14 or 16 (example) before installing
@@ -34,7 +34,7 @@ npm install
 
 If native `node-sass` fails, use an **older Node** or treat as a known legacy issue; the migration path is the **`site/`** Astro app.
 
-## Common commands (Gatsby — repository root)
+## Common commands (legacy Gatsby — repository root, deprecated)
 
 | Command | Purpose |
 |---------|---------|
@@ -42,7 +42,7 @@ If native `node-sass` fails, use an **older Node** or treat as a known legacy is
 | `npm run build` | Production build to `public/` |
 | `npm run serve` | Serves built site locally |
 | `npm run format` | Prettier on `src/**/*.{js,jsx}` |
-| `npm run deploy` | `gatsby build` then `gh-pages -d public` |
+| `npm run deploy` | **Deprecated** — `gatsby build` then `gh-pages -d public`; use Astro CI instead ([deployment-guide.md](./deployment-guide.md)) |
 
 ## Environment
 
@@ -63,9 +63,9 @@ Gatsby exposes **GraphiQL** in development (see starter README) for experimentin
 - **Prettier:** `.prettierrc`  
 - No ESLint config in tree from quick scan  
 
-## Astro migration (`site/`)
+## Production site (`site/`)
 
-The **Astro 6** static app lives under **`site/`** (separate `package.json` from Gatsby). Commands and **Node ≥ 22.12** are summarized in [site/README.md](../site/README.md) and in **Two apps, two Node lines** above. **URLs and hosting:** [deployment-guide.md](./deployment-guide.md). **CI:** push to `main` or `master` runs [`.github/workflows/deploy-astro-pages.yml`](../.github/workflows/deploy-astro-pages.yml).
+The **Astro 6** app under **`site/`** is production. Commands and **Node ≥ 22.12** are in [site/README.md](../site/README.md). **Deploy:** [deployment-guide.md](./deployment-guide.md). **CI:** push to `main` or `master` runs [`.github/workflows/deploy-astro-pages.yml`](../.github/workflows/deploy-astro-pages.yml).
 
 ## Testing
 

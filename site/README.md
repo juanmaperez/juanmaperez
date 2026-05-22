@@ -1,6 +1,10 @@
-# Astro site (migration target)
+# Production site (`site/`)
 
-This directory is the **Gatsby → Astro** rebuild (**Epic 1** — Stories **1.1**–**1.3** plus **1.4** Node/docs alignment). The legacy Gatsby app remains at the repository root; work here until cutover.
+This directory **is** the **production application** for [juanmaperez.dev](https://juanmaperez.dev): Astro 6 static site (FR18). All day-to-day development and CI deploys run from here.
+
+**Deploy:** push to **`main`** / **`master`** or **`workflow_dispatch`** on [`.github/workflows/deploy-astro-pages.yml`](../.github/workflows/deploy-astro-pages.yml) → GitHub Pages from **`dist/`**. See [deployment-guide.md](../docs/deployment-guide.md).
+
+Legacy **Gatsby 2** at the repository root is **deprecated** (Epic 9 will archive it); do not use root `npm run deploy` for production.
 
 ## Requirements
 
@@ -42,7 +46,7 @@ If you ever publish only to **`https://<user>.github.io/<repository>/`** without
 
 ### CI deploy
 
-Push or pull request targeting **`main`** or **`master`** runs [`.github/workflows/deploy-astro-pages.yml`](../.github/workflows/deploy-astro-pages.yml) (`npm ci` → `npm run check` → `npm run build` in this folder; deploy only on push). Configure **Settings → Pages → Build and deployment → GitHub Actions** once. Details: [deployment-guide.md](../docs/deployment-guide.md#astro-ci-github-actions).
+Push or pull request targeting **`main`** or **`master`** runs [`.github/workflows/deploy-astro-pages.yml`](../.github/workflows/deploy-astro-pages.yml) (`npm ci` → `npm run check` → `npm run build` in this folder; deploy only on push). Configure **Settings → Pages → Build and deployment → GitHub Actions** once. Details: [deployment-guide.md](../docs/deployment-guide.md#production-ci-github-actions).
 
 ### CI schema validation gate (FR17, Story 2.4)
 
@@ -83,7 +87,7 @@ Legacy motion inventory: [docs/migration-parity-checklist.md](../docs/migration-
 
 **Cookie:** `animationCompleted` (1 day) — first visit runs hero intro; return visit skips intro.
 
-**Bundle (post-build, gzip, approximate):** GSAP+ScrollTrigger shared chunk ~27 KiB; home route entry ~18 KiB additional; CV entry ~0.6 KiB + shared chunk. Blog HTML has zero `/_astro/*.js` motion references. **7.4** should re-measure LCP/JS vs baselines.
+**Bundle (post-build, gzip, approximate):** GSAP+ScrollTrigger shared chunk ~27 KiB; home route entry ~18 KiB additional; CV entry ~0.6 KiB + shared chunk. Blog HTML has zero `/_astro/*.js` motion references. Checklist **LCP/JS ex.** documents accepted budget; optional advisory measurement: [`_baseline/README.md`](../_baseline/README.md).
 
 ### Typography / FR22 (Story 8.2)
 
@@ -97,7 +101,7 @@ Global styles: `site/src/styles/global.css` imported from `BaseLayout.astro`.
 
 **Design tokens** (`:root`): `--color-canvas` `#fbf9f3`, `--color-text` `#323846`, `--color-accent` `#b7c8cb`, `--color-link` `#1c768f`.
 
-**NFR-V1:** `font-display: swap` on MFred; preload woff2 for faster heading render. Home hero is LCP-sensitive — avoid adding render-blocking font requests beyond this set without measuring in Story **7.4** / baselines.
+**NFR-V1:** `font-display: swap` on MFred; preload woff2 for faster heading render. Home hero is LCP-sensitive — avoid adding render-blocking font requests beyond this set without optional baseline measurement ([`_baseline/README.md`](../_baseline/README.md)).
 
 **Story 8.3:** Per-template layout CSS ported from legacy styled-components (home about/works/contact/hero, CV px scale, blog Montserrat, project MFred hero, 404 display type, fixed header). Shiki vs Prism colors remain **simplified** (FR14).
 

@@ -1,18 +1,17 @@
 # Project documentation index
 
 **Project:** juanmaperez-portfolio  
-**Type:** Monolith — **web** (legacy **Gatsby 2** at root + **Astro 6** under `site/` until cutover)  
-**Primary language:** JavaScript (React) at root; TypeScript + Astro in `site/`  
-**Architecture:** Gatsby: static generation with Markdown and build-time GraphQL. Astro: static `dist/` build (see [development-guide.md](./development-guide.md#two-apps-two-node-lines)).  
+**Type:** Monolith — **web** — **production:** **Astro 6** in **`site/`**; legacy **Gatsby 2** at repo root is **deprecated** (archive pending Epic 9).  
+**Primary language:** TypeScript + Astro in **`site/`** (production); JavaScript (React) at root (legacy reference only).  
+**Architecture:** Production: static `site/dist/` build, content collections, GitHub Actions deploy. Legacy Gatsby tree: static generation + GraphQL (not production).  
 
 ## Quick reference
 
-- **Legacy stack (root):** Gatsby 2.13, React 16.8, remark, sharp, styled-components, SCSS — **use older Node (e.g. 14/16)** for `npm install` / `npm run develop` (`node-sass` is not compatible with Node 22).  
-- **Migration stack (`site/`):** Astro 6, **Node ≥ 22.12** (`site/.nvmrc`) — `cd site && nvm use && npm install && npm run dev`.  
-- **Gatsby entry points:** `gatsby-config.js`, `gatsby-node.js`, `src/pages/`  
-- **Gatsby content:** `src/content/posts/` (9 posts), `src/content/projects/` (5 projects)  
-- **Deploy:** Gatsby: `public/` → `gh-pages` branch. Astro: `site/dist/` → [GitHub Actions → Pages](./deployment-guide.md#astro-ci-github-actions).  
-- **Perf baselines (NFR-P1/P2):** legacy host offline — first baseline at **new** production URL; see [`_baseline/README.md`](../_baseline/README.md).  
+- **Production (`site/`):** Astro 6, **Node ≥ 22.12** (`site/.nvmrc`) — `cd site && nvm use && npm install && npm run dev|build`.  
+- **Content (production):** `site/src/content/posts/`, `site/src/content/projects/`.  
+- **Deploy (production):** `site/dist/` → [GitHub Actions → Pages](./deployment-guide.md) on push to `main`.  
+- **Legacy Gatsby (deprecated):** repo root — older Node (14/16) only if you must run it before **9.2** removal; see [development-guide.md](./development-guide.md#production-app-vs-legacy-gatsby-reference).  
+- **Perf (advisory):** checklist **LCP/JS ex.** + optional [`_baseline/README.md`](../_baseline/README.md); not a mandatory regression gate (PRD v1.2).  
 
 ## Generated documentation
 
@@ -28,13 +27,13 @@
 
 ## Existing documentation
 
-- [README.md](../README.md) — upstream **Gatsby default starter** text (not project-specific; treat as boilerplate)
+- [README.md](../README.md) — production pointer + collapsed historical Gatsby starter text
 
 ## Getting started
 
-1. Read [development-guide.md](./development-guide.md) — especially **[Two apps, two Node lines](./development-guide.md#two-apps-two-node-lines)** — for install and scripts.  
-2. Read [architecture.md](./architecture.md) and [source-tree-analysis.md](./source-tree-analysis.md) before structural changes.  
-3. For **Astro migration**, pair this index with `_bmad-output/planning-artifacts/research/technical-gatsby-2-portfolio-migration-to-astro-research-2026-04-20.md` and [migration parity checklist](./migration-parity-checklist.md).  
+1. Read [site/README.md](../site/README.md) and [development-guide.md](./development-guide.md) — **`site/`** is the only production app.  
+2. Read [deployment-guide.md](./deployment-guide.md) before changing CI or hosting.  
+3. [migration-parity-checklist.md](./migration-parity-checklist.md) — motion/visual sign-off (7.3 complete). Legacy Gatsby research: `_bmad-output/planning-artifacts/research/`.  
 
 ## Scan state
 

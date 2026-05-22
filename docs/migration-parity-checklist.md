@@ -197,3 +197,4 @@ Add a row here only for routes that need **ScrollMagic / GSAP / React** parity r
 | 2026-05-22 | EP — expand FR22/Epic 8: home **layout-css** + image presentation; 8.3 scope (not fonts only) |
 | 2026-05-22 | Story **7.3** — PO sign-off (`7.3 JP`) on mandatory route rows; motion+visual **same**; Islands **N**; blog CR (MFred h1, black titles, icons, horizontal nav); Home hero bg swap noted as defer |
 | 2026-05-22 | PRD **v1.2** — Story **7.4** dropped; NFR-P1/P2 advisory; cutover gated by checklist + **Epic 9** (`site/` sole deployable) |
+| 2026-05-22 | Story **9.1** — docs/README state **`site/`** + Actions as production; legacy Gatsby deprecated pending **9.2** |

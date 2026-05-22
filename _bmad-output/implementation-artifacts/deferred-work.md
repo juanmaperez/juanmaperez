@@ -104,3 +104,10 @@ Items deferred from code reviews and stories (not blocking current slice).
 ## Deferred from: code review of 7-3-checklist-sign-off-before-cutover (2026-05-22)
 
 - **§7.1 component inventory table** still labels CV modules as `island` / react-spring in **Recommended Astro** while route tables correctly show **Islands approved = N** after 7.3 — optional doc alignment pass.
+
+## Deferred from: code review of 9-1-document-site-as-sole-production-application (2026-05-22)
+
+- **`docs/architecture.md` § Deployment** still describes Gatsby `public/` + `gh-pages` as primary — update in **9.4** repo hygiene or a follow-on doc pass.
+- **`docs/source-tree-analysis.md`** + **`docs/project-scan-report.json`** still Gatsby-first from 2026-04-20 scan — refresh when legacy tree is archived (**9.2**).
+- **`docs/development-guide.md` Content authoring** lists legacy `src/content/*` without a “legacy only” label — label or move below production section in **9.4**.
+- **`docs/index.md`** migration checklist blurb still says “Astro cutover” — cosmetic wording; optional in **9.4**.
