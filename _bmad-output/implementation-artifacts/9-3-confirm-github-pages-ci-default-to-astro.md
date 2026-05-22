@@ -220,6 +220,7 @@ Composer (dev-story)
 | 2026-05-22 | CR: repo deliverables OK; AC2/AC4 blocked on merge + live deploy + production smoke; status → in-progress. | code-review |
 | 2026-05-22 | DS: FR21 `verify-production-links.mjs` + smoke bundle; preview 37 links OK. | dev-story |
 | 2026-05-22 | CR: DNS-not-ready policy; smoke exit 2 + phased BASE; AC4 split. | code-review |
+| 2026-05-22 | CR: FR21 CI fail — root `.gitignore` `public` ignored `site/public/`; scoped to `/public` + track assets. | code-review |
 
 ---
 
@@ -235,6 +236,7 @@ Composer (dev-story)
 - [x] [Review][Defer] `BASE=https://juanmaperez.dev` smoke — run when DNS/CNAME propagates (follow-up, not initial gate)
 - [x] [Review][Defer] Delete `origin/gh-pages` — after live deploy smoke passes
 - [x] [Review][Dismiss] AC4 **Fail** on unreachable `.dev` — retraded to **Partial**: expected before DNS; use dist + deploy URL gates
+- [x] [Review][Patch] **FR21 CI (65 broken links)** — Actions run `26297649214`: `/fonts/mfred/*`, favicons, `/images/*` missing in `dist/` because Gatsby-era `.gitignore` rule `public` ignored **`site/public/`** (0 files tracked). Fix: scope ignore to `/public` + `legacy/gatsby/public`; **stage `site/public/**`** (17 files). Gate is correct; deploy would ship broken static assets without this.
 
 ### Acceptance criteria audit
 
@@ -245,7 +247,7 @@ Composer (dev-story)
 | 3 | Pass | `gh-pages` policy documented |
 | 4 | **Partial** | Preview/dist + FR21 **0** broken; **`.dev` unreachable until DNS** — phase **B** (`BASE=page_url`) satisfies intent |
 | 5 | Pass | `github-pages` environment documented |
-| 6 | Pass | Gate quartet + `test:links` **0** |
+| 6 | **Partial** | Gate quartet passes locally; CI FR21 failed until `site/public/` tracked (CR 2026-05-22) |
 
 ### DNS / smoke policy (CR 2026-05-22)
 

@@ -54,9 +54,10 @@ typings/
 # dotenv environment variables file
 .env
 
-# gatsby files
+# gatsby files (scoped — do not ignore Astro `site/public/` static assets)
 .cache/
-public
+/public
+legacy/gatsby/public
 
 # Mac files
 .DS_Store
