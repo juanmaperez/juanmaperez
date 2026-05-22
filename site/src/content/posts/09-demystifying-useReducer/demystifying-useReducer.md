@@ -119,7 +119,7 @@ function countReducer(state, action) {
 }
 ```
 
-It might seem that supporting the function doesn't add much value, but it actually it's really important to delegate the control over whoever is using our API ([inversion of control]('/high-order-functions-callbacks-inversion-control')).
+It might seem that supporting the function doesn't add much value, but it actually it's really important to delegate the control over whoever is using our API ([inversion of control](/blog/high-order-functions-callbacks-inversion-control)).
 
 ### Using the reducer convention on dispatch and reducer
 

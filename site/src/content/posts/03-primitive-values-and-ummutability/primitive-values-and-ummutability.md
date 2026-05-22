@@ -1,11 +1,11 @@
 ---
 path: '/blog/primitive-values-and-ummutability'
 date: '2019-07-16T12:34:00+00:00'
-title: "Primitive values and ummutability"
+title: "Primitive values and immutability"
 type: post
 icon: ./../../../assets/icons/javascript.png
 category: 'javascript'
-tags: ['javascript', "ummutability", "javascript values", "ummutable values", "primitive values"]
+tags: ['javascript', "immutability", "javascript values", "immutable values", "primitive values"]
 excerpt: "In the universe of Javascript, there are many different values, but only some of them are primitives values and you'll be better knowing about them."
 ---
 

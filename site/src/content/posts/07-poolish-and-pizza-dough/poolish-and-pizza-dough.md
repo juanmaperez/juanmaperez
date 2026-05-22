@@ -7,7 +7,9 @@ icon: ./../../../assets/icons/recipes.png
 category: "recipes"
 tags: ["recipes", "pizza", "dough", "pizza dough", "neapolitan pizza"]
 excerpt: "Pizza is great but achieving the perfect pizza dough could be difficult without the right recipe."
----Pizza is great but achieving the perfect pizza dough could be difficult without the right recipe.
+---
+
+Pizza is great but achieving the perfect pizza dough could be difficult without the right recipe.
 
 Creating the best pizza dough is not hard in terms of effort but sometimes can take time because of the fermentation process.
 

@@ -1,4 +1,4 @@
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import { POSTS_PER_PAGE } from '../constants/blog';
 
 export async function getSortedPosts() {
@@ -18,4 +18,24 @@ export function getPostsForPage<T extends { data: { date: Date } }>(
 ): T[] {
 	const start = (page - 1) * POSTS_PER_PAGE;
 	return posts.slice(start, start + POSTS_PER_PAGE);
+}
+
+export function getBlogSlugFromPath(path: string): string {
+	const prefix = '/blog/';
+	if (!path.startsWith(prefix) || path === '/blog' || path === '/blog/') {
+		throw new Error(`Invalid post path for blog slug: ${path}`);
+	}
+	return path.slice(prefix.length);
+}
+
+export function getAdjacentPosts(
+	posts: CollectionEntry<'posts'>[],
+	entry: CollectionEntry<'posts'>,
+) {
+	const index = posts.findIndex((p) => p.id === entry.id);
+	if (index < 0) return { prev: null, next: null };
+	return {
+		prev: index > 0 ? posts[index - 1]! : null,
+		next: index < posts.length - 1 ? posts[index + 1]! : null,
+	};
 }

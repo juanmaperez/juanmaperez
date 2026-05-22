@@ -9,7 +9,7 @@ tags: ['javascript', "functions", "closure", "high order functions", "javascript
 excerpt: "Closure is one of the most powerful features in Javascript, and used in the right way can bring endless possibilities into your implementations."
 ---
 
-[High order functions](/high-order-functions-callbacks-inversion-control) are one of the patterns more used in Javascript and one of the reasons is because of a feature that allows us to persist the local memory of a function beyond its invocation, and its name is closure.
+[High order functions](/blog/high-order-functions-callbacks-inversion-control) are one of the patterns more used in Javascript and one of the reasons is because of a feature that allows us to persist the local memory of a function beyond its invocation, and its name is closure.
 
 Closures will provide us a super powerful tool that will allow us to create complex patterns like currying, once time invokation functions, memoization, even the module pattern which is based on closure as well.
 

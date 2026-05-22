@@ -1,0 +1,54 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+	prev: CollectionEntry<'posts'> | null;
+	next: CollectionEntry<'posts'> | null;
+}
+
+const { prev, next } = Astro.props;
+---
+{(prev || next) && (
+	<nav class="blog-post-nav" aria-label="Post navigation">
+		<div class="blog-post-nav__prev">
+			{prev && (
+				<a href={prev.data.path} rel="prev">
+					← {prev.data.title}
+				</a>
+			)}
+		</div>
+		<div class="blog-post-nav__next">
+			{next && (
+				<a href={next.data.path} rel="next">
+					{next.data.title} →
+				</a>
+			)}
+		</div>
+	</nav>
+)}
+
+<style>
+	.blog-post-nav {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: flex-start;
+		gap: 1rem;
+		margin: 3rem 0 0;
+		max-width: 100%;
+		font-size: 0.875rem;
+		flex-wrap: wrap;
+	}
+	.blog-post-nav__prev,
+	.blog-post-nav__next {
+		flex: 1;
+		min-width: 0;
+	}
+	.blog-post-nav__next {
+		text-align: right;
+	}
+	.blog-post-nav a:focus-visible {
+		outline: 2px solid currentColor;
+		outline-offset: 2px;
+	}
+</style>

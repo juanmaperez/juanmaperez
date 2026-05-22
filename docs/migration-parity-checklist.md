@@ -50,15 +50,15 @@ Distinct categories from current content: `javascript`, `react`, `recipes`.
 
 | Route / template | Legacy path | Motion parity | Islands (Y/N, names) | LCP/JS ex. | Sign-off | Notes |
 |------------------|-------------|---------------|----------------------|------------|----------|-------|
-| Post | `/blog/how-javascript-engine-works` | | N | | | |
-| Post | `/blog/variables-and-values-javascript` | | N | | | |
-| Post | `/blog/primitive-values-and-ummutability` | | N | | | |
-| Post | `/blog/values-and-coercion` | | N | | | |
-| Post | `/blog/high-order-functions-callbacks-inversion-control` | | N | | | |
-| Post | `/blog/closure-high-order-functions` | | N | | | |
-| Post | `/blog/the-perfect-pizza-dough` | | N | | | |
-| Post | `/blog/deconstructing-fetch-browser-api` | | N | | | |
-| Post | `/blog/demystifying-useReducer-hook` | | N | | | |
+| Post | `/blog/how-javascript-engine-works` | removed | N | | | Story 4.3: static detail; prev/next per legacy DESC index |
+| Post | `/blog/variables-and-values-javascript` | removed | N | | | Story 4.3: static detail; prev/next per legacy DESC index |
+| Post | `/blog/primitive-values-and-ummutability` | removed | N | | | Story 4.3: static detail; prev/next per legacy DESC index |
+| Post | `/blog/values-and-coercion` | removed | N | | | Story 4.3: static detail; prev/next per legacy DESC index |
+| Post | `/blog/high-order-functions-callbacks-inversion-control` | removed | N | | | Story 4.3: static detail; prev/next per legacy DESC index |
+| Post | `/blog/closure-high-order-functions` | removed | N | | | Story 4.3: static detail; prev/next per legacy DESC index |
+| Post | `/blog/the-perfect-pizza-dough` | removed | N | | | Story 4.3: static detail; prev/next per legacy DESC index |
+| Post | `/blog/deconstructing-fetch-browser-api` | removed | N | | | Story 4.3: static detail; prev/next per legacy DESC index |
+| Post | `/blog/demystifying-useReducer-hook` | removed | N | | | Story 4.3: static detail; prev/next per legacy DESC index |
 
 ---
 

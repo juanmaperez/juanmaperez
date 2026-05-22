@@ -72,6 +72,12 @@ Items deferred from code reviews and stories (not blocking current slice).
 - **`/blog` nav href 404s until Story 4.1** — intentional during Epic 3; story §Edge cases and link inventory document the call. FR21 applies at release, not mid-migration.
 - **`currentColor` focus ring on dark backgrounds** — `SiteHeader.astro` `:focus-visible` uses `currentColor`; safe with default light page today. Revisit when a design system or dark theme lands (story §Edge cases).
 
+## Deferred from: code review of 4-3-blog-post-detail-pages (2026-05-21)
+
+- **`getSortedPosts()` called twice per post page build** — dedupe via props if collection grows large.
+- **Post `<title>` without `Juanma Perez |` prefix** — story-specified; align in Story **6.1** if desired.
+- **Category links on post header** — deferred to Story **4.4**.
+
 ## Deferred from: code review of 4-2-blog-pagination (2026-05-21)
 
 - **Page 2+ static routes** — `getStaticPaths` empty until 13th post; infrastructure verified at `POSTS_PER_PAGE = 12`.
