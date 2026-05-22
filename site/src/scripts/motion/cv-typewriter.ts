@@ -14,6 +14,7 @@ export function initCvTypewriter(): void {
 
 	if (prefersReducedMotion()) {
 		target.textContent = text;
+		root.querySelector('.cv-summary__cursor')?.classList.add('cv-summary__cursor--done');
 		document.dispatchEvent(new CustomEvent('cv:ready'));
 		return;
 	}
@@ -25,6 +26,7 @@ export function initCvTypewriter(): void {
 			index += 1;
 		} else {
 			window.clearInterval(intervalId);
+			root.querySelector('.cv-summary__cursor')?.classList.add('cv-summary__cursor--done');
 			document.dispatchEvent(new CustomEvent('cv:ready'));
 		}
 	};

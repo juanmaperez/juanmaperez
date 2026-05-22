@@ -1,5 +1,6 @@
 ---
 import { getCategoryPath } from '../../utils/blogPosts';
+import BlogCategoryIcon from './BlogCategoryIcon.astro';
 
 interface Props {
 	title: string;
@@ -18,8 +19,10 @@ const { title, path, excerpt, date, category, iconSrc } = Astro.props;
 	</h2>
 	{category && (
 		<p class="blog-teaser__date post-date">
-			{iconSrc && <img class="blog-teaser__icon post-icon" src={iconSrc} alt="" width="10" height="16" />}
-			<a href={getCategoryPath(category)}>{category}</a>
+			<a class="blog-teaser__category" href={getCategoryPath(category)}>
+				{iconSrc && <BlogCategoryIcon src={iconSrc} label={category} />}
+				{category}
+			</a>
 			{date && (
 				<>
 					{' — '}
@@ -53,7 +56,9 @@ const { title, path, excerpt, date, category, iconSrc } = Astro.props;
 		font-weight: 800;
 		line-height: 1.2;
 		font-size: 26px;
-		color: var(--color-blog-accent, #fa991c);
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+		color: var(--color-text);
 		font-family: var(--font-blog-title);
 	}
 	.blog-teaser__title a {
@@ -69,11 +74,15 @@ const { title, path, excerpt, date, category, iconSrc } = Astro.props;
 		gap: 0.35rem;
 		flex-wrap: wrap;
 	}
-	.blog-teaser__icon {
-		margin-right: 5px;
-		width: 8px;
-		height: 16px;
-		object-fit: cover;
+	.blog-teaser__category {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+		color: inherit;
+		text-decoration: none;
+	}
+	.blog-teaser__category:hover {
+		text-decoration: underline;
 	}
 	.blog-teaser__excerpt {
 		display: block;

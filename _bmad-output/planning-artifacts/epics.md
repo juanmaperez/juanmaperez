@@ -16,7 +16,7 @@ completedAt: '2026-04-20'
 
 ## Overview
 
-Epic and story breakdown for the **Gatsby 2 → Astro** portfolio migration, derived from **PRD v1.1** and **`architecture.md`**. Stories are ordered so each completes with only dependencies on **earlier** stories in the same epic or prior epics.
+Epic and story breakdown for the **Gatsby 2 → Astro** portfolio migration, derived from **PRD v1.2** and **`architecture.md`**. Stories are ordered so each completes with only dependencies on **earlier** stories in the same epic or prior epics.
 
 ---
 
@@ -41,7 +41,8 @@ FR14: Visitor sees **syntax-highlighted** code in technical posts.
 FR15: Visitor can use the site on **mobile and desktop** widths without horizontal scroll on standard pages.  
 FR16: Maintainer can run a **local dev server** with **content live reload** appropriate to the chosen static site generator.  
 FR17: Maintainer can run a **production build** that **fails** when **content schema validation** is enabled (mandatory MVP cutover gate).  
-FR18: Maintainer can deploy via **documented CI pipeline** without manual FTP.  
+FR18: Maintainer can deploy **`site/`** via **documented CI pipeline** (GitHub Actions → Pages) without manual FTP — **sole** production path after cutover.  
+FR23: Maintainer can **retire the legacy Gatsby codebase** at repo root so **only `site/`** remains the maintained application (archive or remove; docs updated).  
 FR19: For scroll/timeline-heavy routes, visitor completes the same primary narrative per **migration parity checklist**; motion same/simplified/removed and approved.  
 FR20: Visitor can reach **at least one primary contact path** from **home** or **global navigation**.  
 FR21: Visitor does not hit **broken internal links** on MVP routes (release checklist: automated or manual).  
@@ -49,8 +50,8 @@ FR22: Visitor experiences **typography, color, spacing, layout, and image presen
 
 ### Non-functional requirements
 
-NFR-P1: **LCP** on home and one representative blog post **≤** pre-migration baseline; baseline capture method documented.  
-NFR-P2: **Transferred JS** for home and same post **≤** baseline + **20 KiB** except approved checklist exceptions; islands only where authorized.  
+NFR-P1: **LCP** — **target** ≤ baseline where available; **advisory** post-cutover (Story **7.4** dropped in PRD **v1.2**).  
+NFR-P2: **Transferred JS** — **target** ≤ baseline + **20 KiB**; **cutover** satisfied by checklist **LCP/JS ex.** rows; formal **7.4** gate **dropped**.  
 NFR-R1: Dependencies installable on **documented Node LTS** without deprecated native binding toolchains for core workflow.  
 NFR-R2: Repository documents **entry commands** and hosting assumptions in `docs/` and/or README.  
 NFR-S1: No API keys or private tokens committed for MVP static deploy.  
@@ -102,12 +103,13 @@ UX-DR5: **WCAG 2.1 Level A** minimum for new templates (color contrast for text/
 | FR15 | E3, E4, E5 | 3.x, 4.x, 5.x visual QA |
 | FR16 | E1 | 1.4 |
 | FR17 | E2 | 2.1, 2.4 |
-| FR18 | E1 | 1.3 |
+| FR18 | E1, E9 | 1.3, 9.1 |
 | FR19 | E7 | 7.2, 7.3 |
 | FR20 | E3 | 3.6 |
 | FR21 | E6 | 6.4 |
 | FR22 | E8 | 8.2, 8.3 |
-| NFR-P1/P2 | E1, E7 | 1.5, 7.4 |
+| FR23 | E9 | 9.2, 9.3 |
+| NFR-P1/P2 | E1 | 1.5 (reference only) |
 | NFR-V1 | E8 | 8.2 |
 | NFR-R1/R2 | E1 | 1.1, 1.4 |
 | NFR-S1/S2 | E6 | 6.5 |
@@ -144,11 +146,15 @@ Search engines and social previews work; **redirects** and **internal links** ar
 
 ### Epic 7: Motion parity and client islands (where approved)
 Where legacy UX demands it, visitors still complete the **narrative** with **controlled motion** and **bounded JS** per checklist.  
-**FRs covered:** FR19 — **NFRs:** NFR-P1 (regression check), NFR-P2 (islands)  
+**FRs covered:** FR19 — checklist **LCP/JS ex.** documents motion budget (formal **7.4** regression **dropped** per PRD **v1.2**).
 
 ### Epic 8: Typography, layout, and visual design parity
 Visitors see the **legacy brand** on the Astro site: fonts, palette, **styled-components layout**, and **image crop/scale** (especially home), not a generic system-font + flex approximation.  
 **FRs covered:** FR22 (with **FR13** for asset pipeline only) — **NFRs:** NFR-V1, NFR-A1 — **UX-DR:** UX-DR4–5  
+
+### Epic 9: Legacy codebase retirement and production cutover
+**`site/`** is the **only** maintained application and **default deployable**; repo-root Gatsby is archived or removed so maintainers cannot accidentally ship the old stack.  
+**FRs covered:** FR18 (cutover confirmation), FR23 — **NFRs:** NFR-R2  
 
 ---
 
@@ -708,19 +714,9 @@ So that **FR19** governance is explicit.
 
 ---
 
-### Story 7.4: Post-islands performance regression check
+### ~~Story 7.4: Post-islands performance regression check~~ — **DROPPED** (PRD **v1.2**, 2026-05-22)
 
-As a **maintainer**,  
-I want **LCP and JS transfer compared to baselines**,  
-So that **NFR-P1** and **NFR-P2** still pass after islands.
-
-**Acceptance criteria:**
-
-**Given** baselines from Story 1.5  
-**When** post-migration Lighthouse/JS measurement reruns with same method  
-**Then** home and representative post meet thresholds or documented exceptions apply  
-
-**Maps to:** NFR-P1, NFR-P2.
+Formal Lighthouse/JS regression gate **removed**. Cutover uses **7.3** checklist sign-off + **LCP/JS ex.** rows. Story **1.5** baselines remain **reference only**. Optional advisory measurement post-launch is out of epic backlog.
 
 ---
 
@@ -785,12 +781,88 @@ So that **FR22** is satisfied route by route.
 
 ---
 
+## Epic 9: Legacy codebase retirement and production cutover
+
+**Goal:** **`site/`** build is the **default production outcome**; legacy Gatsby at repo root is **not** a second deploy path.
+
+### Story 9.1: Document `site/` as sole production application
+
+As a **maintainer**,  
+I want **docs and README** to state clearly that production is **`site/`** + **deploy-astro-pages.yml**,  
+So that **FR18** and **FR23** intent is obvious to future me and contributors.
+
+**Acceptance criteria:**
+
+**Given** PRD **v1.2**  
+**When** docs are updated (`docs/deployment-guide.md`, `docs/project-overview.md`, root `README.md`, `site/README.md`)  
+**Then** **GitHub Pages** source is documented as **GitHub Actions** (Astro workflow), not branch deploy from Gatsby  
+**And** entry commands for production are **`cd site && npm run dev|build`** only  
+**And** legacy `npm run deploy` is marked **deprecated** or removed from primary instructions  
+
+**Maps to:** FR18, FR23, NFR-R2.
+
+---
+
+### Story 9.2: Archive or remove legacy Gatsby application tree
+
+As a **maintainer**,  
+I want **repo-root Gatsby** (`gatsby-config.js`, `gatsby-node.js`, legacy `src/`, root `package.json` scripts) retired,  
+So that **only `site/`** remains the maintained app.
+
+**Acceptance criteria:**
+
+**Given** content and assets already migrated under **`site/`**  
+**When** legacy tree is archived to **`legacy/gatsby/`** (preferred) or removed after a **git tag** snapshot  
+**Then** root **`package.json`** no longer exposes **`gatsby build`** / **`gh-pages`** as the default deploy story  
+**And** `docs/index.md` points maintainers to **`site/`**  
+**And** gate quartet from **`site/`** still passes  
+
+**Maps to:** FR23, NFR-R2.
+
+---
+
+### Story 9.3: Confirm GitHub Pages and CI default to Astro artifact
+
+As a **maintainer**,  
+I want **hosting settings** aligned with the Astro workflow,  
+So that **every push to `main`** publishes **`site/dist`** (or workflow artifact), not legacy **`gh-pages`** from Gatsby.
+
+**Acceptance criteria:**
+
+**Given** `.github/workflows/deploy-astro-pages.yml` exists  
+**When** cutover checklist is completed  
+**Then** repository **Settings → Pages → Build and deployment** uses **GitHub Actions** (documented in deployment guide)  
+**And** optional: disable or document sunset of **`gh-pages`** branch from legacy deploy  
+**And** production URL serves Astro build (smoke: home, blog, cv return expected content)  
+
+**Maps to:** FR18, FR23.
+
+---
+
+### Story 9.4: Repo hygiene after legacy removal
+
+As a **maintainer**,  
+I want **duplicate legacy assets** and stale references cleaned up,  
+So that the repo reflects a single product.
+
+**Acceptance criteria:**
+
+**Given** Story **9.2** archive/remove  
+**When** hygiene pass runs  
+**Then** duplicate icon/font trees at repo root (if redundant with `site/`) are pruned or documented as archive-only  
+**And** `docs/source-tree-analysis.md` (or equivalent) notes **`site/`** as application root  
+**And** no CI workflow still builds Gatsby on **`main`** unless explicitly quarantined to a non-default branch  
+
+**Maps to:** FR23, NFR-R2.
+
+---
+
 ## Final validation (Step 4)
 
 | Check | Result |
 |--------|--------|
-| **FR coverage** | FR1–FR22 each appear in ≥ one story AC scope. |
-| **NFR coverage** | NFR-P1/P2 in 1.5, 7.4 + Epic 7; NFR-V1 in 8.2; R1/R2 in 1.1/1.4; S1/S2 in 6.5; A1 in 3.2, 3.7, 8.3. |
+| **FR coverage** | FR1–FR23 each appear in ≥ one story AC scope (FR23 → Epic 9). |
+| **NFR coverage** | NFR-P1/P2 reference in 1.5 only (advisory); NFR-V1 in 8.2; R1/R2 in 1.1/1.4/9.x; S1/S2 in 6.5; A1 in 3.2, 3.7, 8.3. |
 | **Architecture** | ADRs reflected in Epics 1–2, 5–7; routing in 4–5; CI in 1. |
 | **Story dependencies** | Stories only rely on earlier stories or prior epics (E2 needs E1 CI optionally—E2.4 extends E1.3). |
 | **Starter template** | Covered by Story 1.1 (create Astro project per Architecture). |

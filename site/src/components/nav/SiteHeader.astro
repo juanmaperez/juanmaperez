@@ -49,7 +49,7 @@ const isCurrent = (href: string): boolean => {
 		padding: 30px 120px 20px;
 		display: flex;
 		justify-content: space-between;
-		align-items: flex-start;
+		align-items: center;
 		z-index: 100;
 	}
 	.site-header__brand {
@@ -64,9 +64,11 @@ const isCurrent = (href: string): boolean => {
 		margin: 0;
 		padding: 0;
 		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		gap: 0.25rem;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: flex-end;
+		gap: 0.5rem 1.25rem;
 	}
 	.site-header__nav-link {
 		font-family: var(--font-body);

@@ -100,3 +100,7 @@ Items deferred from code reviews and stories (not blocking current slice).
 
 - **Category icon not inside category link on teaser** — legacy `post-item.js` linked icon only; AC5 met by text `<a>`; wrap `<img>` in same anchor if icon parity required.
 - **`getPostsByCategory` sort contract** — order depends on caller passing `getSortedPosts()` output; add explicit `date` DESC in helper if reused outside `getStaticPaths`.
+
+## Deferred from: code review of 7-3-checklist-sign-off-before-cutover (2026-05-22)
+
+- **§7.1 component inventory table** still labels CV modules as `island` / react-spring in **Recommended Astro** while route tables correctly show **Islands approved = N** after 7.3 — optional doc alignment pass.

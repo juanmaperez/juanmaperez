@@ -8,7 +8,7 @@
 # STATUS DEFINITIONS: see bmad-sprint-planning skill workflow.md
 
 generated: "2026-04-20T12:00:00Z"
-last_updated: "2026-05-22T16:46:00Z"
+last_updated: "2026-05-22T17:20:00Z"
 project: juanmaperez
 project_key: juanmaperez
 tracking_system: file-system
@@ -61,15 +61,22 @@ development_status:
   6-5-analytics-snippet-ga4-or-alternative: done
   epic-6-retrospective: optional
 
-  epic-7: in-progress
+  epic-7: done
   7-1-legacy-animation-inventory: done
   7-2-implement-approved-islands-only: done
-  7-3-checklist-sign-off-before-cutover: backlog
-  7-4-post-islands-performance-regression-check: backlog
+  7-3-checklist-sign-off-before-cutover: done
+  7-4-post-islands-performance-regression-check: cancelled
   epic-7-retrospective: optional
 
-  epic-8: in-progress
+  epic-8: done
   8-1-legacy-typography-and-styling-inventory: done
   8-2-global-design-tokens-and-font-loading: done
   8-3-per-template-visual-reconciliation-and-sign-off: done
   epic-8-retrospective: optional
+
+  epic-9: backlog
+  9-1-document-site-as-sole-production-application: backlog
+  9-2-archive-or-remove-legacy-gatsby-tree: backlog
+  9-3-confirm-github-pages-ci-default-to-astro: backlog
+  9-4-repo-hygiene-after-legacy-removal: backlog
+  epic-9-retrospective: optional

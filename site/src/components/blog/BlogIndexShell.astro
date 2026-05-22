@@ -29,8 +29,15 @@ const { h1, entries, currentPage, numPages } = Astro.props;
 		max-width: 1000px;
 		color: #323846;
 	}
-	.blog-index :global(h1) {
+	.blog-index h1 {
 		margin: 0 0 2rem;
+		font-family: var(--font-heading);
+		font-size: 24px;
+		font-weight: normal;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		color: var(--color-text);
+		line-height: 1.2;
 	}
 	.blog-index :global(.blog-index__list) {
 		list-style: none;

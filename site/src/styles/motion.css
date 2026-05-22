@@ -113,14 +113,9 @@ noscript [data-home-block] {
 	animation: blink 500ms infinite;
 }
 
-[data-cv-reveal]:not(.cv-reveal-ready) {
-	opacity: 0;
-}
-
-@media (prefers-reduced-motion: reduce) {
-	[data-cv-reveal] {
-		opacity: 1;
-	}
+.cv-summary__cursor--done {
+	display: none;
+	animation: none;
 }
 
 .home-hero__cover {

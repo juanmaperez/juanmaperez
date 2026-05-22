@@ -36,23 +36,23 @@ classification:
   domain: personal_portfolio_and_content
   complexity: low
   projectContext: brownfield
-prdVersion: '1.1'
+prdVersion: '1.2'
 completedDate: '2026-04-20'
 lastEdited: '2026-05-22'
-editSource: 'Epic 8 FR22 — layout, images, styled-components port (not fonts only) ([EP] Edit PRD)'
+editSource: 'Cutover pivot — drop 7.4 perf gate; site/ sole deployable; Epic 9 legacy retirement ([EP] Edit PRD)'
 ---
 
 # Product Requirements Document — juanmaperez
 
 **Author:** Juanma Perez  
 **Date:** 2026-04-20  
-**Status:** Complete — revised **v1.1** per validation report (measurability, traceability, implementation leakage in FRs).
+**Status:** Complete — revised **v1.2** (cutover pivot: **`site/`** is production; legacy Gatsby tree retired in **Epic 9**; formal post-islands perf story **dropped**).
 
 ---
 
 ## Executive Summary
 
-Replatform the **juanmaperez** personal site from **legacy Gatsby 2** to **Astro** with **static-first** output and **GitHub Pages** (or equivalent static hosting). The product outcome is the **same audience-facing experience**—home, CV, project case studies, and paginated blog with categories—while **eliminating unmaintainable dependencies** (e.g. `node-sass` / Gatsby 2-era stack), **simplifying the content model** (replace build-time GraphQL with file-based / content-collection patterns), and **establishing a CI-backed deploy path** suitable for a solo maintainer.
+Replatform the **juanmaperez** personal site from **legacy Gatsby 2** to **Astro** with **static-first** output and **GitHub Pages** (or equivalent static hosting). The **production application** lives in **`site/`**; its build output is the **default deployable artifact** via **`.github/workflows/deploy-astro-pages.yml`**. The product outcome is the **same audience-facing experience**—home, CV, project case studies, and paginated blog with categories—while **eliminating unmaintainable dependencies** (e.g. `node-sass` / Gatsby 2-era stack), **simplifying the content model** (replace build-time GraphQL with file-based / content-collection patterns), and **retiring the legacy repo-root Gatsby tree** so a solo maintainer does not maintain two deploy paths.
 
 ### What makes this special
 
@@ -80,12 +80,12 @@ This is not a generic “new website”; it is a **precision migration**: preser
 ### Business success (personal / career)
 
 - Site remains a **credible professional presence** (performance, correctness, up-to-date stack).
-- **Time to ship** migration MVP is bounded: one owner can cut over without prolonged dual maintenance unless explicitly chosen.
+- **Time to ship** migration MVP is bounded: one owner can cut over without prolonged dual maintenance — **dual Gatsby + Astro deploy paths are explicitly out of scope** after **Epic 9**.
 
 ### Technical success
 
 - **Build** succeeds on a **documented Node LTS** without native `node-sass` pain.
-- **Deploy** is reproducible (e.g. GitHub Action → Pages) with **`site` / `base`** correctly set for the hosting URL.
+- **Deploy** is reproducible via **GitHub Actions → Pages** from **`site/`** only, with **`site` / `base`** correctly set for the hosting URL; repo-root **`npm run deploy`** (Gatsby → `gh-pages` branch) is **deprecated** and removed or archived in **Epic 9**.
 - **Content** is driven from **versioned files** with a clear schema (posts vs projects).
 - **Analytics** uses a **maintained** approach (replace legacy UA-only assumptions).
 
@@ -94,8 +94,8 @@ This is not a generic “new website”; it is a **precision migration**: preser
 | Metric | Target |
 |--------|--------|
 | Route smoke | 100% of listed MVP routes return 200 or approved 301 |
-| Lighthouse (home) | Performance score **≥** pre-migration baseline (see Assumptions for capture method) on same throttling class |
-| JS payload (home) | **≤** pre-migration baseline **+ 20 KiB** transferred (mobile profile) unless a route-level exception is recorded in the migration parity checklist |
+| Lighthouse (home) | **Advisory** post-cutover — compare when convenient; not a blocking gate (Story **7.4** dropped; checklist **LCP/JS ex.** documents accepted motion budget) |
+| JS payload (home) | **Advisory** — checklist-approved exceptions on motion-heavy routes suffice for cutover; formal baseline regression story **not** required |
 | Build time (CI) | **≤ 10 min** on free-tier runner for MVP scope |
 
 ## Product scope
@@ -108,7 +108,8 @@ This is not a generic “new website”; it is a **precision migration**: preser
 - **Global layout**: header/menu, footer as applicable, **meta/OG** via the target stack’s templating approach (per Architecture).
 - **Images**: responsive behavior preserved; broken images none on MVP routes.
 - **Sitemap** and **robots** compatible with new generator.
-- **Deploy** to GitHub Pages (or user-approved static host) via pipeline.
+- **Deploy** to GitHub Pages (or user-approved static host) via **`site/`** CI pipeline (sole production path).
+- **Legacy retirement** (Epic 9): archive or remove repo-root Gatsby app; docs state **`site/`** as the only build/deploy entry.
 - **One** analytics integration (new tag or privacy-preserving alternative) documented.
 
 ### Growth (post-MVP)
@@ -234,7 +235,8 @@ Derived from `web_app` signals (SEO, browser support, performance, accessibility
 
 - **FR16:** Maintainer can run a **local dev server** with **content live reload** appropriate to the chosen static site generator (behavior defined in Architecture; no vendor lock-in at PRD level).
 - **FR17:** Maintainer can run a **production build** that **fails** when **content schema validation** is enabled — validation is a **mandatory MVP cutover gate** (enabled before production deploy), not an optional follow-up.
-- **FR18:** Maintainer can deploy via **documented CI pipeline** without manual FTP.
+- **FR18:** Maintainer can deploy **`site/`** via **documented CI pipeline** (`.github/workflows/deploy-astro-pages.yml` → GitHub Pages) without manual FTP; this workflow is the **default and sole** production deploy path after cutover.
+- **FR23:** Maintainer can **retire the legacy Gatsby codebase** at repo root (config, `src/`, root `package.json` deploy scripts) so **only `site/`** remains the maintained application; legacy may be **archived** under `legacy/gatsby/` or removed after a tagged snapshot, with **docs and README** updated so new contributors do not run Gatsby by mistake.
 
 ### Optional / explicit islands (only if parity demands)
 
@@ -255,8 +257,8 @@ Derived from `web_app` signals (SEO, browser support, performance, accessibility
 
 ### Performance
 
-- **NFR-P1:** **LCP** (Largest Contentful Paint) on **home** and on **one representative blog post URL** must be **≤** the pre-migration values. **Baseline capture:** same URLs (or agreed staging equivalents), same **Lighthouse CLI or Chrome DevTools Lighthouse** preset and **throttling class**, documented once before migration freeze; results stored with the release record (e.g. in repo or CI artifact).
-- **NFR-P2:** **Transferred JavaScript** (initial navigation, mobile network profile in Lighthouse or agreed equivalent) for **home** and the **same representative blog post** must not exceed the pre-migration measurement by more than **20 KiB** unless that route has an **approved exception** in the migration parity checklist (named island or legacy parity requirement). **Hydrated or island components** load only on routes **explicitly authorized** in Architecture or that checklist (no unlisted global client bundles).
+- **NFR-P1:** **LCP** on **home** and one **representative blog post** — **target** ≤ pre-migration where baselines exist (Story **1.5**); **not a mandatory cutover gate** after product decision **2026-05-22** (Story **7.4** dropped). Post-cutover measurement is **advisory**. Where baselines are unavailable (legacy host offline), use checklist sign-off and production smoke instead.
+- **NFR-P2:** **Transferred JavaScript** — **target** ≤ baseline **+ 20 KiB** on home and representative post unless checklist exception; **cutover** is satisfied by **migration parity checklist** **LCP/JS ex. = Y** rows with documented rationale (~47 KiB gz on `/` per Story **7.2**). Formal regression story **7.4** is **out of scope**. **Hydrated or island components** load only on routes **explicitly authorized** in Architecture or that checklist (no unlisted global client bundles).
 
 ### Reliability & maintainability
 
@@ -282,12 +284,14 @@ Derived from `web_app` signals (SEO, browser support, performance, accessibility
 
 - **Assumption:** Primary hosting remains **GitHub Pages** unless Juanma changes; `base` path must match repo vs user site URL.
 - **Assumption:** Content volume stays **small** (9 posts, 5 projects per current inventory); no enterprise CMS in MVP.
-- **Assumption:** **Performance baselines** (Lighthouse / LCP / JS transfer for NFR-P1–P2) are captured from the **current production or agreed reference build** before migration freeze, using a method documented in Architecture or release checklist so reruns are comparable.
+- **Assumption:** Story **1.5** baselines (if captured) remain **reference only** — they do **not** block cutover after **v1.2**. Motion-heavy routes rely on checklist **LCP/JS ex.** approval instead of a formal **7.4** gate.
 - **Dependency:** DNS / GitHub settings outside repo for custom domain.
 
 ## Out of scope
 
 - Native mobile apps, authenticated admin UI, e-commerce checkout, user-generated content platform features.
+- **Story 7.4** (mandatory post-islands Lighthouse/JS regression gate) — **dropped** per **v1.2**; use checklist exceptions + optional advisory measurement instead.
+- **Indefinite dual maintenance** of repo-root Gatsby and **`site/`** as parallel production deploy paths.
 
 ## References
 
@@ -298,11 +302,11 @@ Derived from `web_app` signals (SEO, browser support, performance, accessibility
 
 ## Next steps (BMad)
 
-1. **[CA] Create Architecture** — Astro folder structure, content collections, redirect map, CI, migration parity checklist template, baseline capture steps.  
-2. **[CE] Create Epics and Stories** — break FRs (including FR20–FR21) into implementation backlog.  
-3. **[IR] Check Implementation Readiness** before heavy build sprint.  
-4. **Epic 8** — typography & visual parity inventory and implementation (FR22, NFR-V1).  
-5. **Re-validate** — run `bmad-validate-prd` again after major PRD or architecture changes.
+1. **Epic 9** — legacy Gatsby retirement; **`site/`** as sole deployable (FR23, FR18).  
+2. **`[CC] Correct Course`** — sync sprint (`7.4` cancelled), epics, architecture §13 if needed.  
+3. **`[CE]`** — add Epic 9 stories to backlog if not already present.  
+4. **Cutover** — GitHub Pages source = **GitHub Actions** (Astro workflow); parity checklist sign-off (**7.3**) complete.  
+5. **Re-validate** — run `bmad-validate-prd` after **v1.2** if stakeholders need a formal pass.
 
 ---
 

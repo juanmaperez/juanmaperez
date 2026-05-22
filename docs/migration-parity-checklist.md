@@ -22,7 +22,7 @@
 
 **Analytics (NFR-S1/S2):** Story **6.5** — GA4 gtag via `site/src/components/analytics/Analytics.astro` in `BaseLayout` when `PUBLIC_GA_MEASUREMENT_ID` is set at build time. Legacy Universal Analytics `UA-98892695-1` (`gatsby-plugin-google-analytics`) is retired; use a new GA4 `G-…` measurement ID (not the UA property).
 
-**Motion (FR19 prep):** Story **7.1** — component-level inventory below; route tables reconciled to product target **`same`** on motion-heavy surfaces. **7.2 stack:** **GSAP 3 + ScrollTrigger** per Architecture **ADR-008** ([motion-technology-decision.md](../_bmad-output/planning-artifacts/motion-technology-decision.md)) — do not port ScrollMagic. **Islands approved** stays **N** until Story **7.3**.
+**Motion (FR19 prep):** Story **7.1** — component-level inventory below; route tables reconciled to product target **`same`** on motion-heavy surfaces. **7.2 stack:** **GSAP 3 + ScrollTrigger** per Architecture **ADR-008** ([motion-technology-decision.md](../_bmad-output/planning-artifacts/motion-technology-decision.md)) — do not port ScrollMagic. **Islands approved:** **N** (Story **7.3** sign-off 2026-05-22 — vanilla GSAP route scripts, no `@astrojs/react`).
 
 ---
 
@@ -50,7 +50,7 @@ Audit source: repo-root Gatsby `src/` + `gatsby-node.js` (not `site/`). **Build 
 | `/404` | `src/pages/404.js` | styled-components | Static full-viewport background | `n/a` | n/a | N | Story 3.5 static 404 |
 | Build | `gatsby-node.js` | webpack null-loader, aliases | Strip ScrollMagic from SSR HTML; resolve GSAP min paths | `n/a` | n/a | N | Mirror in 7.2: client-only boundaries |
 
-**Astro baseline (7.2 shipped):** GSAP 3 + ScrollTrigger via route-scoped Astro `<script>` modules (`HomeMotion`, `CvMotion`, `ProjectContactMotion`, conditional header script). **No** `@astrojs/react`. Blog/404: no motion JS. **Islands approved** still **N** until **7.3**.
+**Astro baseline (7.2 shipped):** GSAP 3 + ScrollTrigger via route-scoped Astro `<script>` modules (`HomeMotion`, `CvMotion`, `ProjectContactMotion`, conditional header script). **No** `@astrojs/react`. Blog/404: no motion JS (verified `dist/blog/` — no motion module scripts). **Islands approved:** **N** (7.3).
 
 **Visual (FR22):** Story **8.1** inventory below; Story **8.2** ships global fonts/tokens. **8.3** ports **styled-components layout** and **image presentation** (home priority: about image **32vw**, works **600×900** cover crops, contact display type)—not fonts alone.
 
@@ -115,9 +115,9 @@ Source of truth: `site/src/config/redirects.ts` (built from content `path` front
 
 | Route / template | Legacy path | Motion parity | Visual parity | Islands (Y/N, names) | LCP/JS ex. | Sign-off | Notes |
 |------------------|-------------|---------------|---------------|----------------------|------------|----------|-------|
-| Home | `/` | same | same | N | Y | 8.3 DS 2026-05-22 | Layout CSS ported (§ Home layout); **7.2** motion; **7.3** PO sign-off pending |
-| CV | `/cv/` | same | same | N | Y | 8.3 DS 2026-05-22 | 44px/22px/18px MFred scale; **7.3** PO sign-off pending |
-| Not found | `/404/` or host 404 | n/a | same | N | N | 8.3 DS 2026-05-22 | MFred 300px / 36px display type |
+| Home | `/` | same | same | N | Y | 8.3 DS + 7.3 JP 2026-05-22 | Layout CSS + **7.2** motion; **defer:** legacy hero first/second bg swap not ported (cover + link stagger OK); **7.4** measures JS |
+| CV | `/cv/` | same | same | N | Y | 8.3 DS + 7.3 JP 2026-05-22 | Typewriter → stagger; photo on load; **7.4** measures JS |
+| Not found | `/404/` or host 404 | n/a | same | N | N | 8.3 DS + 7.3 JP 2026-05-22 | MFred 300px / 36px display type; no motion JS |
 
 ---
 
@@ -127,8 +127,8 @@ Legacy `gatsby-node.js`: first page `/blog`, further pages `/blog/page/{n}` (1-b
 
 | Route / template | Legacy path | Motion parity | Visual parity | Islands (Y/N, names) | LCP/JS ex. | Sign-off | Notes |
 |------------------|-------------|---------------|---------------|----------------------|------------|----------|-------|
-| Blog list page 1 | `/blog` | n/a | same | N | N | 8.3 DS 2026-05-22 | Montserrat 26px/800 teasers |
-| Blog list page 2+ | `/blog/page/2` (add rows if `ceil(posts/12) > 1`) | n/a | same | N | N | | 4.2 pagination; inherits blog list styling |
+| Blog list page 1 | `/blog` | n/a | same | N | N | 8.3 DS + 7.3 JP 2026-05-22 | MFred black **Blog** h1; black Montserrat teaser titles; `BlogCategoryIcon` |
+| Blog list page 2+ | `/blog/page/2` (add rows if `ceil(posts/12) > 1`) | n/a | same | N | N | n/a | Not built (9 posts, single page); 4.2 ready when content grows |
 
 ---
 
@@ -138,9 +138,9 @@ Distinct categories from current content: `javascript`, `react`, `recipes`.
 
 | Route / template | Legacy path | Motion parity | Visual parity | Islands (Y/N, names) | LCP/JS ex. | Sign-off | Notes |
 |------------------|-------------|---------------|---------------|----------------------|------------|----------|-------|
-| Category | `/blog/category/javascript` | n/a | same | N | N | | 4.4 static; inherits global + teaser styles |
-| Category | `/blog/category/react` | n/a | same | N | N | | 4.4: 1 post |
-| Category | `/blog/category/recipes` | n/a | same | N | N | | 4.4: 1 post |
+| Category | `/blog/category/javascript` | n/a | same | N | N | 8.3 DS + 7.3 JP 2026-05-22 | 4.4 static; teaser + icon parity |
+| Category | `/blog/category/react` | n/a | same | N | N | 8.3 DS + 7.3 JP 2026-05-22 | 4.4: 1 post |
+| Category | `/blog/category/recipes` | n/a | same | N | N | 8.3 DS + 7.3 JP 2026-05-22 | 4.4: 1 post |
 
 ---
 
@@ -148,15 +148,15 @@ Distinct categories from current content: `javascript`, `react`, `recipes`.
 
 | Route / template | Legacy path | Motion parity | Visual parity | Islands (Y/N, names) | LCP/JS ex. | Sign-off | Notes |
 |------------------|-------------|---------------|---------------|----------------------|------------|----------|-------|
-| Post | `/blog/how-javascript-engine-works` | n/a | same | N | N | | 4.3 static; **8.1** Montserrat title + Consolas code |
-| Post | `/blog/variables-and-values-javascript` | n/a | same | N | N | | 4.3 static detail |
-| Post | `/blog/primitive-values-and-ummutability` | n/a | same | N | N | | 4.3 static detail |
-| Post | `/blog/values-and-coercion` | n/a | same | N | N | | 4.3 static detail |
-| Post | `/blog/high-order-functions-callbacks-inversion-control` | n/a | same | N | N | | 4.3 static detail |
-| Post | `/blog/closure-high-order-functions` | n/a | same | N | N | | 4.3 static detail |
-| Post | `/blog/the-perfect-pizza-dough` | n/a | same | N | N | | 4.3 static detail |
-| Post | `/blog/deconstructing-fetch-browser-api` | n/a | same | N | N | | 4.3 static detail |
-| Post | `/blog/demystifying-useReducer-hook` | n/a | same | N | N | | 4.3 static detail |
+| Post | `/blog/how-javascript-engine-works` | n/a | same | N | N | 8.3 DS + 7.3 JP 2026-05-22 | Black Montserrat title; MFred h2–h4 uppercase; aligned header column |
+| Post | `/blog/variables-and-values-javascript` | n/a | same | N | N | 8.3 DS + 7.3 JP 2026-05-22 | 4.3 static detail |
+| Post | `/blog/primitive-values-and-ummutability` | n/a | same | N | N | 8.3 DS + 7.3 JP 2026-05-22 | 4.3 static detail |
+| Post | `/blog/values-and-coercion` | n/a | same | N | N | 8.3 DS + 7.3 JP 2026-05-22 | 4.3 static detail |
+| Post | `/blog/high-order-functions-callbacks-inversion-control` | n/a | same | N | N | 8.3 DS + 7.3 JP 2026-05-22 | 4.3 static detail |
+| Post | `/blog/closure-high-order-functions` | n/a | same | N | N | 8.3 DS + 7.3 JP 2026-05-22 | 4.3 static detail |
+| Post | `/blog/the-perfect-pizza-dough` | n/a | same | N | N | 8.3 DS + 7.3 JP 2026-05-22 | 4.3 static detail |
+| Post | `/blog/deconstructing-fetch-browser-api` | n/a | same | N | N | 8.3 DS + 7.3 JP 2026-05-22 | 4.3 static detail |
+| Post | `/blog/demystifying-useReducer-hook` | n/a | same | N | N | 8.3 DS + 7.3 JP 2026-05-22 | 4.3 static detail |
 
 **Code highlighting (FR14):** Story **4.5** — fenced blocks use **Shiki** (`github-light` in `astro.config.mjs`), not legacy `gatsby-remark-prismjs`. Functional parity; not pixel-perfect Prism theme match. Posts **07** (recipes) have no fences.
 
@@ -166,11 +166,11 @@ Distinct categories from current content: `javascript`, `react`, `recipes`.
 
 | Route / template | Legacy path | Motion parity | Visual parity | Islands (Y/N, names) | LCP/JS ex. | Sign-off | Notes |
 |------------------|-------------|---------------|---------------|----------------------|------------|----------|-------|
-| Project | `/projects/umaicha` | same | same | N | Y | 8.3 DS 2026-05-22 | MFred 140px hero; 18px body |
-| Project | `/projects/sainsburys` | same | same | N | Y | | 5.2 images |
-| Project | `/projects/oysho` | same | same | N | Y | | 5.2 images |
-| Project | `/projects/colossus-bets` | same | same | N | Y | | 5.2 images |
-| Project | `/projects/australis` | same | same | N | Y | | 5.2 images |
+| Project | `/projects/umaicha` | same | same | N | Y | 8.3 DS + 7.3 JP 2026-05-22 | MFred 140px hero; contact scroll FX; **7.4** measures JS |
+| Project | `/projects/sainsburys` | same | same | N | Y | 8.3 DS + 7.3 JP 2026-05-22 | 5.2 images; contact scroll |
+| Project | `/projects/oysho` | same | same | N | Y | 8.3 DS + 7.3 JP 2026-05-22 | 5.2 images; contact scroll |
+| Project | `/projects/colossus-bets` | same | same | N | Y | 8.3 DS + 7.3 JP 2026-05-22 | 5.2 images; contact scroll |
+| Project | `/projects/australis` | same | same | N | Y | 8.3 DS + 7.3 JP 2026-05-22 | 5.2 images; contact scroll |
 
 ---
 
@@ -180,8 +180,8 @@ Add a row here only for routes that need **ScrollMagic / GSAP / React** parity r
 
 | Route / template | Legacy path | Motion parity | Islands (Y/N, names) | LCP/JS ex. | Sign-off | Notes |
 |------------------|-------------|---------------|----------------------|------------|----------|-------|
-| Home (summary) | `/` | same | N | Y | | Detail: inventory §7.1 — MainBlock, AboutBlock, WorkItem, ContactBlock, header, mixins |
-| CV (summary) | `/cv/` | same | N | Y | | Detail: inventory §7.1 — typewriter + react-spring sections |
+| Home (summary) | `/` | same | N | Y | 7.3 JP 2026-05-22 | §7.1 — MainBlock, AboutBlock, WorkItem, ContactBlock, header; hero bg swap deferred |
+| CV (summary) | `/cv/` | same | N | Y | 7.3 JP 2026-05-22 | §7.1 — typewriter + GSAP stagger (no React) |
 
 ---
 
@@ -195,3 +195,5 @@ Add a row here only for routes that need **ScrollMagic / GSAP / React** parity r
 | 2026-05-22 | Story 8.1 — typography/styling inventory; **Visual parity** column; target **same** (system-font interim) |
 | 2026-05-22 | Story 8.2 — `global.css`, MFred/Questrial/Montserrat loading, design tokens |
 | 2026-05-22 | EP — expand FR22/Epic 8: home **layout-css** + image presentation; 8.3 scope (not fonts only) |
+| 2026-05-22 | Story **7.3** — PO sign-off (`7.3 JP`) on mandatory route rows; motion+visual **same**; Islands **N**; blog CR (MFred h1, black titles, icons, horizontal nav); Home hero bg swap noted as defer |
+| 2026-05-22 | PRD **v1.2** — Story **7.4** dropped; NFR-P1/P2 advisory; cutover gated by checklist + **Epic 9** (`site/` sole deployable) |
