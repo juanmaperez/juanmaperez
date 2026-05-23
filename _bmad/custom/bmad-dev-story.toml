@@ -1,8 +1,0 @@
-# Team override: Dev Agent Record must identify Amelia when dev-story runs after agent-dev.
-
-[workflow]
-
-persistent_facts = [
-  "MANDATORY on story completion (step 9): set Dev Agent Record → Agent model used to exactly: Amelia (Senior Software Engineer) — <Cursor model> when this session started with bmad-agent-dev or the user chose DS from Amelia. Never use Composer (dev-story) alone.",
-  "Change log Author for implementation rows: Amelia (bmad-dev-story), not dev-story or Composer (dev-story).",
-]

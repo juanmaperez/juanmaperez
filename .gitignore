@@ -79,3 +79,4 @@ yarn-lock.json
 # Scratch/transient artifacts produced by code-review workflow (review diffs, etc).
 # Outputs live here intentionally; tracked artifacts go in implementation-artifacts/.
 _bmad-output/tmp/
+_bmad
