@@ -176,6 +176,31 @@ const formattedDate = entry.data.date.toLocaleDateString('en-GB', {
 		padding-left: 1rem;
 		border-left: 3px solid #b7c8cb;
 	}
+	.blog-post__content :global(table) {
+		width: 100%;
+		margin: 0 0 1.25rem;
+		border-collapse: collapse;
+		font-size: 0.9375rem;
+		line-height: 1.5;
+	}
+	.blog-post__content :global(thead th) {
+		font-family: var(--font-heading);
+		font-weight: normal;
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+		font-size: 0.8125rem;
+		background: #f0ede6;
+	}
+	.blog-post__content :global(th),
+	.blog-post__content :global(td) {
+		padding: 0.5rem 0.75rem;
+		border: 1px solid var(--color-accent);
+		text-align: left;
+		vertical-align: top;
+	}
+	.blog-post__content :global(tbody tr:nth-child(even) td) {
+		background: rgba(183, 200, 203, 0.12);
+	}
 	.blog-post__content :global(pre.astro-code) {
 		overflow-x: auto;
 		max-width: 100%;
