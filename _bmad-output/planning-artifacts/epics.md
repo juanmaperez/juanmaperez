@@ -771,7 +771,7 @@ So that **FR22** is satisfied route by route.
 
 **Given** global tokens from Story 8.2 and inventory **`component-css`** / **`layout-css`** rows  
 **When** templates are updated by porting legacy **styled-components** rules into scoped Astro `<style>` (or shared `site/src/styles/home.css` if DRY)  
-**Then** **home** matches legacy presentation for: hero link position/size; about **girl.jpg** at **32vw** fixed/absolute positioning and **6vw** intro copy with legacy padding; works cards **~600×900** cover crops with overflow clip and MFred rotated titles; contact **MFred** display scale (**400px** month/year class)  
+**Then** **home** matches legacy presentation for: hero link position/size; about **me.jpg** at **32vw** fixed/absolute positioning and **6vw** intro copy with legacy padding; works cards **~600×900** cover crops with overflow clip and MFred rotated titles; contact **MFred** display scale (**400px** month/year class)  
 **And** blog teasers, CV sections, project hero, header brand, and 404 match inventory **`same`** rows  
 **And** side-by-side smoke (legacy build or screenshots vs `site` dev) documented for **home `/`** in Dev Agent Record  
 **And** checklist **Visual parity** and **Sign-off** columns updated; mandatory rows signed before cutover  

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { TweenMax } from 'gsap';
 import { Link } from 'gatsby'
 import Image from './../image'
-import girl from './../../assets/images/girl.jpg'
+import me from './../../assets/images/me.jpg'
 
 import { Controller, Scene } from 'react-scrollmagic';
 import ScrollMagic from 'ScrollMagic'
@@ -176,7 +176,7 @@ class AboutBlock extends Component {
         <div className="about-wrapper">
     
           <div className="image">
-            <Image imageUrl={ girl } title="lady madrid" />
+            <Image imageUrl={ me } title="lady madrid" />
           </div>
           
           <div className="intro-text">

@@ -101,7 +101,7 @@ So that **FR15** and **UX-DR4** hold for core pages.
   - `<header>`, `<nav aria-label="Primary">`, `<main>`, `<footer>` exist.
 
   **Images (UX-DR3) — home + CV**
-  - `/`: project thumbnails + `girl.jpg` have non-empty `alt`.
+  - `/`: project thumbnails + `me.jpg` have non-empty `alt`.
   - `/cv`: portrait `alt` present.
   - `/404`: decorative background — if purely CSS background, note **n/a**; recovery text must remain readable.
 

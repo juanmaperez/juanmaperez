@@ -49,7 +49,7 @@ Verified on production preview (`npm run build && npm run preview`) at each widt
 
 - **Landmarks:** `<header>`, `<nav aria-label="Primary">`, `<main>`, `<footer>` present on all three routes (DOM inspection on preview).
 - **Headings:** Exactly one `<h1>` inside `<main>` per route.
-- **Images:** Home thumbnails and `girl.jpg` have non-empty `alt`; CV portrait has `alt="Juanma Perez"`.
+- **Images:** Home thumbnails and `me.jpg` have non-empty `alt`; CV portrait has `alt="Juanma Perez"`.
 - **Focus:** Global nav uses `:focus-visible` outline in `SiteHeader.astro` (see `site/README.md` §Accessibility). Tab order reaches brand → Home → CV → Blog → Contact → main links → footer mailto without trap.
 - **404 images:** Recovery uses text links only; hero background is CSS — decorative, n/a for alt.
 - **CV print:** Static sections; no clipped text in print preview at 375px+ (carry-over from Story 3.4).

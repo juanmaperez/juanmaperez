@@ -22,7 +22,7 @@ So that **FR22** is satisfied route by route.
 
 Epics 3–5 and **8.2** fixed **fonts and palette** but **not** legacy **styled-components** layout. Home feels wrong because:
 
-- **About:** legacy `girl.jpg` is **32vw**, fixed to the right; Astro caps the figure at **~20rem** in a flex row.
+- **About:** legacy `me.jpg` is **32vw**, fixed to the right; Astro caps the figure at **~20rem** in a flex row.
 - **Works:** legacy uses **600×900** boxes with **background-size: cover** and **1100px** tall image offset; Astro uses responsive `<img>` with `height: auto`.
 - **Contact:** legacy **400px** MFred month/year; Astro uses `clamp()` nowhere near display scale.
 - **Hero:** legacy link block **right: 120px; bottom: 50px**; Astro uses **1rem** offsets.
